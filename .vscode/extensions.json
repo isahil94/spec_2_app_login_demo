@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.debugpy",
+    "redhat.vscode-yaml",
+    "be5invis.toml",
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "ms-vscode.makefile-tools",
+    "ms-vscode-remote.remote-containers",
+    "charliermarsh.ruff",
+    "ms-python.black-formatter",
+    "ms-python.isort"
+  ]
+}

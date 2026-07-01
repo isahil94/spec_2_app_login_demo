@@ -1,0 +1,262 @@
+name: Documentation Validation
+
+# Run on push to main and pull requests
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/copilot-instructions.md'
+      - 'ai/hooks/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/copilot-instructions.md'
+      - 'ai/hooks/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  # Validate README exists and has content
+  readme:
+    name: README Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check README exists
+        run: |
+          if [ ! -f "README.md" ]; then
+            echo "✗ README.md not found"
+            exit 1
+          fi
+          echo "✓ README.md found"
+
+      - name: Check README has content
+        run: |
+          if [ ! -s "README.md" ]; then
+            echo "✗ README.md is empty"
+            exit 1
+          fi
+          
+          # Check for required sections
+          SECTIONS=("Overview" "Features" "Architecture" "Repository Structure" "Getting Started" "Usage" "Contributing")
+          FAILED=0
+          
+          for section in "${SECTIONS[@]}"; do
+            if grep -qi "$section" README.md; then
+              echo "✓ Found section: $section"
+            else
+              echo "✗ Missing section: $section (optional)"
+            fi
+          done
+          
+          echo "✓ README.md has content"
+
+  # Validate documentation exists
+  docs:
+    name: Documentation Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check documentation directory
+        run: |
+          if [ ! -d "docs" ]; then
+            echo "✗ docs/ directory not found"
+            exit 1
+          fi
+          echo "✓ docs/ directory found"
+
+      - name: Validate core documentation files
+        run: |
+          echo "Validating core documentation..."
+          DOCS=(
+            "docs/architecture.md"
+            "docs/developer-guide.md"
+            "docs/project-structure.md"
+          )
+          
+          for doc in "${DOCS[@]}"; do
+            if [ -f "$doc" ]; then
+              echo "✓ Found: $doc"
+            else
+              echo "ℹ️ Optional: $doc"
+            fi
+          done
+
+  # Validate developer guide
+  developer-guide:
+    name: Developer Guide
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check developer guide exists
+        run: |
+          if [ -f "docs/developer-guide.md" ]; then
+            echo "✓ Developer guide found"
+            
+            # Check for required sections
+            SECTIONS=("Setup" "Architecture" "Development" "Testing" "Contributing")
+            for section in "${SECTIONS[@]}"; do
+              if grep -qi "^## .*$section" docs/developer-guide.md; then
+                echo "  ✓ Section: $section"
+              else
+                echo "  ℹ️ Section: $section (optional)"
+              fi
+            done
+          else
+            echo "ℹ️ Developer guide not found (optional)"
+          fi
+
+  # Validate AI configuration documentation
+  ai-docs:
+    name: AI Configuration Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check AI documentation
+        run: |
+          echo "Validating AI configuration documentation..."
+          
+          # Check hook documentation
+          HOOK_DOCS=(
+            "ai/hooks/README.md"
+            "ai/hooks/hooks.md"
+            "ai/hooks/hook-implementation-strategy.md"
+            "ai/hooks/HOOK-INTEGRATION-GUIDE.md"
+            "ai/hooks/QUICK-REFERENCE.md"
+          )
+          
+          for doc in "${HOOK_DOCS[@]}"; do
+            if [ -f "$doc" ]; then
+              SIZE=$(wc -c < "$doc")
+              if [ "$SIZE" -gt 100 ]; then
+                echo "✓ Found: $doc"
+              else
+                echo "✗ Empty: $doc"
+              fi
+            else
+              echo "ℹ️ Optional: $doc"
+            fi
+          done
+
+      - name: Check GitHub copilot instructions
+        run: |
+          if [ -f ".github/copilot-instructions.md" ]; then
+            SIZE=$(wc -c < ".github/copilot-instructions.md")
+            if [ "$SIZE" -gt 100 ]; then
+              echo "✓ Copilot instructions found"
+            else
+              echo "✗ Copilot instructions are empty"
+              exit 1
+            fi
+          else
+            echo "ℹ️ Copilot instructions not found (optional)"
+          fi
+
+  # Check markdown formatting
+  markdown-format:
+    name: Markdown Format Check
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install markdown tools
+        run: npm install -g markdownlint-cli prettier
+
+      - name: Check markdown formatting
+        run: |
+          echo "Checking markdown formatting..."
+          find . -name "*.md" \
+            -not -path "./node_modules/*" \
+            -not -path "./.git/*" | head -20 | while read file; do
+            echo "Checking: $file"
+            markdownlint "$file" 2>/dev/null || true
+          done
+          echo "✓ Markdown check completed (non-blocking)"
+
+      - name: Format check with Prettier
+        run: |
+          prettier --check docs/ README.md --parser markdown 2>/dev/null || true
+
+  # Validate workflow documentation
+  workflow-docs:
+    name: Workflow Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check workflow documentation
+        run: |
+          echo "Validating workflow documentation..."
+          
+          # Check for workflow descriptions in README or docs
+          if grep -r "ci.yml\|quality.yml\|documentation.yml\|release.yml" README.md docs/ 2>/dev/null | grep -q "workflow\|pipeline"; then
+            echo "✓ Workflow documentation found"
+          else
+            echo "ℹ️ Consider adding workflow documentation to README.md or docs/"
+          fi
+
+  # Generate documentation report
+  report:
+    name: Documentation Report
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [readme, docs, developer-guide, ai-docs, markdown-format, workflow-docs]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate summary
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "Documentation Validation Summary"
+          echo "═══════════════════════════════════════"
+          echo "✓ README: ${{ needs.readme.result }}"
+          echo "✓ Docs: ${{ needs.docs.result }}"
+          echo "✓ Developer Guide: ${{ needs.developer-guide.result }}"
+          echo "✓ AI Docs: ${{ needs.ai-docs.result }}"
+          echo "✓ Markdown Format: ${{ needs.markdown-format.result }}"
+          echo "✓ Workflow Docs: ${{ needs.workflow-docs.result }}"
+          echo "═══════════════════════════════════════"
+          
+          if [ "${{ needs.readme.result }}" = "failure" ] || \
+             [ "${{ needs.docs.result }}" = "failure" ]; then
+            exit 1
+          fi
+
+      - name: Upload documentation artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: documentation
+          path: |
+            README.md
+            docs/
+            .github/copilot-instructions.md
+            ai/hooks/
+          retention-days: 30

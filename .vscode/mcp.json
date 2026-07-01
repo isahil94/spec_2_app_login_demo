@@ -1,0 +1,287 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/spec/main/schema/mcp-server-config.json",
+  "description": "Model Context Protocol (MCP) servers for Agentic SDLC Platform. Enables GitHub Copilot secure access to local development tools.",
+  "version": "1.0.0",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"],
+      "disabled": false,
+      "env": {},
+      "description": "Read/write project files and generate artifacts. Core capability for accessing repository structure.",
+      "capabilities": {
+        "resources": true,
+        "tools": ["read_file", "write_file", "list_directory", "search_files"]
+      },
+      "security": {
+        "sandboxed": true,
+        "allowedPaths": [
+          "${workspaceFolder}",
+          "${workspaceFolder}/artifacts",
+          "${workspaceFolder}/ai",
+          "${workspaceFolder}/.github",
+          "${workspaceFolder}/configs",
+          "${workspaceFolder}/apps"
+        ],
+        "restrictedPaths": [
+          "${workspaceFolder}/.git/objects",
+          "${workspaceFolder}/node_modules",
+          "${workspaceFolder}/.env"
+        ]
+      },
+      "rateLimits": {
+        "fileReadsPerMinute": 100,
+        "fileWritesPerMinute": 20,
+        "searchQueriesPerMinute": 50
+      }
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "${workspaceFolder}"],
+      "disabled": false,
+      "env": {},
+      "description": "Git repository access. Enables status checks, diffs, commits, and history inspection.",
+      "capabilities": {
+        "resources": true,
+        "tools": ["get_status", "get_diff", "create_commit", "get_branch", "get_log"]
+      },
+      "security": {
+        "sandboxed": true,
+        "allowedOperations": ["read", "status", "log", "diff", "branch"],
+        "restrictedOperations": ["force_push", "delete_branch"]
+      },
+      "rateLimits": {
+        "commitsPerHour": 10,
+        "diffQueriesPerMinute": 30
+      }
+    },
+    "terminal": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-bash"],
+      "disabled": false,
+      "env": {
+        "PATH": "${PATH}"
+      },
+      "description": "Execute build scripts, tests, linting, and formatting. Controlled execution environment for development tasks.",
+      "capabilities": {
+        "tools": ["execute_command"]
+      },
+      "security": {
+        "sandboxed": true,
+        "allowedCommands": [
+          "npm",
+          "yarn",
+          "python",
+          "pip",
+          "eslint",
+          "black",
+          "pytest",
+          "docker",
+          "git",
+          "node",
+          "tsc",
+          "prettier"
+        ],
+        "restrictedCommands": [
+          "rm -rf /",
+          "sudo",
+          "chmod 777",
+          "mkfs",
+          "dd"
+        ],
+        "workingDirectory": "${workspaceFolder}",
+        "timeout": 300000,
+        "maxConcurrentCommands": 3
+      },
+      "rateLimits": {
+        "commandsPerMinute": 20
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "disabled": false,
+      "env": {
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+      },
+      "description": "GitHub integration for repository metadata, pull requests, and issues. Requires GITHUB_TOKEN environment variable.",
+      "capabilities": {
+        "resources": true,
+        "tools": ["list_pulls", "list_issues", "get_repo_metadata", "create_pull_request"]
+      },
+      "security": {
+        "authentication": "token",
+        "allowedScopes": ["repo:read", "repo:write"],
+        "restrictedScopes": ["admin:repo_hook", "delete_repo"]
+      },
+      "rateLimits": {
+        "apiCallsPerHour": 60
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"],
+      "disabled": false,
+      "description": "Browser automation and UI testing. Enables screenshot capture, form interaction, and end-to-end testing.",
+      "capabilities": {
+        "tools": ["launch_browser", "navigate", "screenshot", "interact_with_page"]
+      },
+      "configuration": {
+        "launchArgs": ["--disable-blink-features=AutomationControlled"],
+        "headless": true,
+        "timeout": 60000
+      },
+      "security": {
+        "sandboxed": true,
+        "allowedDomains": [
+          "localhost",
+          "127.0.0.1"
+        ],
+        "restrictedDomains": []
+      },
+      "rateLimits": {
+        "screenshotsPerMinute": 10,
+        "interactionsPerMinute": 30
+      }
+    }
+  },
+  "optionalServers": {
+    "description": "Optional MCP servers. Disabled by default. Enable in 'mcpServers' section to activate.",
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite"],
+      "disabled": true,
+      "description": "SQLite database inspection and queries. Enable when database testing is required.",
+      "capabilities": {
+        "resources": true,
+        "tools": ["query_database", "list_tables", "get_schema"]
+      },
+      "configuration": {
+        "databasePath": "${workspaceFolder}/data/app.db",
+        "readOnly": false
+      },
+      "security": {
+        "allowedQueries": ["SELECT", "INSERT", "UPDATE", "DELETE"],
+        "restrictedQueries": ["DROP TABLE", "DROP DATABASE", "TRUNCATE"]
+      },
+      "enableWhen": "testing_database_layer",
+      "notes": "To enable, move this section to mcpServers and set disabled=false"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"],
+      "disabled": true,
+      "description": "(MOVED to mcpServers - now enabled)",
+      "notes": "This server has been moved to mcpServers and enabled. Reference moved version above."
+    },
+    "postgresql": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "disabled": true,
+      "description": "PostgreSQL database access. Enable when using PostgreSQL in production environment.",
+      "capabilities": {
+        "resources": true,
+        "tools": ["query_database", "list_tables", "get_schema", "execute_migration"]
+      },
+      "configuration": {
+        "host": "${env:DB_HOST:localhost}",
+        "port": "${env:DB_PORT:5432}",
+        "database": "${env:DB_NAME:app_db}",
+        "user": "${env:DB_USER:postgres}",
+        "password": "${env:DB_PASSWORD}"
+      },
+      "security": {
+        "requirePasswordFromEnv": true,
+        "allowedQueries": ["SELECT", "INSERT", "UPDATE", "DELETE"],
+        "readOnlyMode": false
+      },
+      "enableWhen": "production_environment",
+      "notes": "Requires environment variables: DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD. To enable, move to mcpServers and set disabled=false"
+    },
+    "docker": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-docker"],
+      "disabled": true,
+      "description": "Docker container management. Enable when managing containerized deployments.",
+      "capabilities": {
+        "tools": ["build_image", "run_container", "list_containers", "inspect_container", "stop_container"]
+      },
+      "configuration": {
+        "socketPath": "/var/run/docker.sock",
+        "allowBuildFromDockerfile": true,
+        "allowContainerExecution": true
+      },
+      "security": {
+        "restrictedImages": ["ubuntu", "debian", "busybox"],
+        "allowedNetworks": ["app-network"],
+        "requireImageSignature": false
+      },
+      "enableWhen": "devops_workflows",
+      "notes": "Requires Docker daemon running. To enable, move to mcpServers and set disabled=false"
+    }
+  },
+  "security": {
+    "description": "Global security configuration for all MCP servers.",
+    "enableSandboxing": true,
+    "logAllAccess": true,
+    "auditLog": "${workspaceFolder}/.vscode/mcp-audit.log",
+    "rateLimitingEnabled": true,
+    "tlsVerification": true,
+    "allowUnsignedServers": false
+  },
+  "configuration": {
+    "description": "Global configuration for MCP servers.",
+    "defaultTimeout": 30000,
+    "retryPolicy": {
+      "maxRetries": 3,
+      "backoffMultiplier": 2
+    },
+    "loggingLevel": "info",
+    "debugMode": false
+  },
+  "documentation": {
+    "overview": "This configuration enables GitHub Copilot to securely access local development tools via Model Context Protocol (MCP). All servers run locally with sandboxing and security restrictions.",
+    "requiredServers": [
+      "filesystem - Essential for reading project files and writing artifacts",
+      "git - Required for version control operations",
+      "terminal - Needed for running build/test/lint commands",
+      "github - Optional but recommended for PR/issue integration"
+    ],
+    "quickStart": {
+      "1_verify_installation": "Ensure Node.js is installed: node --version",
+      "2_verify_mcp_cli": "Install MCP CLI: npm install -g @modelcontextprotocol/cli",
+      "3_test_filesystem": "npx @modelcontextprotocol/server-filesystem .",
+      "4_test_git": "npx @modelcontextprotocol/server-git .",
+      "5_reload_vscode": "Reload VS Code after modifying this file"
+    },
+    "enablingOptionalServers": {
+      "playwright": "Uncomment or move 'playwright' from optionalServers to mcpServers",
+      "sqlite": "Uncomment or move 'sqlite' from optionalServers to mcpServers. Ensure database path exists.",
+      "postgresql": "Move 'postgresql' to mcpServers. Set environment variables: DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD",
+      "docker": "Move 'docker' to mcpServers. Ensure Docker daemon is running: docker ps"
+    },
+    "securityConsiderations": {
+      "allowedPaths": "Filesystem server only accesses specified paths. Add paths to 'allowedPaths' as needed.",
+      "restrictedPaths": "Sensitive paths like .git/objects and node_modules are blocked by default.",
+      "sandboxing": "All servers run in sandboxed mode with restricted capabilities.",
+      "authentication": "GitHub server requires GITHUB_TOKEN environment variable.",
+      "rateLimiting": "All servers have rate limits to prevent abuse.",
+      "auditLogging": "All MCP access is logged to .vscode/mcp-audit.log"
+    },
+    "troubleshooting": {
+      "serverNotResponding": "Check that required npm package is installed: npm install -g @modelcontextprotocol/server-<name>",
+      "permissionDenied": "Verify that paths in allowedPaths are accessible to your user.",
+      "commandNotFound": "Ensure allowed commands are in PATH. Check terminal server configuration.",
+      "rateLimitExceeded": "Check MCP audit log. Increase rateLimits if legitimate use case.",
+      "authenticationFailed": "For GitHub server, ensure GITHUB_TOKEN environment variable is set and valid."
+    },
+    "bestPractices": {
+      "1": "Keep disabled servers commented, don't delete them.",
+      "2": "Use environment variables for sensitive data (tokens, passwords).",
+      "3": "Review mcp-audit.log periodically for suspicious activity.",
+      "4": "Test new servers individually before using in workflows.",
+      "5": "Update MCP servers regularly: npm update -g @modelcontextprotocol/server-*",
+      "6": "Document any custom servers or modifications to this file."
+    }
+  }
+}

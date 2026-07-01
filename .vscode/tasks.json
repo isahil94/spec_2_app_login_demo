@@ -1,0 +1,101 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Bootstrap Venv",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "if (!(Test-Path .venv\\Scripts\\python.exe)) { py -m venv .venv }; .\\.venv\\Scripts\\python.exe -m pip install --upgrade pip"
+      ],
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": [
+        "-m",
+        "pip",
+        "install",
+        "-r",
+        "requirements.txt"
+      ],
+      "dependsOn": "Bootstrap Venv",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Run Tests",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": [
+        "-m",
+        "pytest",
+        "tests",
+        "-v",
+        "--tb=short"
+      ],
+      "dependsOn": "Install Dependencies",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Run Application",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": [
+        "main.py"
+      ],
+      "dependsOn": "Install Dependencies",
+      "isBackground": false,
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Format Code",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": [
+        "-m",
+        "black",
+        ".",
+        "--line-length=100"
+      ],
+      "dependsOn": "Install Dependencies",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Lint Code",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": [
+        "-m",
+        "flake8",
+        ".",
+        "--max-line-length=100",
+        "--exclude=.venv,build,dist"
+      ],
+      "dependsOn": "Install Dependencies",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "SDLC: Use Supervisor Chat Mode",
+      "type": "shell",
+      "command": "echo",
+      "args": [
+        "Start SDLC from Copilot Chat with: @chatmode supervisor"
+      ],
+      "isBackground": false,
+      "problemMatcher": [],
+      "group": "none"
+    }
+  ]
+}

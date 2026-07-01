@@ -1,0 +1,205 @@
+name: Pull Request Validation
+
+# Run on PR creation, update, or when commits are pushed to PR
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+jobs:
+  quality-checks:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Format check (Black)
+        run: |
+          python -m black --check --quiet .
+      
+      - name: Import sorting check (isort)
+        run: |
+          python -m isort --check-only --quiet .
+      
+      - name: Linting (Pylint)
+        run: |
+          python -m pylint scripts/ --disable=all --enable=E,F
+        continue-on-error: true
+      
+      - name: Security scan (Bandit)
+        run: |
+          python -m bandit -r scripts/ -f json -o bandit-report.json
+        continue-on-error: true
+      
+      - name: Type checking (mypy)
+        run: |
+          python -m mypy scripts/ --ignore-missing-imports
+        continue-on-error: true
+  
+  testing:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    needs: quality-checks
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run unit tests
+        run: |
+          python -m pytest tests/unit/ -v --tb=short --junit-xml=test-results.xml
+      
+      - name: Run integration tests
+        run: |
+          python -m pytest tests/integration/ -v --tb=short
+        continue-on-error: true
+      
+      - name: Check test coverage
+        run: |
+          python -m pytest tests/ --cov=scripts --cov-report=xml --cov-fail-under=80
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+      
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: test-results.xml
+          check_name: Test Results
+  
+  validation:
+    name: Configuration Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Validate MCP configuration
+        run: |
+          npm install -g @modelcontextprotocol/cli
+          node .vscode/validate-mcp.js
+      
+      - name: Validate YAML
+        run: |
+          npm install -g js-yaml
+          find . -name "*.yml" -o -name "*.yaml" | grep -v node_modules | xargs -I {} sh -c 'echo "Validating {}" && node -e "const yaml = require(\"js-yaml\"); console.log(yaml.load(require(\"fs\").readFileSync(\"{}\", \"utf8\")))"'
+        continue-on-error: true
+      
+      - name: Validate JSON
+        run: |
+          for file in $(find . -name "*.json" -not -path "*/node_modules/*" -not -path "*/.git/*"); do
+            echo "Validating $file"
+            python -m json.tool < "$file" > /dev/null || exit 1
+          done
+      
+      - name: Check repository structure
+        run: |
+          python -c "
+          import os
+          required_dirs = ['.github/chatmodes', 'ai/agents', 'scripts', '.vscode']
+          for d in required_dirs:
+              if not os.path.isdir(d):
+                  print(f'ERROR: Missing required directory: {d}')
+                  exit(1)
+          print('✓ Repository structure is valid')
+          "
+  
+  summary:
+    name: PR Summary
+    runs-on: ubuntu-latest
+    needs: [quality-checks, testing, validation]
+    if: always()
+    
+    steps:
+      - name: Comment PR with summary
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const workflow_run = context.payload.pull_request || context.payload.review;
+            if (!workflow_run) return;
+            
+            const checks_passed = ${{ needs['quality-checks'].result == 'success' }};
+            const tests_passed = ${{ needs.testing.result == 'success' }};
+            const validation_passed = ${{ needs.validation.result == 'success' }};
+            
+            let summary = '## PR Validation Summary\n\n';
+            summary += checks_passed ? '✓' : '✗';
+            summary += ' Quality Checks\n';
+            summary += tests_passed ? '✓' : '✗';
+            summary += ' Test Suite\n';
+            summary += validation_passed ? '✓' : '✗';
+            summary += ' Configuration Validation\n\n';
+            
+            if (checks_passed && tests_passed && validation_passed) {
+              summary += '**Status: Ready for review** ✓\n\n';
+              summary += 'All automated checks passed. Code review via Copilot Agent Mode can now proceed.';
+            } else {
+              summary += '**Status: Review blocked** ✗\n\n';
+              summary += 'Please fix failing checks before requesting review.';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });
+
+  status-check:
+    name: Status Checks
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [quality-checks, testing, validation, summary]
+    
+    steps:
+      - name: Determine status
+        run: |
+          if [ "${{ needs['quality-checks'].result }}" != "success" ] || \
+             [ "${{ needs.testing.result }}" != "success" ] || \
+             [ "${{ needs.validation.result }}" != "success" ]; then
+            echo "❌ PR validation failed"
+            exit 1
+          else
+            echo "✓ PR validation passed"
+            exit 0
+          fi

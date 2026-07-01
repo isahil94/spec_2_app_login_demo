@@ -1,0 +1,385 @@
+name: Quality Assurance
+
+# Run on push and pull requests to validate project structure
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+# Cancel previous runs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Validate repository structure
+  structure:
+    name: Repository Structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check required directories
+        run: |
+          REQUIRED_DIRS=(
+            "ai/agents"
+            "ai/contracts"
+            "ai/guardrails"
+            "ai/hooks"
+            "ai/instructions"
+            "ai/prompts"
+            "ai/skills"
+            "ai/templates"
+            "orchestration"
+            "scripts"
+            ".github/workflows"
+            ".github/chatmodes"
+            "docs"
+            "artifacts"
+            "configs"
+          )
+          
+          echo "Validating required directories..."
+          FAILED=0
+          for dir in "${REQUIRED_DIRS[@]}"; do
+            if [ ! -d "$dir" ]; then
+              echo "✗ Missing: $dir"
+              FAILED=1
+            else
+              echo "✓ Found: $dir"
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            exit 1
+          fi
+
+      - name: Check required files
+        run: |
+          REQUIRED_FILES=(
+            "README.md"
+            "pyproject.toml"
+            "requirements.txt"
+            "main.py"
+            ".github/copilot-instructions.md"
+            ".vscode/settings.json"
+            ".vscode/tasks.json"
+            ".vscode/launch.json"
+            ".vscode/extensions.json"
+            ".vscode/mcp.json"
+          )
+          
+          echo "Validating required files..."
+          FAILED=0
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "✗ Missing: $file"
+              FAILED=1
+            else
+              echo "✓ Found: $file"
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            exit 1
+          fi
+
+  # Validate YAML files
+  yaml:
+    name: YAML Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install YAML validator
+        run: pip install yamllint
+
+      - name: Validate workflow YAML
+        run: |
+          echo "Validating GitHub Actions workflows..."
+          yamllint .github/workflows/ || true
+
+      - name: Validate configuration YAML
+        run: |
+          echo "Validating AI configuration..."
+          find ai/ -name "*.yml" -o -name "*.yaml" | while read file; do
+            yamllint "$file" || true
+          done
+
+  # Validate JSON files
+  json:
+    name: JSON Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON configuration files..."
+          find . -name "*.json" -not -path "./node_modules/*" -not -path "./.git/*" | while read file; do
+            echo "Checking: $file"
+            python -m json.tool "$file" > /dev/null 2>&1 || { echo "✗ Invalid JSON: $file"; exit 1; }
+            echo "✓ Valid: $file"
+          done
+
+  # Validate Markdown files
+  markdown:
+    name: Markdown Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install markdown linter
+        run: npm install -g markdownlint-cli
+
+      - name: Check Markdown formatting
+        run: |
+          echo "Validating Markdown files..."
+          markdownlint README.md docs/*.md ai/hooks/*.md 2>/dev/null || echo "ℹ️ Markdown validation available"
+
+      - name: Check for broken links in Markdown
+        run: |
+          echo "Checking for markdown references..."
+          find . -name "*.md" -not -path "./node_modules/*" | xargs grep -l "^\[.*\](.*\.md)" || echo "ℹ️ No markdown links found"
+
+  # Validate AI configuration
+  ai-config:
+    name: AI Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Validate agent definitions
+        run: |
+          echo "Validating agent definitions..."
+          AGENTS=(
+            "ai/agents/00-supervisor.md"
+            "ai/agents/01-business-analyst.md"
+            "ai/agents/02-solution-architect.md"
+            "ai/agents/03-ui-ux-developer.md"
+            "ai/agents/04-backend-developer.md"
+            "ai/agents/05-database-developer.md"
+            "ai/agents/06-qa-engineer.md"
+            "ai/agents/07-reviewer.md"
+            "ai/agents/08-documentation.md"
+            "ai/agents/09-devops.md"
+          )
+          
+          FAILED=0
+          for agent in "${AGENTS[@]}"; do
+            if [ ! -f "$agent" ]; then
+              echo "✗ Missing agent: $agent"
+              FAILED=1
+            else
+              # Check if file has content
+              if [ -s "$agent" ]; then
+                echo "✓ Found: $agent"
+              else
+                echo "✗ Empty: $agent"
+                FAILED=1
+              fi
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            exit 1
+          fi
+
+      - name: Validate contract definitions
+        run: |
+          echo "Validating contract definitions..."
+          CONTRACTS=(
+            "ai/contracts/agent-contract.md"
+            "ai/contracts/approval-contract.md"
+            "ai/contracts/artifact-contracts.md"
+            "ai/contracts/event-contracts.md"
+            "ai/contracts/memory-contract.md"
+            "ai/contracts/quality-report-contract.md"
+            "ai/contracts/validation-contract.md"
+            "ai/contracts/workflow-state.md"
+          )
+          
+          FAILED=0
+          for contract in "${CONTRACTS[@]}"; do
+            if [ ! -f "$contract" ]; then
+              echo "✗ Missing contract: $contract"
+              FAILED=1
+            else
+              echo "✓ Found: $contract"
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            exit 1
+          fi
+
+      - name: Validate chat modes
+        run: |
+          echo "Validating chat modes..."
+          CHATMODES=(
+            ".github/chatmodes/supervisor.chatmode.md"
+            ".github/chatmodes/business-analyst.chatmode.md"
+            ".github/chatmodes/solution-architect.chatmode.md"
+            ".github/chatmodes/ui-ux-developer.chatmode.md"
+            ".github/chatmodes/backend-developer.chatmode.md"
+            ".github/chatmodes/database-developer.chatmode.md"
+            ".github/chatmodes/qa-engineer.chatmode.md"
+            ".github/chatmodes/reviewer.chatmode.md"
+            ".github/chatmodes/devops-release.chatmode.md"
+            ".github/chatmodes/documentation.chatmode.md"
+          )
+          
+          FAILED=0
+          for chatmode in "${CHATMODES[@]}"; do
+            if [ ! -f "$chatmode" ]; then
+              echo "✗ Missing chat mode: $chatmode"
+              FAILED=1
+            else
+              echo "✓ Found: $chatmode"
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            exit 1
+          fi
+
+  # Validate hook configuration
+  hooks:
+    name: Hook Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Validate hook definitions
+        run: |
+          echo "Validating hook definitions..."
+          if [ -f "ai/hooks/hooks.md" ]; then
+            # Check if file contains hook definitions
+            if grep -q "^## " ai/hooks/hooks.md; then
+              echo "✓ Hook definitions present"
+            else
+              echo "✗ No hook definitions found"
+              exit 1
+            fi
+          else
+            echo "✗ Hook definitions file missing"
+            exit 1
+          fi
+
+      - name: Validate hook implementations
+        run: |
+          echo "Validating hook implementations..."
+          HOOK_SCRIPTS=(
+            "scripts/hooks/__init__.py"
+            "scripts/hooks/setup_hooks.py"
+            "scripts/hooks/pre_commit.py"
+            "scripts/hooks/pre_push.py"
+            "scripts/hooks/commit_msg_validator.py"
+          )
+          
+          FAILED=0
+          for script in "${HOOK_SCRIPTS[@]}"; do
+            if [ ! -f "$script" ]; then
+              echo "✗ Missing: $script"
+              FAILED=1
+            else
+              echo "✓ Found: $script"
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            exit 1
+          fi
+
+  # Validate MCP configuration
+  mcp:
+    name: MCP Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Validate MCP configuration
+        run: |
+          echo "Validating MCP configuration..."
+          if [ ! -f ".vscode/mcp.json" ]; then
+            echo "✗ MCP configuration missing"
+            exit 1
+          fi
+          
+          python -c "import json; json.load(open('.vscode/mcp.json'))" && echo "✓ Valid MCP configuration" || exit 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run MCP validation script
+        run: |
+          if [ -f ".vscode/validate-mcp.js" ]; then
+            node .vscode/validate-mcp.js || true
+          fi
+
+  # Summary
+  summary:
+    name: Quality Summary
+    runs-on: ubuntu-latest
+    needs: [structure, yaml, json, markdown, ai-config, hooks, mcp]
+    if: always()
+    steps:
+      - name: Check Quality Status
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "Quality Assurance Summary"
+          echo "═══════════════════════════════════════"
+          echo "✓ Structure: ${{ needs.structure.result }}"
+          echo "✓ YAML: ${{ needs.yaml.result }}"
+          echo "✓ JSON: ${{ needs.json.result }}"
+          echo "✓ Markdown: ${{ needs.markdown.result }}"
+          echo "✓ AI Config: ${{ needs.ai-config.result }}"
+          echo "✓ Hooks: ${{ needs.hooks.result }}"
+          echo "✓ MCP: ${{ needs.mcp.result }}"
+          echo "═══════════════════════════════════════"
+          
+          if [ "${{ needs.structure.result }}" = "failure" ] || \
+             [ "${{ needs.ai-config.result }}" = "failure" ] || \
+             [ "${{ needs.hooks.result }}" = "failure" ]; then
+            exit 1
+          fi

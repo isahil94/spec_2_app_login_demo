@@ -49,13 +49,8 @@ next: qa_engineer
 - apps/database/sql/procedures/
 - apps/database/orm/
 - apps/database/README.md
-- artifacts/database/sql/schema.sql
-- artifacts/database/sql/migrations/
-- artifacts/database/sql/seed/
-- artifacts/database/sql/views/
-- artifacts/database/sql/procedures/
-- artifacts/database/orm/
-- artifacts/database/README.md
+- apps/database/init_db.py
+- apps/database/sql/migrations/0001_initial.sql
 - artifacts/database/quality-report.md
 - artifacts/database/handoff-contract.md
 - artifacts/database/openlog.md
@@ -87,6 +82,8 @@ next: qa_engineer
 - Missing required inputs only
 - Missing required outputs only
 
+- Constraints and Guardrails: Validate that declared constraints (FKs, CHECKs, NOT NULL, UNIQUE) are implemented and enforced. Run guardrail checks defined by repository guardrails and record any violations.
+
 ## Output Rules
 - Generate working database implementation artifacts first
 - Keep Markdown outputs limited to quality-report.md, handoff-contract.md, and openlog.md
@@ -101,6 +98,11 @@ next: qa_engineer
 - Implement exactly approved architecture; do not invent entities, change relationships, or modify business rules.
 - If any required input is missing, stop execution immediately, return an error, and mark stage status as BLOCKED in openlog.md, handoff-contract.md, and quality-report.md.
 
+# Initializer and Migration Requirements
+- If `apps/database/init_db.py` is not present, generate a portable initializer script that can create the runtime DB, seed sample data, and support a `--validate` mode to run checks in-memory. The initializer is an owned artifact.
+- If the migrations folder contains no migrations, create a generic idempotent starter migration at `apps/database/sql/migrations/0001_initial.sql` that is non-destructive and suitable as a validation artifact (for example, creating a migration_history table).
+- As part of `Database: Full Auto` execution the agent MUST attempt to initialize the runtime database and report the outcome in the three artifact markdowns. When the target engine is file-based (SQLite), "start" means create the DB file and ensure connections succeed; for server-based engines, the agent should attempt to connect and start the service if tooling allows.
+
 ## Autonomous Execution Policy (Mandatory)
 - Mode Name: `Database: Full Auto`.
 - Execute the full database stage end-to-end without asking the user for routine manual steps.
@@ -114,6 +116,15 @@ next: qa_engineer
 3. Run validation checks required by approved architecture and data constraints.
 4. Record outcomes in `quality-report.md`, `handoff-contract.md`, and `openlog.md`.
 5. Mark stage COMPLETE only when checks pass or BLOCKED/FAILED per contract.
+
+## Mandatory Run Steps (Full Auto)
+The Database Developer agent MUST perform the following steps during `Database: Full Auto` execution and record outcomes in the stage artifacts. These steps are mandatory and must be performed in sequence unless the workflow is explicitly BLOCKED.
+
+1. Validate (no persistent DB changes): run schema and migration validation in-memory (`--validate`) and record validation results in `artifacts/database/quality-report.md`. This step must not modify or create the persistent DB.
+2. Initialize persistent DB: create or recreate the runtime database (`artifacts/database/app.db`) and seed required sample data (`--init`). Record the initialization outcome in `artifacts/database/handoff-contract.md` and `artifacts/database/openlog.md`.
+3. Start and verify DB: for file-based engines (SQLite), open a connection and execute queries to confirm required tables exist and seed data is accessible; for server-based engines, attempt to start/connect to the service and run the same verification queries. Record verification results and table listings in `artifacts/database/quality-report.md` and `artifacts/database/openlog.md`.
+
+If any step fails, append the failure and blocking reason to `openlog.md` and mark the stage as BLOCKED per the Output Rules.
 
 ## Role Boundary
 Implements the data layer based on approved architecture and backend contracts.

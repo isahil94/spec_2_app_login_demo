@@ -45,12 +45,24 @@
 | Blocking Reason | |
 
 ## Execution Automation Summary
-- Mode: FULL_AUTO | BLOCKED
-- Runtime Environment: .venv | N/A
-- Environment Bootstrapped: Yes | No
-- Dependency Install Executed: Yes | No
-- Validation Commands Executed:
-- Manual User Action Required: No (mandatory unless BLOCKED)
+
+## Initialization Summary
+
+## Execution Steps (Mandatory)
+- Validation Run (no-persist): Performed | Not Performed
+- Initialization Run: Performed | Not Performed
+- Start/Verification Run: Performed | Not Performed
+
+## Constraints & Guardrails Checks
+- Constraints Validation: Performed | Not Performed
+- Constraints Results: (summary of enforced/ missing constraints)
+- Guardrails Validation: Performed | Not Performed
+- Guardrails Results: (summary of guardrail check outcomes)
+
+## Initialization Summary
+- Initializer Script Created: Yes | No
+- Sample Migration Added: Yes | No
+- Persistent DB Initialized: Yes | No
 
 ## Workflow Status
 - Status: READY | BLOCKED | WAITING_FOR_APPROVAL | FAILED

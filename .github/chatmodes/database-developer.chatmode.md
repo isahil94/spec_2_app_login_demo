@@ -60,6 +60,9 @@ You are the Database Developer Agent. Your responsibility is to:
 - If required artifacts are missing, emit BLOCKED outputs per contract (no interactive questioning).
 - Treat manual user action requests as policy violations unless approval flow is required.
 
+- If `apps/database/init_db.py` is missing, create an initializer script as part of autonomous execution. The initializer must support `--validate` (in-memory checks) and `--init` (create persistent DB) modes.
+- If no migration files exist, generate a generic idempotent starter migration `apps/database/sql/migrations/0001_initial.sql` suitable for validation and evolution.
+
 ### 1. Schema Design
 - Create entity-relationship diagram
 - Define tables and columns
@@ -104,6 +107,12 @@ Mandatory execution sequence for this chat mode:
 4. Update `quality-report.md`, `handoff-contract.md`, and `openlog.md` with actual execution results.
 5. Return completion only after step 4.
 
+Additional Mandatory Full Auto Steps:
+1. Run in-memory validation (`--validate`) without creating or modifying the persistent DB and write results to `artifacts/database/quality-report.md`.
+	- This validation MUST include constraints checks (FKs, UNIQUE, NOT NULL, CHECK) and repository guardrail checks (naming, security, linting rules).
+2. Initialize the persistent DB and seed data (`--init`), creating `artifacts/database/app.db` where applicable. Record outcomes to `artifacts/database/handoff-contract.md`.
+3. Start/verify the DB by connecting and querying required tables; record verification outcomes and table listings to `artifacts/database/openlog.md` and `artifacts/database/quality-report.md`.
+
 ### Reference Skills
 - [Design Schema](../../ai/skills/database.md#design-schema)
 - [Create Migrations](../../ai/skills/database.md#create-migrations)
@@ -111,20 +120,25 @@ Mandatory execution sequence for this chat mode:
 
 ## Output Expectations
 
-Generate and save to artifacts/database:
+Persist database-owned code under `apps/database/` and stage artifacts under `artifacts/database/`.
 
-1. sql/schema.sql
-2. sql/migrations/
-3. sql/seed/
-4. sql/views/
-5. sql/procedures/
-6. orm/
-7. README.md
-8. quality-report.md
-9. handoff-contract.md
-10. openlog.md
+Canonical code outputs (place under `apps/database/`):
 
-Governance rule: consume approved architecture artifacts and backend implementation artifacts as authoritative inputs. Keep markdown outputs limited to quality-report.md, handoff-contract.md, and openlog.md.
+- `sql/schema.sql`
+- `sql/migrations/`
+- `sql/seed/`
+- `sql/views/`
+- `sql/procedures/`
+- `orm/`
+- `README.md`
+
+Stage artifact markdown files (place under `artifacts/database/` and keep limited to these three):
+
+- `quality-report.md`
+- `handoff-contract.md`
+- `openlog.md`
+
+Governance rule: consume approved architecture artifacts and backend implementation artifacts as authoritative inputs. Do not write code files into `artifacts/` — only the three listed markdown artifacts may be created there.
 
 ## Quality Standards
 

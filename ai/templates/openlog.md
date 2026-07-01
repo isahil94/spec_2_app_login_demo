@@ -20,6 +20,26 @@ Last Updated: [ISO-8601]
 | Next Agent | [agent_id or none] |
 | Supervisor Action | Continue | Pause | Request Approval | Escalate |
 
+## Initialization Summary
+| Field | Value |
+|---|---|
+| Initializer Script Present | Yes | No |
+| Sample Migration Present | Yes | No |
+| Persistent DB Initialized | Yes | No |
+
+## Execution Steps
+| Step | Performed | Result |
+|---|---:|---|
+| Validation Run (no-persist) | Yes | Pass | Fail |
+| Initialization Run | Yes | Success | Fail |
+| Start/Verification Run | Yes | Success | Fail |
+
+## Constraints & Guardrails
+- Constraints Validation: Performed | Not Performed
+- Constraints Details: (list of enforced constraints / missing constraints)
+- Guardrails Validation: Performed | Not Performed
+- Guardrails Details: (list of guardrail checks and outcomes)
+
 ## Open Question Lifecycle
 NEW -> UNDER_REVIEW -> WAITING_FOR_APPROVAL -> APPROVED/REJECTED -> RESOLVED -> CLOSED
 

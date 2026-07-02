@@ -307,7 +307,7 @@ pytest-cov>=4.0
 black>=23.0
 flake8>=5.0
 isort>=5.0
-pylance>=1.1.0
+mypy>=1.0
 httpx>=0.23.0
 aiohttp>=3.8.0
 ```
@@ -468,7 +468,7 @@ aiohttp>=3.8.0
 + mypy>=0.910
 + pylint>=2.0
 - isort>=5.0
-  pylance>=1.1.0
+  mypy>=0.910
 
   # Optional: For API and async support
   httpx>=0.23.0

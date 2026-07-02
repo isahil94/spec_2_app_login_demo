@@ -35,7 +35,7 @@ See [../.github/chatmodes/](../.github/chatmodes/) for 10 specialized Copilot ch
 # Option A: Manual install from marketplace
 # - GitHub Copilot
 # - Python
-# - Pylance
+# - Type checking tools (mypy or equivalent)
 # - Black Formatter
 # - isort
 # - Pytest

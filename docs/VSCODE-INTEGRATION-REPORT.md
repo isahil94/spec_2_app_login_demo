@@ -230,9 +230,9 @@ ${workspaceFolder}\.venv\Scripts\python.exe
 - ✅ GitHub.copilot - Required for platform
 - ✅ GitHub.copilot-chat - Required for chat functionality
 
-**Python Development:**
+-**Python Development:**
 - ✅ ms-python.python - Core Python support
-- ✅ ms-python.vscode-pylance - Advanced type checking
+- ✅ Type checking (mypy or equivalent) - Static type checking
 - ✅ ms-python.debugpy - Python debugging
 - ✅ ms-python.black-formatter - Code formatting
 - ✅ ms-python.isort - Import sorting

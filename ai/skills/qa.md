@@ -153,7 +153,7 @@ Validate critical user journeys across backend, frontend, and database layers, e
 - `business_rules` (array): Required validation rules and constraints
 - `auth_scenarios` (array): Signup/login cases to exercise
 - `page_flows` (array): Core user journeys and page states
-- `pylance_context` (object, optional): Static analysis context from Pylance
+- `static_analysis_context` (object, optional): Static analysis context (mypy/eslint/flake8 output)
 
 ### Outputs
 - `workflow_validation_results` (object): Results for auth and page-flow checks
@@ -164,17 +164,19 @@ Validate critical user journeys across backend, frontend, and database layers, e
 ### Dependencies
 - Application implementation available
 - Requirements and acceptance criteria documented
-- Pylance or equivalent static analysis available
+- Static analysis tools available (mypy/eslint/flake8)
 
 ### Execution Steps
-1. Run Pylance-based static validation for backend, frontend, and database code.
-2. Review authentication requirements for signup and login.
-3. If the required workflow or validation test is missing, generate a new test case and publish it under the appropriate QA artifact path in `artifacts/tests/`.
-4. Exercise signup scenarios with missing email, invalid email, weak password, duplicate user, and valid data.
-5. Exercise login scenarios with unknown users, missing credentials, wrong password, and correct credentials.
-6. Validate core pages and flows for required-field checks, empty states, and successful completion paths.
-7. Confirm database constraints and persistence behavior for invalid or missing data.
-8. Record failures, expected behavior, and remediation guidance.
+1. Run static analysis (mypy, eslint, flake8) for backend, frontend, and database code and capture results.
+2. Generate Playwright E2E tests for acceptance criteria where appropriate; keep one spec file per feature and place under the repository's E2E test folder (e.g., `tests/e2e`).
+3. Run generated Playwright tests automatically; capture and save failure screenshots to `artifacts/tests/e2e/screenshots`.
+4. Review authentication requirements for signup and login.
+5. If the required workflow or validation test is missing, generate a new Playwright test case and publish it under `artifacts/tests/`.
+6. Exercise signup scenarios with missing email, invalid email, weak password, duplicate user, and valid data via Playwright.
+7. Exercise login scenarios with unknown users, missing credentials, wrong password, and correct credentials via Playwright.
+8. Validate core pages and flows for required-field checks, empty states, and successful completion paths via Playwright.
+9. Confirm database constraints and persistence behavior for invalid or missing data (query DB directly where needed).
+10. Record failures, expected behavior, and remediation guidance.
 
 ### Validation Checklist
 - [ ] Missing input produces the expected validation error
@@ -183,7 +185,7 @@ Validate critical user journeys across backend, frontend, and database layers, e
 - [ ] Unknown user and wrong credentials are rejected appropriately
 - [ ] Core pages expose the correct UX for empty/error/success states
 - [ ] Database constraints are enforced or reported clearly
-- [ ] Pylance validation was run and issues were reviewed
+- [ ] Static analysis completed and Playwright tests executed; issues reviewed
 
 ### Success Criteria
 - Authentication and page workflows behave according to documented requirements
@@ -197,6 +199,45 @@ Validate critical user journeys across backend, frontend, and database layers, e
 - Page workflows fail without clear error handling
 - Database constraints are not enforced or not surfaced
 - Static analysis issues remain unresolved
+
+---
+
+## Skill: Generate Playwright E2E Tests
+
+### Purpose
+Generate maintainable Playwright end-to-end tests from user stories and acceptance criteria, run tests, and capture failure artifacts.
+
+### When to Use
+- When an explicit user story or acceptance criterion requires an end-to-end verification
+- For critical workflows (authentication, navigation, data persistence)
+
+### Inputs
+- `user_story` (object): User story with acceptance criteria and scenarios
+- `local_url` (string): Local URL where the feature is deployed (e.g., http://localhost:5173/feature)
+- `selectors` (object, optional): DOM selectors or page object hints
+
+### Outputs
+- Playwright spec file saved under `tests/e2e/<feature-name>.spec.ts` or `.js`
+- Failure screenshots saved under `artifacts/tests/e2e/screenshots`\
+- `ui-live-test-report.md` summarizing execution results and links to screenshots
+
+### Execution Steps
+1. Parse the `user_story` and extract Gherkin-style scenarios.
+2. Generate a Playwright spec file (one per feature) that implements the scenarios using Playwright test API and page objects where helpful.
+3. Run Playwright tests automatically using the project's Playwright setup (or install Playwright if missing in a controlled manner).
+4. On test failures, save screenshots and the test trace to `artifacts/tests/e2e/screenshots`.
+5. Produce `ui-live-test-report.md` with pass/fail, failure screenshots, and rerun commands.
+
+### Validation Checklist
+- [ ] One spec file per feature is created
+- [ ] Tests implement acceptance criteria exactly (no invented flows)
+- [ ] Failure screenshots captured for each failed test
+- [ ] Report includes target user story and local URL
+
+### Success Criteria
+- Playwright tests run and report results automatically
+- Failure artifacts are stored and linked from reports
+- Tests are maintainable and aligned with feature names
 
 ---
 

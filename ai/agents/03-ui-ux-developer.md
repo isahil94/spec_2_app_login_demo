@@ -58,8 +58,8 @@ next: qa_engineer
 - artifacts/frontend/openlog.md
 
 ## Skills Used
-- Generate React + TypeScript + Vite frontend
 - Build responsive pages, layouts, and reusable components
+- Navigation flow
 - Implement routing, forms, and state scaffolding
 - Implement accessibility, tokens/styles, and API service placeholders
 

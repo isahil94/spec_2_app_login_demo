@@ -112,7 +112,7 @@
   - Impact: **Broken reference** to skill file
 - ✅ Input artifacts: Correctly references requirements and architecture
 - ✅ Parallel execution: Correctly marked and documented
-- ✅ Output paths: `artifacts/app/frontend/` - Follows convention
+- ✅ Output paths: `app/frontend/` for implementation code and `artifacts/frontend/` for governance artifacts - follows convention
 
 **Issues:**
 1. **Broken Skill File Reference:** Chat mode references `ai/skills/uiux-developer.md` but file is `ai/skills/ui-ux.md`

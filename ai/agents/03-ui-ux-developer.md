@@ -89,6 +89,8 @@ next: qa_engineer
 - Do not duplicate architecture or requirement text
 - Reference upstream artifacts where possible
 - Preserve mandatory schemas for openlog/handoff/quality artifacts; compact content only.
+- Frontend implementation outputs must be written to `app/frontend/`.
+- Only frontend governance artifacts may be written to `artifacts/frontend/`.
 - Automatically consume all available upstream artifacts before generation; treat them as authoritative.
 - Auto-discover and consume Figma reference from upstream artifacts; do not request it again.
 - Use figma_design_intake.md as the structured visual handoff artifact when present.

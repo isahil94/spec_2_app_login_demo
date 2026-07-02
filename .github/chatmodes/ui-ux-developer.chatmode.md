@@ -84,6 +84,11 @@ Figma rule:
 - Test keyboard navigation
 - Provide implementation-ready accessibility behavior
 
+### 5. Output Path Rules
+- Persist implementation code under `app/frontend/`.
+- Persist frontend governance artifacts under `artifacts/frontend/` only.
+- Do not place frontend implementation output in `artifacts/frontend/`.
+
 ### 5. API Consumption Boundary
 - Consume only approved API contracts.
 - Implement lightweight frontend service abstractions for request/response handling.

@@ -1,0 +1,159 @@
+{
+  "workflow_id": "wf-full-test",
+  "generated_at": "2026-07-03T22:46:45.452367",
+  "total_events": 22,
+  "events_by_type": {
+    "workflow_started": 1,
+    "stage_started": 2,
+    "stage_completed": 1,
+    "stage_failed": 1,
+    "artifact_generated": 16,
+    "approval_requested": 1
+  },
+  "events_by_stage": {
+    "business-analyst": 18,
+    "solution-architect": 3
+  },
+  "critical_events": [
+    {
+      "type": "stage_failed",
+      "stage": "solution-architect",
+      "message": "Failed stage: solution-architect - No output artifacts materialized for stage 'solution-architect'. Expected: ",
+      "timestamp": "2026-07-03T22:46:45.414687"
+    }
+  ],
+  "timeline": [
+    {
+      "timestamp": "2026-07-03T22:46:45.291448",
+      "event": "workflow_started",
+      "stage": null,
+      "message": "Workflow started with specification: specs\\specification.md"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.309483",
+      "event": "stage_started",
+      "stage": "business-analyst",
+      "message": "Starting stage: business-analyst"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.378373",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/requirements_spec"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.380345",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/user_stories"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.381525",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/acceptance_criteria"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.382595",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/non_functional_requirements"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.385736",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/ui_observations"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.387594",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/figma_design_intake"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.388931",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/screen_elements"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.390123",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/personas"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.391237",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/business_process_flows"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.392339",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/business_rules"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.393532",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/data_requirements"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.394813",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/glossary"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.395942",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/traceability"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.397009",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/quality_report"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.398094",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/handoff_contract"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.399190",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/openlog"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.402452",
+      "event": "stage_completed",
+      "stage": "business-analyst",
+      "message": "Completed stage: business-analyst (0.06s)"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.406180",
+      "event": "stage_started",
+      "stage": "solution-architect",
+      "message": "Starting stage: solution-architect"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.410183",
+      "event": "approval_requested",
+      "stage": "solution-architect",
+      "message": "Approval requested for stage: solution-architect"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:45.414687",
+      "event": "stage_failed",
+      "stage": "solution-architect",
+      "message": "Failed stage: solution-architect - No output artifacts materialized for stage 'solution-architect'. Expected: "
+    }
+  ]
+}

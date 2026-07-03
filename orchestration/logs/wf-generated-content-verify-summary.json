@@ -1,0 +1,746 @@
+{
+  "workflow_id": "wf-generated-content-verify",
+  "generated_at": "2026-07-04T00:01:48.542720",
+  "total_events": 120,
+  "events_by_type": {
+    "workflow_started": 1,
+    "stage_started": 9,
+    "stage_completed": 9,
+    "artifact_generated": 100,
+    "workflow_completed": 1
+  },
+  "events_by_stage": {
+    "business-analyst": 17,
+    "solution-architect": 17,
+    "ui-ux-developer": 17,
+    "backend-developer": 24,
+    "database-developer": 8,
+    "qa-engineer": 9,
+    "reviewer": 9,
+    "documentation": 11,
+    "devops": 6
+  },
+  "critical_events": [],
+  "timeline": [
+    {
+      "timestamp": "2026-07-04T00:01:47.805105",
+      "event": "workflow_started",
+      "stage": null,
+      "message": "Workflow started with specification: specs\\specification.md"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.808313",
+      "event": "stage_started",
+      "stage": "business-analyst",
+      "message": "Starting stage: business-analyst"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.866107",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/requirements_spec"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.891015",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/user_stories"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.892236",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/acceptance_criteria"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.893226",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/non_functional_requirements"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.894160",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/ui_observations"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.894819",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/figma_design_intake"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.895172",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/screen_elements"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.895487",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/personas"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.896405",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/business_process_flows"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.897204",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/business_rules"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.897938",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/data_requirements"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.898402",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/glossary"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.898937",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/traceability"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.899465",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/quality_report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.899770",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/handoff_contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.900118",
+      "event": "stage_completed",
+      "stage": "business-analyst",
+      "message": "Completed stage: business-analyst (0.06s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.901545",
+      "event": "stage_started",
+      "stage": "solution-architect",
+      "message": "Starting stage: solution-architect"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.958974",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/architecture-design"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.959468",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/module-design"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.960036",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/technology-stack"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.960676",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/tdd"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.962589",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/lld"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.964344",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/api-specifications"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.965074",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/user-flow-specification"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.966096",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/data-dictionary"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.966968",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/security-architecture"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.967638",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/deployment-architecture"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.968440",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/database-strategy"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.969286",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/architecture-decision-records"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.970288",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.970955",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.971950",
+      "event": "artifact_generated",
+      "stage": "solution-architect",
+      "message": "Generated artifact: architecture/openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.973026",
+      "event": "stage_completed",
+      "stage": "solution-architect",
+      "message": "Completed stage: solution-architect (0.05s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:47.975495",
+      "event": "stage_started",
+      "stage": "ui-ux-developer",
+      "message": "Starting stage: ui-ux-developer"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.103261",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/package.json"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.106919",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/tsconfig.json"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.108557",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/vite.config.ts"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.110102",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/main.tsx"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.111309",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/App.tsx"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.113606",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/pages"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.114995",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/layouts"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.116050",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/components"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.117804",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/state"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.119210",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/services/api"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.120471",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/src/styles"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.121360",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: apps/frontend/README"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.122359",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: frontend/quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.125069",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: frontend/handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.126292",
+      "event": "artifact_generated",
+      "stage": "ui-ux-developer",
+      "message": "Generated artifact: frontend/openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.126959",
+      "event": "stage_completed",
+      "stage": "ui-ux-developer",
+      "message": "Completed stage: ui-ux-developer (0.12s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.128835",
+      "event": "stage_started",
+      "stage": "backend-developer",
+      "message": "Starting stage: backend-developer"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.226970",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/controllers"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.227666",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/services"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.228245",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/dto"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.228809",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/domain"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.229373",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/validation"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.229779",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/auth"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.230190",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/config"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.230560",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/middleware"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.230924",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/routes"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.231265",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/src/logging"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.231825",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/requirements.txt"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.232339",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: apps/backend/README"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.232945",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/backend-design"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.233596",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/endpoint-implementation"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.234444",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/business-logic"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.235104",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/validation-rules"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.235807",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/integration-implementation"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.236352",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/backend-spec"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.236725",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/backend-development-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.237060",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.237625",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.238025",
+      "event": "artifact_generated",
+      "stage": "backend-developer",
+      "message": "Generated artifact: backend/openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.238399",
+      "event": "stage_completed",
+      "stage": "backend-developer",
+      "message": "Completed stage: backend-developer (0.09s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.241173",
+      "event": "stage_started",
+      "stage": "database-developer",
+      "message": "Starting stage: database-developer"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.297022",
+      "event": "artifact_generated",
+      "stage": "database-developer",
+      "message": "Generated artifact: apps/database/sql/schema.sql"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.297627",
+      "event": "artifact_generated",
+      "stage": "database-developer",
+      "message": "Generated artifact: apps/database/init_db.py"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.298225",
+      "event": "artifact_generated",
+      "stage": "database-developer",
+      "message": "Generated artifact: apps/database/README"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.298700",
+      "event": "artifact_generated",
+      "stage": "database-developer",
+      "message": "Generated artifact: database/quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.299055",
+      "event": "artifact_generated",
+      "stage": "database-developer",
+      "message": "Generated artifact: database/handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.299420",
+      "event": "artifact_generated",
+      "stage": "database-developer",
+      "message": "Generated artifact: database/openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.299888",
+      "event": "stage_completed",
+      "stage": "database-developer",
+      "message": "Completed stage: database-developer (0.05s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.301730",
+      "event": "stage_started",
+      "stage": "qa-engineer",
+      "message": "Starting stage: qa-engineer"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.369657",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/ui-live-test-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.370545",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/coverage-matrix"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.373864",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/gap-analysis"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.375210",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/qa-blockers"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.376749",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.377854",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.378810",
+      "event": "artifact_generated",
+      "stage": "qa-engineer",
+      "message": "Generated artifact: tests/openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.380406",
+      "event": "stage_completed",
+      "stage": "qa-engineer",
+      "message": "Completed stage: qa-engineer (0.07s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.386202",
+      "event": "stage_started",
+      "stage": "reviewer",
+      "message": "Starting stage: reviewer"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.426638",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/review-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.427283",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/quality-scorecard"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.427974",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/findings"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.428449",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/improvement-recommendations"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.429322",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.429838",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.430270",
+      "event": "artifact_generated",
+      "stage": "reviewer",
+      "message": "Generated artifact: review/openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.430667",
+      "event": "stage_completed",
+      "stage": "reviewer",
+      "message": "Completed stage: reviewer (0.04s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.432609",
+      "event": "stage_started",
+      "stage": "documentation",
+      "message": "Starting stage: documentation"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.470290",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: README"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.471257",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: INSTALL"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.471969",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: USER_GUIDE"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.472654",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: API"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.473992",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: DEPLOYMENT"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.474492",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: CHANGELOG"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.474947",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.475391",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.475894",
+      "event": "artifact_generated",
+      "stage": "documentation",
+      "message": "Generated artifact: openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.476522",
+      "event": "stage_completed",
+      "stage": "documentation",
+      "message": "Completed stage: documentation (0.04s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.479525",
+      "event": "stage_started",
+      "stage": "devops",
+      "message": "Starting stage: devops"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.526187",
+      "event": "artifact_generated",
+      "stage": "devops",
+      "message": "Generated artifact: .env.example"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.526791",
+      "event": "artifact_generated",
+      "stage": "devops",
+      "message": "Generated artifact: quality-report"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.527994",
+      "event": "artifact_generated",
+      "stage": "devops",
+      "message": "Generated artifact: handoff-contract"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.529138",
+      "event": "artifact_generated",
+      "stage": "devops",
+      "message": "Generated artifact: openlog"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.530186",
+      "event": "stage_completed",
+      "stage": "devops",
+      "message": "Completed stage: devops (0.04s)"
+    },
+    {
+      "timestamp": "2026-07-04T00:01:48.533185",
+      "event": "workflow_completed",
+      "stage": null,
+      "message": "Workflow completed successfully (0.72s)"
+    }
+  ]
+}

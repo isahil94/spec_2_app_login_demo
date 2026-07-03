@@ -41,6 +41,8 @@ Automatically consume Figma URL from `specification.md` if present. If absent, c
 - Accessibility Expectations: [Business-level accessibility expectations]
 - Responsive Expectations: [Business-level responsiveness expectations]
 - Visual Detail Notes: [Layout, spacing, hierarchy, component patterns, notable states]
+- Default Route (mandatory): [The literal screen/route shown when no authenticated session exists]
+- Unauthenticated Access Behavior (mandatory): [What happens if a protected screen/route is requested without a session]
 
 ## OpenLog References
 - Raise only necessary UI questions in `openlog.md`.
@@ -48,3 +50,4 @@ Automatically consume Figma URL from `specification.md` if present. If absent, c
 ## Rules
 - Describe business behavior only.
 - Do not prescribe implementation.
+- Keep this artifact focused on the user experience, navigation, and screen-level behavior; do not duplicate the detailed element inventory captured in screen-elements.md.

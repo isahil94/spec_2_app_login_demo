@@ -1,0 +1,41 @@
+{
+  "workflow_id": "wf-ba-test-3",
+  "generated_at": "2026-07-03T22:44:21.096098",
+  "total_events": 3,
+  "events_by_type": {
+    "workflow_started": 1,
+    "stage_started": 1,
+    "stage_failed": 1
+  },
+  "events_by_stage": {
+    "business-analyst": 2
+  },
+  "critical_events": [
+    {
+      "type": "stage_failed",
+      "stage": "business-analyst",
+      "message": "Failed stage: business-analyst - No output artifacts materialized for stage 'business-analyst'. Expected: ",
+      "timestamp": "2026-07-03T22:44:21.083057"
+    }
+  ],
+  "timeline": [
+    {
+      "timestamp": "2026-07-03T22:44:21.077662",
+      "event": "workflow_started",
+      "stage": null,
+      "message": "Workflow started with specification: specs\\specification.md"
+    },
+    {
+      "timestamp": "2026-07-03T22:44:21.079694",
+      "event": "stage_started",
+      "stage": "business-analyst",
+      "message": "Starting stage: business-analyst"
+    },
+    {
+      "timestamp": "2026-07-03T22:44:21.083057",
+      "event": "stage_failed",
+      "stage": "business-analyst",
+      "message": "Failed stage: business-analyst - No output artifacts materialized for stage 'business-analyst'. Expected: "
+    }
+  ]
+}

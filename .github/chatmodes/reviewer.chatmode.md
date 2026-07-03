@@ -23,12 +23,11 @@ You are the Reviewer Agent. Your responsibility is to:
 
 ## Input Artifacts
 
-- Review: `apps/frontend/`
-- Review: `app/backend/`
-- Review: `apps/database/`
+- Review: `artifacts/frontend/`
+- Review: `artifacts/backend/`
 - Review: `artifacts/database/`
 - Review: `artifacts/tests/`
-- Reference: [Agent Definition](../../ai/agents/07-reviewer.md)
+- Reference: [Agent Definition](../../.github/agents/07-reviewer.agent.md)
 
 ## Responsibilities
 
@@ -152,7 +151,7 @@ This agent is complete when:
 
 ## Reference Documents
 
-- [Agent Definition](../../ai/agents/07-reviewer.md)
+- [Agent Definition](../../.github/agents/07-reviewer.agent.md)
 - [Skills](../../ai/skills/reviewer.md)
 - [Review Report Template](../../ai/templates/review-report.md)
 - [Quality Report Contract](../../ai/contracts/quality-report-contract.md)
@@ -160,4 +159,3 @@ This agent is complete when:
 ---
 
 **Note:** This is the final quality gate before deployment. Be thorough and fair in assessment.
-

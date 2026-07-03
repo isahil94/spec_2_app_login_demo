@@ -250,7 +250,7 @@ scripts/build.py   → python -m build (used by release.yml)
 .vscode/validate-mcp.js       → Runs in quality.yml
 .github/copilot-instructions  → Validated by documentation.yml
 ai/hooks/hooks.md             → Validated by quality.yml
-ai/agents/*.md                → 10 agents validated by quality.yml
+ .github/agents/*.md                → 10 agents validated by quality.yml
 ai/contracts/*.md             → 8 contracts validated by quality.yml
 .github/chatmodes/*.md        → 10 chat modes validated by quality.yml
 scripts/hooks/*.py            → 5 hook scripts validated by quality.yml
@@ -529,7 +529,7 @@ Total: 1,830 lines of production-ready YAML and documentation
 | Format check fails | `python scripts/format.py --fix` |
 | Lint errors | `python scripts/lint.py --fix` |
 | Tests fail | `python -m pytest tests/` |
-| Structure validation fails | Check `ai/agents/`, `ai/contracts/` |
+| Structure validation fails | Check `.github/agents/`, `ai/contracts/` |
 | MCP validation fails | Check `.vscode/mcp.json` syntax |
 | Release blocked | Ensure CHANGELOG updated, version consistent |
 
@@ -542,7 +542,7 @@ python scripts/lint.py
 python -m pytest tests/
 
 # Validate structure
-ls -la ai/agents/ | wc -l  # Should be 10
+ls -la .github/agents/ | wc -l  # Should be 10
 
 # Validate configs
 node .vscode/validate-mcp.js

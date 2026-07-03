@@ -182,7 +182,7 @@
 - [x] `.vscode/validate-mcp.js` runs in quality.yml
 - [x] `.github/copilot-instructions.md` validated by documentation.yml
 - [x] `ai/hooks/hooks.md` validated by quality.yml
-- [x] `ai/agents/*.md` validated by quality.yml (10 files)
+- [x] `.github/agents/*.md` validated by quality.yml (10 files)
 - [x] `ai/contracts/*.md` validated by quality.yml (8 files)
 - [x] `.github/chatmodes/*.chatmode.md` validated by quality.yml (10 files)
 - [x] `scripts/hooks/*.py` validated by quality.yml (5 files)
@@ -289,7 +289,7 @@
 
 ### Can Verify Structure
 
-- [x] `ls -la ai/agents/` (should show 10 files)
+- [x] `ls -la .github/agents/` (should show 10 files)
 - [x] `ls -la ai/contracts/` (should show 8 files)
 - [x] `ls -la scripts/hooks/` (should show 5 files)
 - [x] `node .vscode/validate-mcp.js`

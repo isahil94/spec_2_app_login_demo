@@ -33,6 +33,8 @@ Provide the single source of truth for navigation and UX flows.
 - [Route | Purpose | Permissions]
 
 ## Screen Details
+---
+
 ### Screen: [Screen Name]
 - Purpose: [Purpose]
 - Route: [Route]

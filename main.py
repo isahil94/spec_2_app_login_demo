@@ -54,7 +54,7 @@ class SpecsToAppPlatform:
 
         required_paths = [
             Path(".github/copilot-instructions.md"),
-            Path("ai/agents"),
+            Path(".github/agents"),
             Path("ai/prompts"),
             Path("ai/skills"),
             Path("ai/contracts"),
@@ -177,9 +177,9 @@ For full workflow orchestration, use GitHub Copilot chat modes:
   @chatmode solution-architect
   ... etc
 
-Note: Agent orchestration is handled via:
+    Note: Agent orchestration is handled via:
     - Supervisor chat mode + agent chat modes (.github/chatmodes/)
-    - Markdown agent definitions (ai/agents/*.md)
+    - Markdown agent definitions (.github/agents/*.md)
     - Not a custom Python orchestration engine
         """,
     )

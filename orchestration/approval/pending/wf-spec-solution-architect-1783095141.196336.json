@@ -1,0 +1,17 @@
+{
+  "approval_id": "wf-spec-solution-architect-1783095141.196336",
+  "workflow_id": "wf-spec",
+  "stage": "solution-architect",
+  "blocker_report": "No output artifacts materialized for stage 'solution-architect'. Expected: `artifacts/architecture/architecture-design.md`, `artifacts/architecture/module-design.md`, `artifacts/architecture/technology-stack.md`, `artifacts/architecture/tdd.md`, `artifacts/architecture/lld.md`, `artifacts/architecture/api-specifications.md`, `artifacts/architecture/user-flow-specification.md`, `artifacts/architecture/data-dictionary.md`, `artifacts/architecture/security-architecture.md`, `artifacts/architecture/deployment-architecture.md`, `artifacts/architecture/database-strategy.md`, `artifacts/architecture/architecture-decision-records.md`, `artifacts/architecture/quality-report.md`, `artifacts/architecture/handoff-contract.md`, `artifacts/architecture/openlog.md`",
+  "blocker_type": "execution_failure",
+  "severity": "high",
+  "required_approval_roles": [
+    "reviewer"
+  ],
+  "status": "pending",
+  "created_at": "2026-07-03T21:42:21.196359",
+  "expires_at": "2026-07-10T21:42:21.196360",
+  "approved_by": null,
+  "approved_at": null,
+  "decision_notes": null
+}

@@ -35,7 +35,7 @@ def setup_logging(name: str, level: int = logging.INFO) -> logging.Logger:
 
 def load_agent_definition(agent_filename: str) -> Dict[str, Any]:
     """
-    Load an agent definition from the ai/agents directory.
+    Load an agent definition from the .github/agents directory.
     
     Args:
         agent_filename: Name of the agent markdown file (e.g., '01-business-analyst.md')
@@ -48,7 +48,7 @@ def load_agent_definition(agent_filename: str) -> Dict[str, Any]:
         yaml.YAMLError: If YAML frontmatter is invalid
     """
     workspace_root = Path(__file__).parent.parent
-    agent_path = workspace_root / 'ai' / 'agents' / agent_filename
+    agent_path = workspace_root / '.github' / 'agents' / agent_filename
     
     if not agent_path.exists():
         raise FileNotFoundError(f"Agent definition not found: {agent_path}")

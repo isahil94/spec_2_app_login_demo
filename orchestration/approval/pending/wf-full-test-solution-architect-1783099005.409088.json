@@ -1,0 +1,17 @@
+{
+  "approval_id": "wf-full-test-solution-architect-1783099005.409088",
+  "workflow_id": "wf-full-test",
+  "stage": "solution-architect",
+  "blocker_report": "No output artifacts materialized for stage 'solution-architect'. Expected: ",
+  "blocker_type": "execution_failure",
+  "severity": "high",
+  "required_approval_roles": [
+    "reviewer"
+  ],
+  "status": "pending",
+  "created_at": "2026-07-03T22:46:45.409109",
+  "expires_at": "2026-07-10T22:46:45.409109",
+  "approved_by": null,
+  "approved_at": null,
+  "decision_notes": null
+}

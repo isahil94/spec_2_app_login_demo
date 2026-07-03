@@ -36,7 +36,7 @@ Extract structured business requirements from raw specifications, identifying go
 - `stakeholder_analysis` (array): Stakeholder responsibilities, goals, pain points, and success criteria
 - `glossary_terms` (array): Business glossary entries
 - `ui_observations` (array): Observations from the provided design reference
-- `figma_design_intake` (object): Structured Figma intake summary including URL, screen coverage, visual notes, and frontend handoff guidance
+- `figma_design_intake` (object): Structured Figma intake summary including URL (or reference screenshots from `examples/task-management/` if Figma unavailable), screen coverage, visual notes, and frontend handoff guidance
 - `business_capability_requirements` (array): Capability statements grouped by business domain
 - `business_data_model` (array): Conceptual entities and relationships
 
@@ -56,7 +56,7 @@ Extract structured business requirements from raw specifications, identifying go
 6. Identify gaps and ambiguities
 7. Prioritize requirements by business value using MoSCoW
 8. Generate clarification questions
-9. Document non-functional expectations, stakeholders, glossary, and Figma observations in business language only
+9. Document non-functional expectations, stakeholders, glossary, and Figma (or reference screenshot from `examples/task-management/` if Figma unavailable) observations in business language only
 10. Structure output for downstream agents
 11. Verify no technical design or implementation details are present
 

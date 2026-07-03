@@ -1,0 +1,138 @@
+{
+  "workflow_id": "wf-ba-success",
+  "generated_at": "2026-07-03T22:46:34.914012",
+  "total_events": 20,
+  "events_by_type": {
+    "workflow_started": 1,
+    "stage_started": 1,
+    "stage_completed": 1,
+    "artifact_generated": 16,
+    "workflow_completed": 1
+  },
+  "events_by_stage": {
+    "business-analyst": 18
+  },
+  "critical_events": [],
+  "timeline": [
+    {
+      "timestamp": "2026-07-03T22:46:34.838397",
+      "event": "workflow_started",
+      "stage": null,
+      "message": "Workflow started with specification: specs\\specification.md"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.840015",
+      "event": "stage_started",
+      "stage": "business-analyst",
+      "message": "Starting stage: business-analyst"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.866914",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/requirements_spec"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.890868",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/user_stories"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.891748",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/acceptance_criteria"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.892333",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/non_functional_requirements"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.892989",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/ui_observations"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.894007",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/figma_design_intake"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.894603",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/screen_elements"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.895098",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/personas"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.895542",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/business_process_flows"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.896548",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/business_rules"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.897338",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/data_requirements"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.898097",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/glossary"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.898723",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/traceability"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.899651",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/quality_report"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.900384",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/handoff_contract"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.902815",
+      "event": "artifact_generated",
+      "stage": "business-analyst",
+      "message": "Generated artifact: requirements/openlog"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.905218",
+      "event": "stage_completed",
+      "stage": "business-analyst",
+      "message": "Completed stage: business-analyst (0.03s)"
+    },
+    {
+      "timestamp": "2026-07-03T22:46:34.908637",
+      "event": "workflow_completed",
+      "stage": null,
+      "message": "Workflow completed successfully (0.07s)"
+    }
+  ]
+}

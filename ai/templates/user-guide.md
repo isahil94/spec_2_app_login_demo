@@ -24,6 +24,8 @@ Provide end-user instructions for features, workflows, and expected outcomes.
 - [Step]
 
 ## Core Tasks
+---
+
 ### Task: [Task Name]
 - Goal: [Goal]
 - Steps:

@@ -28,6 +28,9 @@ Specification
     ↓
 Supervisor
     ↓
+    ## Agent Definitions
+
+    Agent behavior must be defined in Markdown under `.github/agents`.
 Business Analyst
     ↓
 Solution Architect
@@ -89,7 +92,7 @@ Do not invent new top-level folders unless required.
 
 ## Agent Definitions
 
-Agent behavior must be defined in Markdown under `ai/agents`.
+Agent behavior must be defined in Markdown under `.github/agents`.
 
 Never hardcode prompts or responsibilities.
 
@@ -305,15 +308,7 @@ Prefer deterministic tests.
 
 ## Default Demo Application
 
-Unless specified otherwise, generate a Task Management System including:
-
-- Authentication
-- Projects
-- Tasks
-- Comments
-- Labels
-- Notifications
-- Dashboard
+Do not assume a default application type. Always derive scope, entry point, and features solely from specification.md. Never fall back to a generic demo app.
 
 ---
 

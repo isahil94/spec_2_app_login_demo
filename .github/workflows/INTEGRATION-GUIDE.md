@@ -73,7 +73,7 @@ ci.yml
 quality.yml
 ├── Repository Structure
 │   └── Validates:
-│       - ai/agents/ (10 agent definitions)
+│       - .github/agents/ (10 agent definitions)
 │       - ai/contracts/ (8 contract files)
 │       - ai/hooks/ (hook definitions)
 │       - orchestration/ (subsystems)
@@ -95,7 +95,7 @@ quality.yml
 │
 ├── AI Configuration
 │   ├── Validates:
-│   │   - 10 agent definitions (ai/agents/*.md)
+│   │   - 10 agent definitions (.github/agents/*.md)
 │   │   - 8 contract definitions (ai/contracts/*.md)
 │   │   - 10 chat modes (.github/chatmodes/*.chatmode.md)
 │   └── Fails: If any required asset missing
@@ -361,7 +361,7 @@ python scripts/build.py --version 1.0.0
 **Validation:** File exists, has content  
 **Required:** Yes (hook system)
 
-### ai/agents/*.md
+### .github/agents/*.md
 
 **Purpose:** Agent definitions (10 files)  
 **Used By:** quality.yml (validation)  
@@ -470,13 +470,13 @@ python -m pytest tests/           # Re-run tests locally
 **Remediation:**
 ```bash
 # Check structure
-ls -la ai/agents/ ai/contracts/ scripts/hooks/
+ls -la .github/agents/ ai/contracts/ scripts/hooks/
 
 # Validate MCP config
 node .vscode/validate-mcp.js
 
 # Validate agent definitions
-ls -la ai/agents/ | wc -l  # Should be 10
+ls -la .github/agents/ | wc -l  # Should be 10
 ```
 
 ### Documentation Pipeline Fails

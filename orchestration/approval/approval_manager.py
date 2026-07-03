@@ -8,10 +8,10 @@ Once approved, the workflow can resume from the blocked stage.
 """
 
 import json
-from pathlib import Path
-from typing import Dict, List, Optional, Any
-from datetime import datetime
+from datetime import datetime, timedelta
 from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 
 class ApprovalStatus(Enum):
@@ -44,7 +44,7 @@ class ApprovalRequest:
         self.required_approval_roles = required_approval_roles or ["reviewer", "architect"]
         self.status = ApprovalStatus.PENDING
         self.created_at = datetime.now()
-        self.expires_at = datetime.now() + pd.Timedelta(days=7)  # 7 day expiry
+        self.expires_at = datetime.now() + timedelta(days=7)  # 7 day expiry
         self.approved_by = None
         self.approved_at = None
         self.approval_notes = None

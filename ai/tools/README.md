@@ -477,7 +477,7 @@ Task: Accomplish X
 Tools referenced in `.github/copilot-instructions.md`
 
 ### Agent Definitions
-Agents can reference tools in `ai/agents/*.md`
+Agents can reference tools in `.github/agents/*.md`
 
 ### Chat Modes
 Chat modes can include tool guidance in `.github/chatmodes/*.md`

@@ -15,6 +15,8 @@ Summarize release contents, impact, known issues, and upgrade guidance.
 [What changed and why]
 
 ## Included Changes
+---
+
 ### Added
 - [Item]
 

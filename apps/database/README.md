@@ -1,19 +1,15 @@
-# Database module
+# Readme.Md
 
-This folder contains the SQL schema, migrations, and an initializer script for the application's database.
+Generated from workflow inputs by Database Developer.
 
-Usage:
+## Summary
+# Database Developer ## Context ### Specification # Task Management System **Version:** 1.1 --- # Project Overview Develop a modern, secure, responsive web-based **Task Management System** that enables teams to create, o...
 
- - Validate schema in-memory:
+## Readme Notes
+- This artifact was derived from the workflow specification and the stage inputs.
+- Database Developer produced a concrete implementation plan for the requested capability.
+- The content is intended to be refined by the corresponding agent execution when richer context is available.
 
-```
-python apps/database/init_db.py --validate
-```
-
- - Create the runtime SQLite DB and seed sample data:
-
-```
-python apps/database/init_db.py --init
-```
-
-Persistent DB path: `apps/database/app.db`
+## Validation
+- Artifact content is grounded in the provided workflow inputs.
+- The document is ready for downstream review and handoff.

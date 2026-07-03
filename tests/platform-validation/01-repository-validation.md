@@ -12,7 +12,7 @@ Repository layout, naming conventions, canonical directories, and platform-level
 # Validation Steps
 - [ ] Verify top-level structure is intact.
 - [ ] Verify canonical directory naming and presence.
-- [ ] Verify numbered agent files exist in ai/agents.
+- [ ] Verify numbered agent files exist in .github/agents.
 - [ ] Verify canonical chat modes exist in .github/chatmodes.
 - [ ] Verify templates directory and template files exist.
 - [ ] Verify contracts directory and contract files exist.

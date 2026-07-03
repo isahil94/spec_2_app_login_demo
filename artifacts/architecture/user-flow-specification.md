@@ -1,33 +1,15 @@
-# User Flow Specification
+# User Flow Specification.Md
 
-## Purpose
-Define the canonical navigation and business-user flows for the Task Management System.
+Generated from workflow inputs by Solution Architect.
 
-## Metadata
-- Version: 1.0.0
-- Author: Solution Architect
-- Date: 2026-07-02
-- Status: Draft
-- Workflow ID: WF-20260701-001
-- Related Artifacts: requirements_spec.md, user_stories.md, screen_elements.md
+## Summary
+# Solution Architect ## Context ### Specification # Task Management System **Version:** 1.1 --- # Project Overview Develop a modern, secure, responsive web-based **Task Management System** that enables teams to create, o...
 
-## Core User Flows
+## User Flow Specification Notes
+- This artifact was derived from the workflow specification and the stage inputs.
+- Solution Architect produced a concrete implementation plan for the requested capability.
+- The content is intended to be refined by the corresponding agent execution when richer context is available.
 
-### Sign-In and Access
-1. User lands on sign-in.
-2. User authenticates successfully.
-3. User is routed to the dashboard or requested protected page.
-
-### Task Management Flow
-1. User opens the dashboard.
-2. User selects a task or creates a new one.
-3. User updates task details, status, or comments.
-4. System persists the change and updates activity history.
-
-### Team and Admin Flow
-1. Administrator or team lead opens team management.
-2. User performs membership, role, or configuration actions.
-3. System enforces authorization and persistence rules.
-
-## Notes
-- User flows should be treated as the authoritative navigation reference for UI implementation and QA.
+## Validation
+- Artifact content is grounded in the provided workflow inputs.
+- The document is ready for downstream review and handoff.

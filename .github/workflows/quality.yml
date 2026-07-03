@@ -28,7 +28,7 @@ jobs:
       - name: Check required directories
         run: |
           REQUIRED_DIRS=(
-            "ai/agents"
+            ".github/agents"
             "ai/contracts"
             "ai/guardrails"
             "ai/hooks"
@@ -179,16 +179,16 @@ jobs:
         run: |
           echo "Validating agent definitions..."
           AGENTS=(
-            "ai/agents/00-supervisor.md"
-            "ai/agents/01-business-analyst.md"
-            "ai/agents/02-solution-architect.md"
-            "ai/agents/03-ui-ux-developer.md"
-            "ai/agents/04-backend-developer.md"
-            "ai/agents/05-database-developer.md"
-            "ai/agents/06-qa-engineer.md"
-            "ai/agents/07-reviewer.md"
-            "ai/agents/08-documentation.md"
-            "ai/agents/09-devops.md"
+            ".github/agents/00-supervisor.agent.md"
+            ".github/agents/01-business-analyst.agent.md"
+            ".github/agents/02-solution-architect.agent.md"
+            ".github/agents/03-ui-ux-developer.agent.md"
+            ".github/agents/04-backend-developer.agent.md"
+            ".github/agents/05-database-developer.agent.md"
+            ".github/agents/06-qa-engineer.agent.md"
+            ".github/agents/07-reviewer.agent.md"
+            ".github/agents/08-documentation.agent.md"
+            ".github/agents/09-devops.agent.md"
           )
           
           FAILED=0

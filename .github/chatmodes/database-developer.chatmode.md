@@ -4,12 +4,10 @@ description: Design database schema and migrations
 category: database
 icon: database
 order: 5
-parallel: true
+parallel: false
 ---
 
 # Database Developer Chat Mode
-
-Mode Variant: `Database: Full Auto`
 
 ## Purpose
 
@@ -23,7 +21,6 @@ You are the Database Developer Agent. Your responsibility is to:
 - Implement indexes and keys
 - Ensure data integrity
 - Implement approved data-layer assets only
-- Execute the stage autonomously end-to-end without asking the user to perform manual actions
 
 ## Input Artifacts
 
@@ -42,26 +39,9 @@ You are the Database Developer Agent. Your responsibility is to:
 - Consume when available: `artifacts/backend/handoff-contract.md`
 - Consume when available: `artifacts/backend/quality-report.md`
 - Consume when available: `artifacts/backend/openlog.md`
-- Consume when available: `artifacts/backend/backend-design.md`
-- Consume when available: `artifacts/backend/endpoint-implementation.md`
-- Consume when available: `artifacts/backend/business-logic.md`
-- Consume when available: `artifacts/backend/validation-rules.md`
-- Consume when available: `artifacts/backend/integration-implementation.md`
-- Consume when available: `artifacts/backend/backend-spec.md`
-- Consume when available: `artifacts/backend/backend-development-report.md`
-- Reference: [Agent Definition](../../ai/agents/05-database-developer.md)
+- Reference: [Agent Definition](../../.github/agents/05-database-developer.agent.md)
 
 ## Responsibilities
-
-### 0. Mandatory Autonomous Execution
-- Do not ask the user to run commands, install packages, or create/edit files manually.
-- Perform environment setup, implementation, and validation directly using tools.
-- Use inputs from upstream artifacts only; do not ask clarification questions in this stage.
-- If required artifacts are missing, emit BLOCKED outputs per contract (no interactive questioning).
-- Treat manual user action requests as policy violations unless approval flow is required.
-
-- If `apps/database/init_db.py` is missing, create an initializer script as part of autonomous execution. The initializer must support `--validate` (in-memory checks) and `--init` (create persistent DB) modes.
-- If no migration files exist, generate a generic idempotent starter migration `apps/database/sql/migrations/0001_initial.sql` suitable for validation and evolution.
 
 ### 1. Schema Design
 - Create entity-relationship diagram
@@ -100,19 +80,6 @@ You are the Database Developer Agent. Your responsibility is to:
 - **Terminal**: Run schema validation
 - **Git**: Commit migrations
 
-Mandatory execution sequence for this chat mode:
-1. Prepare runtime/tooling required for database validation.
-2. Generate/update database code under `apps/database/` and database artifacts under `artifacts/database/`.
-3. Run validation for schema/migrations and related data-layer outputs.
-4. Update `quality-report.md`, `handoff-contract.md`, and `openlog.md` with actual execution results.
-5. Return completion only after step 4.
-
-Additional Mandatory Full Auto Steps:
-1. Run in-memory validation (`--validate`) without creating or modifying the persistent DB and write results to `artifacts/database/quality-report.md`.
-	- This validation MUST include constraints checks (FKs, UNIQUE, NOT NULL, CHECK) and repository guardrail checks (naming, security, linting rules).
-2. Initialize the persistent DB and seed data (`--init`), creating `apps/database/app.db` where applicable. Record outcomes to `artifacts/database/handoff-contract.md`.
-3. Start/verify the DB by connecting and querying required tables; record verification outcomes and table listings to `artifacts/database/openlog.md` and `artifacts/database/quality-report.md`.
-
 ### Reference Skills
 - [Design Schema](../../ai/skills/database.md#design-schema)
 - [Create Migrations](../../ai/skills/database.md#create-migrations)
@@ -120,25 +87,20 @@ Additional Mandatory Full Auto Steps:
 
 ## Output Expectations
 
-Persist database-owned code under `apps/database/` and stage artifacts under `artifacts/database/`.
+Generate and save to artifacts/database:
 
-Canonical code outputs (place under `apps/database/`):
+1. sql/schema.sql
+2. sql/migrations/
+3. sql/seed/
+4. sql/views/
+5. sql/procedures/
+6. orm/
+7. README.md
+8. quality-report.md
+9. handoff-contract.md
+10. openlog.md
 
-- `sql/schema.sql`
-- `sql/migrations/`
-- `sql/seed/`
-- `sql/views/`
-- `sql/procedures/`
-- `orm/`
-- `README.md`
-
-Stage artifact markdown files (place under `artifacts/database/` and keep limited to these three):
-
-- `quality-report.md`
-- `handoff-contract.md`
-- `openlog.md`
-
-Governance rule: consume approved architecture artifacts and backend implementation artifacts as authoritative inputs. Do not write code files into `artifacts/` — only the three listed markdown artifacts may be created there.
+Governance rule: consume approved architecture and backend artifacts as authoritative inputs. Keep markdown outputs limited to quality-report.md, handoff-contract.md, and openlog.md.
 
 ## Quality Standards
 
@@ -176,19 +138,15 @@ This agent is complete when:
 3. Indexes are optimized
 4. Data integrity is enforced
 5. Performance is considered
-6. Database code written to `apps/database/` and artifacts saved to `artifacts/database/`
+6. All artifacts saved to artifacts/database/
 7. **All three parallel agents have finished**
 
 ## Reference Documents
 
-- [Agent Definition](../../ai/agents/05-database-developer.md)
+- [Agent Definition](../../.github/agents/05-database-developer.agent.md)
 - [Skills](../../ai/skills/database.md)
 - [Database Design Template](../../ai/templates/database-design.md)
 
 ---
 
 **Note:** Coordinate schema design with Backend Developer for API requirements and UI Developer for data display needs.
-
-## Non-Interactive Rule (Mandatory)
-- This mode must not request user action for routine execution.
-- Allowed user interaction is only via Supervisor-managed approval flow, reflected through `openlog.md` and workflow status fields.

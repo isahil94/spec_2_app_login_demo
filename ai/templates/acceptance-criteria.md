@@ -26,6 +26,7 @@ Define objective, verifiable conditions required for a story or feature to be ac
 - Each story must include acceptance criteria for happy path, alternate path, validation, error, edge, authorization, and state transition behavior where applicable.
 - Each criterion must be measurable, testable, and unambiguous.
 - Each story must cover, where applicable: validation, success, failure, permissions, navigation, search, filtering, sorting, pagination, error handling, audit events, and security behavior.
+- Dependency-Unavailable Criterion (mandatory per story): At least one criterion must state the literal expected behavior when a required backend or data dependency cannot be reached. Must specify exact expected screen/state name, not general phrases like "appropriate error message."
 
 ## Rules
 - This file is the single source of truth for acceptance criteria.

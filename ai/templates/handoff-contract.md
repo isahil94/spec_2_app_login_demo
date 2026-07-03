@@ -81,4 +81,3 @@
 - Keep field values concise (1-3 lines where appropriate).
 - AI Usage is metadata-only; do not add narrative explanations.
 - In backend stage, FULL_AUTO is mandatory unless workflow status is BLOCKED/FAILED.
-

@@ -37,7 +37,7 @@ class DevOpsReleaseAgent(AgentBase):
     def __init__(self):
         super().__init__(
             name="DevOps & Release",
-            agent_file="ai/agents/08-devops-release.md",
+            agent_file=".github/agents/08-devops-release.md",
         )
 
     def run(self, input_path: Optional[str] = None, output_path: Optional[str] = None):

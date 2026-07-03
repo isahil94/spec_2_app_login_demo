@@ -468,6 +468,8 @@ Figma propagation rule:
 - If a Figma URL exists anywhere in `specification.md`, consume it automatically as an input.
 - Preserve the URL unchanged through BA outputs.
 - Do not ask for the Figma URL again.
+- If no Figma URL is present in `specification.md` or the URL is inaccessible, check `examples/task-management/` for reference screenshots (SS) and use those as the visual reference source instead.
+- If neither Figma nor screenshots are available, fall back to existing placeholder behavior (no warnings).
 
 Duplication control rule:
 - Keep acceptance criteria centralized in `acceptance_criteria.md`.

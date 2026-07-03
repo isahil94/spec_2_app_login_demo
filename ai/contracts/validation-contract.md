@@ -84,8 +84,10 @@ Business Analyst boundary checks (when agentId = business_analyst):
 - No additional BA artifacts are produced outside the package.
 - No duplicate information is spread across BA artifacts.
 - If a Figma URL exists in `specification.md`, it is consumed automatically and preserved unchanged in BA outputs.
+- If no Figma URL is present or inaccessible, check `examples/task-management/` for reference screenshots (SS) and use those as the visual reference source instead.
 - If a Figma URL exists in `specification.md`, `figma_design_intake.md` must also be generated with the URL, covered screens, and frontend-relevant visual notes.
-- If no Figma URL exists in `specification.md`, the frontend stage must continue without blocking and may proceed using the other approved requirement artifacts.
+- If no Figma URL exists but screenshots are available from `examples/task-management/`, `figma_design_intake.md` must reference those screenshots instead.
+- If neither Figma nor screenshots are available, the frontend stage must continue without blocking and may proceed using the other approved requirement artifacts.
 - Acceptance criteria are centralized in `acceptance_criteria.md` and are not duplicated in `user_stories.md`.
 
 Solution Architect boundary checks (when agentId = solution_architect):

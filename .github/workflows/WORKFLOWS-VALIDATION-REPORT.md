@@ -11,20 +11,8 @@
 **Overall Health: ⚠️ WARNING (69%)**
 
 | Metric | Status | Details |
-|--------|--------|---------|
-| Workflows Analyzed | 6 | ci.yml, documentation.yml, on-pull-request.yml, on-push-main.yml, on-release.yml, quality.yml, release.yml |
-| YAML Syntax | ✅ PASS | All workflows have valid YAML structure |
-| Job Dependencies | ✅ PASS | All job dependencies properly configured |
 | Action Versions | ✅ PASS | All GitHub Actions use pinned versions (v3, v4) |
 | Reference Validation | ⚠️ WARNING | 3 critical issues found |
-| Best Practices | ⚠️ WARNING | 4 recommendations |
-| Cross-platform Support | ✅ PASS | Linux (ubuntu-latest) - Windows not tested |
-
-**Critical Issues:** 3  
-**Warnings:** 4  
-**Recommendations:** 5  
-
----
 
 ## Workflow-by-Workflow Analysis
 
@@ -38,29 +26,15 @@
 - ✅ Concurrency control enabled (cancel-in-progress)
 - ✅ All 6 jobs properly sequenced: setup → [format, imports, lint, test, coverage] → summary
 
-**References:**
-- ✅ requirements.txt
-- ✅ Python 3.11
 - ✅ Actions: checkout@v4, setup-python@v4, upload-artifact@v3, codecov/codecov-action@v3
 - ✅ pip packages: black, isort, pylint, flake8, pytest, bandit, mypy
-
-**Issues:** None
-
-**Recommendations:**
-- Consider adding `fetch-depth: 0` to all checkout steps for consistency
 
 ---
 
 ### 2. ✅ documentation.yml - PASS
-
-**Status:** PASS (No critical issues)
-
-**Structure:**
-- ✅ Valid YAML syntax
 - ✅ Path-based triggers (docs/**, README.md, .github/copilot-instructions.md)
 - ✅ workflow_dispatch enabled for manual triggers
 - ✅ 5 jobs properly sequenced
-
 **References:**
 - ✅ README.md
 - ✅ docs/ directory
@@ -69,17 +43,8 @@
 - ✅ docs/project-structure.md (marked optional)
 - ✅ .github/copilot-instructions.md
 - ✅ ai/hooks/ documentation
-- ✅ Node.js 18 for markdown tools
 
 **Issues:** None
-
-**Best Practices:**
-- ✅ Uses npm for markdown tools (markdownlint, prettier)
-- ✅ continue-on-error: true on optional checks
-
----
-
-### 3. ⚠️ on-pull-request.yml - WARNING
 
 **Status:** WARNING (2 issues)
 
@@ -207,7 +172,7 @@
 - ✅ Path-based triggers (push/PR to main, develop)
 
 **References - All Verified ✅**
-- ✅ All 10 agent files in ai/agents/ (00-09)
+- ✅ All 10 agent files in .github/agents/ (00-09)
 - ✅ All 8 contract files in ai/contracts/
 - ✅ All 10 chat mode files in .github/chatmodes/
 - ✅ ai/hooks/hooks.md
@@ -353,7 +318,7 @@
 ```
 ✅ tests/             - Exists (may be empty)
 ✅ docs/              - Exists
-✅ ai/agents/         - Exists (10 agents verified)
+✅ .github/agents/         - Exists (10 agents verified)
 ✅ ai/contracts/      - Exists (8 contracts verified)
 ✅ .github/chatmodes/ - Exists (10 chat modes verified)
 ✅ .vscode/           - Exists (validation script verified)

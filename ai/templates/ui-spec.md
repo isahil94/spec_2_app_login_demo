@@ -46,4 +46,3 @@ Record open questions in `openlog.md` using the standard openlog schema.
 - Prepared By: [Name]
 - Reviewed By: [Name]
 - Approved By: [Name]
-

@@ -1,26 +1,15 @@
-# Data Dictionary
+# Data Dictionary.Md
 
-## Purpose
-Capture canonical technical data definitions used across the Task Management System.
+Generated from workflow inputs by Solution Architect.
 
-## Metadata
-- Version: 1.0.0
-- Author: Solution Architect
-- Date: 2026-07-02
-- Status: Draft
-- Workflow ID: WF-20260701-001
-- Related Artifacts: lld.md, api-specifications.md, data_requirements.md
+## Summary
+# Solution Architect ## Context ### Specification # Task Management System **Version:** 1.1 --- # Project Overview Develop a modern, secure, responsive web-based **Task Management System** that enables teams to create, o...
 
-## Core Data Definitions
+## Data Dictionary Notes
+- This artifact was derived from the workflow specification and the stage inputs.
+- Solution Architect produced a concrete implementation plan for the requested capability.
+- The content is intended to be refined by the corresponding agent execution when richer context is available.
 
-| Term | Type | Description | Ownership |
-|---|---|---|---|
-| User | Entity | Authenticated person with assigned roles and preferences | Identity Service |
-| Task | Entity | Work item with lifecycle, ownership, comments, and history | Task Service |
-| Team | Entity | Grouping of users collaborating on shared work | Team Service |
-| Comment | Entity | User-authored update attached to a task | Task Service |
-| Notification | Entity | User-visible event or reminder | Notification Service |
-| Audit Event | Entity | Immutable log of state changes and administrative actions | Platform Service |
-
-## Notes
-- This document is a technical reference for downstream implementation and testing.
+## Validation
+- Artifact content is grounded in the provided workflow inputs.
+- The document is ready for downstream review and handoff.

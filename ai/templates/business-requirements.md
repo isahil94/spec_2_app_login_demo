@@ -33,6 +33,8 @@ Define the master business specification in a traceable, implementation-ready fo
 - [Goal ID | Goal Statement | Success Metric]
 
 ## Scope
+---
+
 ### In Scope
 - [In-scope item]
 

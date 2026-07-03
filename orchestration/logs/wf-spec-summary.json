@@ -1,0 +1,41 @@
+{
+  "workflow_id": "wf-spec",
+  "generated_at": "2026-07-03T21:42:21.232643",
+  "total_events": 3,
+  "events_by_type": {
+    "stage_started": 1,
+    "stage_failed": 1,
+    "approval_requested": 1
+  },
+  "events_by_stage": {
+    "solution-architect": 3
+  },
+  "critical_events": [
+    {
+      "type": "stage_failed",
+      "stage": "solution-architect",
+      "message": "Failed stage: solution-architect - No output artifacts materialized for stage 'solution-architect'. Expected: `artifacts/architecture/architecture-design.md`, `artifacts/architecture/module-design.md`, `artifacts/architecture/technology-stack.md`, `artifacts/architecture/tdd.md`, `artifacts/architecture/lld.md`, `artifacts/architecture/api-specifications.md`, `artifacts/architecture/user-flow-specification.md`, `artifacts/architecture/data-dictionary.md`, `artifacts/architecture/security-architecture.md`, `artifacts/architecture/deployment-architecture.md`, `artifacts/architecture/database-strategy.md`, `artifacts/architecture/architecture-decision-records.md`, `artifacts/architecture/quality-report.md`, `artifacts/architecture/handoff-contract.md`, `artifacts/architecture/openlog.md`",
+      "timestamp": "2026-07-03T21:42:21.204686"
+    }
+  ],
+  "timeline": [
+    {
+      "timestamp": "2026-07-03T21:42:21.154618",
+      "event": "stage_started",
+      "stage": "solution-architect",
+      "message": "Starting stage: solution-architect"
+    },
+    {
+      "timestamp": "2026-07-03T21:42:21.197289",
+      "event": "approval_requested",
+      "stage": "solution-architect",
+      "message": "Approval requested for stage: solution-architect"
+    },
+    {
+      "timestamp": "2026-07-03T21:42:21.204686",
+      "event": "stage_failed",
+      "stage": "solution-architect",
+      "message": "Failed stage: solution-architect - No output artifacts materialized for stage 'solution-architect'. Expected: `artifacts/architecture/architecture-design.md`, `artifacts/architecture/module-design.md`, `artifacts/architecture/technology-stack.md`, `artifacts/architecture/tdd.md`, `artifacts/architecture/lld.md`, `artifacts/architecture/api-specifications.md`, `artifacts/architecture/user-flow-specification.md`, `artifacts/architecture/data-dictionary.md`, `artifacts/architecture/security-architecture.md`, `artifacts/architecture/deployment-architecture.md`, `artifacts/architecture/database-strategy.md`, `artifacts/architecture/architecture-decision-records.md`, `artifacts/architecture/quality-report.md`, `artifacts/architecture/handoff-contract.md`, `artifacts/architecture/openlog.md`"
+    }
+  ]
+}

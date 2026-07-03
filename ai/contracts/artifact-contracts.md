@@ -98,8 +98,8 @@ Lifecycle (applies to all artifacts):
 | user_stories.md | Implementation-ready user stories with scenarios, dependencies, and references (without duplicated acceptance criteria) | Business Analyst | Solution Architect, UI/UX Developer, Backend Developer, QA Engineer | Markdown |
 | acceptance_criteria.md | Single source of truth for acceptance criteria organized by user story | Business Analyst | Solution Architect, QA Engineer, Reviewer, DevOps & Release | Markdown |
 | non_functional_requirements.md | Non-functional requirement package grouped by required quality domains | Business Analyst | Solution Architect, QA Engineer, Reviewer | Markdown |
-| ui_observations.md | UI observations from optional Figma URL detected in specification.md (or skipped silently when absent) | Business Analyst | UI/UX Developer, Solution Architect, QA Engineer | Markdown |
-| figma_design_intake.md | Structured Figma design intake artifact with URL, screen coverage, visual system notes, interaction notes, and frontend guidance | Business Analyst | UI/UX Developer, Solution Architect, QA Engineer | Markdown |
+| ui_observations.md | UI observations from optional Figma URL detected in specification.md, or reference screenshots from `examples/task-management/` if Figma unavailable (or skipped silently when absent) | Business Analyst | UI/UX Developer, Solution Architect, QA Engineer | Markdown |
+| figma_design_intake.md | Structured Figma design intake artifact with URL, screen coverage, visual system notes, interaction notes, and frontend guidance; or reference screenshots from `examples/task-management/` if Figma unavailable | Business Analyst | UI/UX Developer, Solution Architect, QA Engineer | Markdown |
 | screen_elements.md | Business-only inventory of every screen and interactive element with field-level business details | Business Analyst | UI/UX Developer, Backend Developer, Database Developer, QA Engineer, Reviewer, Documentation | Markdown |
 | personas.md | Business personas with goals, responsibilities, permissions, and primary processes | Business Analyst | UI/UX Developer, Backend Developer, QA Engineer, Reviewer, Documentation | Markdown |
 | business_process_flows.md | Business workflow documentation with objectives, triggers, preconditions, flows, postconditions, screens, and related acceptance criteria | Business Analyst | UI/UX Developer, Backend Developer, Database Developer, QA Engineer, Reviewer, Documentation | Markdown |
@@ -118,8 +118,7 @@ Lifecycle (applies to all artifacts):
 | user-flow-specification.md | Canonical navigation and UX flow reference for screens and state transitions | Solution Architect | UI/UX Developer, Backend Developer, QA Engineer, Reviewer | Markdown |
 | data-dictionary.md | Canonical technical data definitions and ownership | Solution Architect | Backend Developer, Database Developer, QA Engineer, Reviewer | Markdown |
 | security-architecture.md | Security model, controls, threats, and compliance posture | Solution Architect | Backend Developer, QA Engineer, Reviewer, DevOps & Release | Markdown |
-| deployment-architecture.md | Runtime, environment, deployment, networking, monitoring, and recovery architecture | Solution Architect | DevOps & Release, QA Engineer, Reviewer | Markdown |
-| api-contracts.md | Service interface contracts and error models | Solution Architect | Backend Developer, QA Engineer, Documentation | Markdown |
+| deployment-architecture.md | Runtime, environment, deployment, networking, monitoring, and recovery architecture | Solution Architect | DevOps & Release, QA Engineer, Reviewer | Markdown |W
 | database-schema.md | Logical and physical data model definition | Database Developer | Backend Developer, QA Engineer, Documentation | Markdown |
 | frontend-spec.md | UI structure, interaction, accessibility, design constraints | UI/UX Developer | Backend Developer, QA Engineer, Reviewer, Documentation | Markdown |
 | backend-spec.md | Service behavior, use cases, and integration mapping | Backend Developer | Database Developer, QA Engineer, Reviewer, DevOps & Release, Documentation | Markdown |
@@ -135,8 +134,10 @@ Lifecycle (applies to all artifacts):
 Business Analyst consolidation policy:
 - BA artifact contracts are limited to `requirements_spec.md`, `user_stories.md`, `acceptance_criteria.md`, `non_functional_requirements.md`, `ui_observations.md`, `screen_elements.md`, `personas.md`, `business_process_flows.md`, `business_rules.md`, `data_requirements.md`, `glossary.md`, `traceability.md`, `quality_report.md`, `handoff_contract.md`, and `openlog.md`.
 - Figma URL, when present, is consumed from `specification.md` and propagated unchanged in BA handoff.
+- If no Figma URL is available or inaccessible, Business Analyst checks `examples/task-management/` for reference screenshots (SS) and propagates those instead.
 - When a Figma URL is present, Business Analyst must also create `figma_design_intake.md` as a structured frontend handoff artifact.
-- The UI/UX Developer may consume `figma_design_intake.md` when it exists upstream, but the absence of this artifact is not a blocker when no Figma reference exists in the specification.
+- When screenshots are available from `examples/task-management/`, Business Analyst must create `figma_design_intake.md` referencing those screenshots.
+- The UI/UX Developer may consume `figma_design_intake.md` when it exists upstream, but the absence of this artifact is not a blocker when no Figma reference or screenshots exist in the specification.
 - Acceptance criteria remain centralized in `acceptance_criteria.md`; user stories must reference but not duplicate.
 
 ### 7.1 specification.md
@@ -251,8 +252,8 @@ content:
       title: "Artifact immutability after publication"
 ```
 
-### 7.10 api-contracts.md
-- Name: api-contracts.md
+### 7.10 api-specifications.md
+- Name: api-specifications.md
 - Purpose: Defines operation contracts, request/response schemas, and error semantics.
 - Owner Agent: Solution Architect
 - Consuming Agents: Backend Developer, QA Engineer, Documentation.
@@ -321,7 +322,7 @@ content:
 - Owner Agent: Backend Developer
 - Consuming Agents: Database Developer, QA Engineer, Reviewer, DevOps & Release, Documentation.
 - File Format: Markdown
-- Validation Rules: Must align with api-contracts.md, database-schema.md, and business rules.
+- Validation Rules: Must align with api-specifications.md, database-schema.md, and business rules.
 - Versioning: Semantic versioning.
 - Lifecycle: Draft -> Validated -> Published -> Archived.
 - Required Fields: services, workflows, errorHandling, observability, dependencies.
@@ -342,7 +343,7 @@ content:
 - Owner Agent: Backend Developer
 - Consuming Agents: Database Developer, QA Engineer, Reviewer, Documentation.
 - File Format: Markdown
-- Validation Rules: Must align with api-contracts.md, backend-spec.md, and database-schema.md.
+- Validation Rules: Must align with api-specifications.md, backend-spec.md, and database-schema.md.
 - Versioning: Semantic versioning.
 - Lifecycle: Draft -> Validated -> Published -> Archived.
 - Required Fields: fieldValidation, enumConstraints, crossFieldRules, databaseConstraints.
@@ -364,7 +365,7 @@ content:
 - Owner Agent: Backend Developer
 - Consuming Agents: Database Developer, QA Engineer, Reviewer, Documentation.
 - File Format: Markdown
-- Validation Rules: Must align with backend-spec.md, business-logic.md, and api-contracts.md.
+- Validation Rules: Must align with backend-spec.md, business-logic.md, and api-specifications.md.
 - Versioning: Semantic versioning.
 - Lifecycle: Draft -> Validated -> Published -> Archived.
 - Required Fields: serviceInteractions, workflows, dataFlows, transactionScope.

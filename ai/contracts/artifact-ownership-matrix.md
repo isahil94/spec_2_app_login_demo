@@ -30,7 +30,7 @@ Every cell in Section 3 uses exactly one of the following statuses.
 |--------|---------|
 | **OWN** | The agent is the sole creator and owner. Only this agent may create this artifact. No other agent may write to it. |
 | **CONSUME** | Read-only input. The agent reads and depends on this artifact but must never modify it. |
-| **EXTEND** | The agent may enrich the artifact without changing its original intent. Ownership remains with the originating agent. Only explicitly granted on api-contracts.md for Backend Developer. |
+| **EXTEND** | The agent may enrich the artifact without changing its original intent. Ownership remains with the originating agent. Only explicitly granted on api-specifications.md for Backend Developer. |
 | **REFERENCE** | The artifact is used for context only. No modifications permitted. Lower dependency than CONSUME. |
 | **NONE** | The artifact is irrelevant to this stage. The agent must not read or touch it. |
 
@@ -54,7 +54,7 @@ BEFORE generating any artifact:
            openlog.md          (Open Item with Category: Governance)
        - Reference the owning agent's artifact path instead of generating.
   5. EXTEND is the only exception: Backend Developer may append to
-     endpoint-implementation.md as an addendum to api-contracts.md
+     endpoint-implementation.md as an addendum to api-specifications.md
      without overwriting the original.
 ```
 
@@ -70,14 +70,18 @@ Columns: BA = Business Analyst | SA = Solution Architect | UX = UI/UX Developer 
 |----------|----|----|----|----|----|----|----|----|----|----|
 | requirements_spec.md | OWN | CONSUME | REFERENCE | REFERENCE | REFERENCE | REFERENCE | REFERENCE | REFERENCE | CONSUME | REFERENCE |
 | user_stories.md | OWN | CONSUME | CONSUME | CONSUME | REFERENCE | CONSUME | REFERENCE | REFERENCE | CONSUME | REFERENCE |
-| acceptance_criteria.md | OWN | CONSUME | REFERENCE | NONE | NONE | CONSUME | REFERENCE | NONE | REFERENCE | REFERENCE |
+| acceptance_criteria.md | OWN | CONSUME | REFERENCE | CONSUME | NONE | CONSUME | REFERENCE | NONE | REFERENCE | REFERENCE |
 | non_functional_requirements.md | OWN | CONSUME | REFERENCE | REFERENCE | REFERENCE | CONSUME | REFERENCE | REFERENCE | REFERENCE | REFERENCE |
 | ui_observations.md | OWN | CONSUME | CONSUME | NONE | NONE | REFERENCE | NONE | NONE | REFERENCE | NONE |
 | screen_elements.md | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | NONE | CONSUME | REFERENCE |
 | business_rules.md | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | NONE | CONSUME | REFERENCE |
 | data_requirements.md | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | NONE | CONSUME | REFERENCE |
 | glossary.md | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | NONE | CONSUME | REFERENCE |
-| traceability.md | OWN | CONSUME | NONE | NONE | NONE | CONSUME | CONSUME | NONE | CONSUME | REFERENCE |
+| traceability.md | OWN | CONSUME | NONE | CONSUME | NONE | CONSUME | CONSUME | NONE | CONSUME | REFERENCE |
+| personas.md | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | NONE | NONE | NONE | REFERENCE |
+| business_process_flows.md | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | NONE | NONE | NONE | REFERENCE |
+| figma_design_intake.md | OWN | CONSUME | CONSUME | NONE | NONE | NONE | NONE | NONE | NONE | REFERENCE |
+    
 
 ### 3.2 Solution Architect Artifacts
 
@@ -94,6 +98,7 @@ Columns: BA = Business Analyst | SA = Solution Architect | UX = UI/UX Developer 
 | deployment-architecture.md | NONE | OWN | NONE | NONE | NONE | NONE | REFERENCE | CONSUME | CONSUME | REFERENCE |
 | architecture-decision-records.md | NONE | OWN | REFERENCE | REFERENCE | REFERENCE | REFERENCE | CONSUME | REFERENCE | CONSUME | REFERENCE |
 | database-strategy.md | NONE | OWN | NONE | REFERENCE | CONSUME | NONE | REFERENCE | NONE | REFERENCE | NONE |
+| technology-stack.md | NONE | OWN | CONSUME | CONSUME | CONSUME | CONSUME | CONSUME | REFERENCE | CONSUME | REFERENCE |
 
 ### 3.3 UI/UX Developer Artifacts
 
@@ -219,11 +224,16 @@ Each agent owns its own scoped instance. No other agent may write to another age
 
 **Consumes:**
 - `specification.md` (platform input)
-- `figma_url.txt` (optional fallback only)
+- `figma_url.txt` (optional fallback)
 - `config.yaml` (optional)
 
 Figma propagation rule:
-- If a Figma URL exists in `specification.md`, Business Analyst must consume it directly and preserve it unchanged through `ui_observations.md`, `figma_design_intake.md`, and `handoff_contract.md`.
+- If no Figma URL is present in `specification.md` or the URL is inaccessible, Business Analyst must check
+  for a screenshots folder provided alongside `specification.md` for this project
+  (e.g. `spec/screenshots/`, or wherever the user has placed screenshots relative to the spec) and use
+  those as the visual reference source, propagating them through `ui_observations.md`,
+  `figma_design_intake.md`, and `handoff_contract.md`. Do not substitute screenshots or design
+  references from any other project, example, or demo folder.
 
 **May Extend:** None.
 
@@ -256,6 +266,7 @@ Figma propagation rule:
 - `security-architecture.md`
 - `deployment-architecture.md`
 - `architecture-decision-records.md`
+- `technology-stack.md`
 - `database-strategy.md` (conceptual only)
 - `quality-report.md`
 - `handoff-contract.md` (SA-scoped)
@@ -268,6 +279,10 @@ Figma propagation rule:
 - `non_functional_requirements.md`
 - `ui_observations.md`
 - `traceability.md`
+- `business_rules.md`
+- `data_requirements.md`
+- `glossary.md`
+- `screen_elements.md`
 - `quality_report.md` (BA output, read-only)
 - `handoff_contract.md` (BA output, read-only)
 - `openlog.md` (BA output, read-only)
@@ -316,7 +331,7 @@ Figma propagation rule:
 - `ui_observations.md`
 - `figma_design_intake.md` (when present upstream)
 - `user_stories.md`
-- `api-contracts.md` (reference only — must not modify)
+- `api-specifications.md` (reference only — must not modify)
 
 **May Extend:** None.
 
@@ -346,15 +361,14 @@ Figma propagation rule:
 
 **Consumes:**
 - `architecture-design.md`
-- `api-contracts.md` (implements; must not alter the contract document)
+- `api-specifications.md` (implements; must not alter the contract document)
 - `security-architecture.md`
 - `user_stories.md`
-- `coding-guidelines.md`
 
-**May Extend:** `api-contracts.md` — Backend Developer may produce implementation notes or endpoint mapping artifacts as addendums but must never modify the published API contracts.
+**May Extend:** `api-specifications.md` — Backend Developer may produce implementation notes or endpoint mapping artifacts as addendums but must never modify the published API contracts.
 
 **Must NOT generate:**
-- Modifications to `api-contracts.md`
+- Modifications to `api-specifications.md`
 - Database schema, DDL, migration scripts, ORM models or database design
 - Frontend code, components, styling or UI specifications
 - Business requirements or architectural decisions
@@ -382,8 +396,7 @@ Figma propagation rule:
 **Consumes:**
 - `database-strategy.md` (from Solution Architect — conceptual guide only)
 - `backend-design.md` (entity and data requirements)
-- `service-design.md` (entity and data requirements)
-- `api-contracts.md` (data shape reference)
+- `api-specifications.md` (data shape reference)
 
 **May Extend:** None.
 
@@ -415,11 +428,10 @@ Figma propagation rule:
 **Consumes:**
 - `user_stories.md`
 - `acceptance_criteria.md`
-- `api-contracts.md`
+- `api-specifications.md`
 - `ui-specification.md`
 - `backend-design.md`
 - `database-schema.md`
-- `service-design.md`
 
 **May Extend:** None.
 
@@ -458,41 +470,7 @@ Figma propagation rule:
 
 **Boundary statement:** Reviewer independently assesses all completed artifacts for completeness, consistency, quality, traceability and compliance with requirements, architecture and governance. It produces only review findings, recommendations and quality assessment artifacts. It never modifies the artifacts it reviews.
 ---
-
-### 4.8 DevOps & Release
-
-**Pipeline position:** 7
-
-**Owns:**
-- `deployment-plan.md`
-- `ci-cd-pipeline.md`
-- `infrastructure-specification.md`
-- `monitoring-observability.md`
-- `rollback-recovery-plan.md`
-- `release-report.md`
-- `quality-report.md`
-- `handoff-contract.md` (DevOps-scoped)
-- `openlog.md` (DevOps-scoped)
-
-**Consumes:**
-- `deployment-strategy.md` (from Solution Architect)
-- `migration-plan.md` (from Database Developer)
-- `review-report.md` (from Reviewer)
-- All application artifacts (read-only, for packaging)
-
-**May Extend:** None.
-
-**Must NOT:**
-- Redesign or modify application architecture
-- Alter API contracts, database schema, or code
-- Produce business logic or feature code
-- Regenerate artifacts owned by Solution Architect
-
-**Boundary statement:** DevOps & Release owns infrastructure and delivery pipeline. Application design belongs to upstream agents.
-
----
-
-### 4.9 Documentation
+### 4.8 Documentation
 
 **Pipeline position:** 8
 
@@ -518,6 +496,38 @@ Figma propagation rule:
 **Boundary statement:** Documentation synthesizes all prior artifacts into human-readable guides. It does not produce or modify any implementation artifact.
 
 ---
+### 4.9 DevOps & Release
+
+**Pipeline position:** 7
+
+**Owns:**
+- `deployment-plan.md`
+- `ci-cd-pipeline.md`
+- `infrastructure-specification.md`
+- `monitoring-observability.md`
+- `rollback-recovery-plan.md`
+- `release-report.md`
+- `quality-report.md`
+- `handoff-contract.md` (DevOps-scoped)
+- `openlog.md` (DevOps-scoped)
+
+**Consumes:**
+- `deployment-architecture.md` (from Solution Architect)
+- `migration-plan.md` (from Database Developer)
+- `review-report.md` (from Reviewer)
+- All application artifacts (read-only, for packaging)
+
+**May Extend:** None.
+
+**Must NOT:**
+- Redesign or modify application architecture
+- Alter API contracts, database schema, or code
+- Produce business logic or feature code
+- Regenerate artifacts owned by Solution Architect
+
+**Boundary statement:** DevOps & Release owns infrastructure and delivery pipeline. Application design belongs to upstream agents.
+
+---
 
 ### 4.10 Supervisor
 
@@ -531,7 +541,7 @@ Figma propagation rule:
 - `progress_report.md`
 - Approval requests and responses
 
-**Consumes:** All agent events, handoff contracts, approval decisions.
+**Consumes:** All agent events, handoff contracts, openlog, approval decisions.
 
 **May Extend:** None (reads all; owns orchestration state only).
 
@@ -549,53 +559,73 @@ specification.md
     ▼
 [Business Analyst]
     │  Produces: requirements_spec.md, user_stories.md, acceptance_criteria.md,
-    │            non_functional_requirements.md, ui_observations.md, traceability.md
+    │            non_functional_requirements.md, ui_observations.md,
+    │            figma_design_intake.md, screen_elements.md, personas.md,
+    │            business_process_flows.md, business_rules.md,
+    │            data_requirements.md, glossary.md, traceability.md
     ▼
 [Solution Architect]
-    │  Consumes: requirements_spec.md, user_stories.md, non_functional_requirements.md
-    │  Produces: architecture-design.md, api-contracts.md, database-strategy.md,
-    │            deployment-strategy.md, security-architecture.md, technology-decision-matrix.md
+    │  Consumes: full BA artifact package
+    │  Produces: architecture-design.md, module-design.md, technology-stack.md,
+    │            tdd.md, lld.md, api-specifications.md, user-flow-specification.md,
+    │            data-dictionary.md, security-architecture.md,
+    │            deployment-architecture.md, architecture-decision-records.md
+    ▼
+    │──── [Approval Gate: Architecture] ────
     ▼
     ├──────────────────────────────────┐
     ▼                                  ▼
 [UI/UX Developer]              [Backend Developer]
-    │  Consumes: architecture-design.md    │  Consumes: architecture-design.md,
-    │            ui_observations.md        │            api-contracts.md,
-    │  Produces: ui-specification.md,      │            security-architecture.md
-    │            design-system.md,         │  Produces: backend-design.md,
-    │            component-spec.md,        │            service-design.md,
-    │            interaction-spec.md       │            endpoint-implementation-plan.md
+    │  Consumes: architecture-design.md,   │  Consumes: architecture-design.md,
+    │            ui_observations.md,       │            module-design.md,
+    │            screen_elements.md,       │            api-specifications.md,
+    │            user-flow-specification.md│            security-architecture.md
+    │  Produces: apps/frontend/ (code),    │  Produces: apps/backend/ (code),
+    │            quality-report.md,        │            backend-design.md,
+    │            handoff-contract.md,      │            endpoint-implementation.md,
+    │            openlog.md                │            business-logic.md,
+    │                                      │            validation-rules.md,
+    │                                      │            integration-implementation.md,
+    │                                      │            backend-spec.md,
+    │                                      │            backend-development-report.md
     │                                      ▼
     │                         [Database Developer]
-    │                              │  Consumes: database-strategy.md,
-    │                              │            backend-design.md,
-    │                              │            service-design.md
-    │                              │  Produces: database-schema.md,
-    │                              │            er-diagram.md,
-    │                              │            migration-plan.md
-    └──────────────┬───────────────┘
-                   ▼
-            [QA Engineer]
-                     │  Consumes: user_stories.md, acceptance_criteria.md, api-contracts.md,
-                   │            ui-specification.md, backend-design.md, database-schema.md
-                   │  Produces: test-plan.md, test-cases.md, integration-tests.md, qa-report.md
-                   ▼
-             [Reviewer]
-                   │  Consumes: all artifacts (read-only)
-                   │  Produces: review-report.md, architecture-review.md,
-                   │            quality-scorecard.md, improvement-recommendations.md
-                   ▼
-         [DevOps & Release]
-                   │  Consumes: deployment-strategy.md, migration-plan.md, review-report.md
-                   │  Produces: Dockerfile, docker-compose.yml, ci/cd workflows,
-                   │            deployment-config.md, release-plan.md
-                   ▼
-          [Documentation]
-                   │  Consumes: all artifacts (read-only synthesis)
-                   │  Produces: user-guide.md, developer-guide.md, api-documentation.md,
-                   │            deployment-guide.md, release-notes.md
-                   ▼
-                 DONE
+    │                              │  Consumes: architecture-design.md,
+    │                              │            backend-design.md
+    │                              │  Produces: database-schema.md, er-diagram.md,
+    │                              │            migration-plan.md, indexing-strategy.md,
+    │                              │            seed-data-plan.md, database-report.md
+    └──────────────────┬───────────┘
+                        ▼
+                 [QA Engineer]
+                        │  Consumes: user_stories.md, acceptance_criteria.md,
+                        │            api-specifications.md, database-schema.md
+                        │  Produces: test-plan.md, unit/integration/system test cases,
+                        │            regression-test-plan.md, test-execution-report.md
+                        ▼
+                  [Reviewer]
+                        │  Consumes: all artifacts (read-only)
+                        │  Produces: review-report.md, quality-scorecard.md,
+                        │            findings.md, improvement-recommendations.md
+                        ▼
+              │──── [Approval Gate: Final Review] ────
+              ▼
+          
+             [Documentation]
+                        │  Consumes: all artifacts (read-only synthesis)
+                        │  Produces: user-guide.md, developer-guide.md,
+                        │            api-documentation.md, deployment-guide.md,
+                        │            release-notes.md
+                        ▼
+            [DevOps & Release]
+                        │  Consumes: deployment-architecture.md, migration-plan.md,
+                        │            review-report.md
+                        │  Produces: deployment-plan.md, ci-cd-pipeline.md,
+                        │            infrastructure-specification.md,
+                        │            monitoring-observability.md,
+                        │            rollback-recovery-plan.md, release-report.md
+                        ▼
+                      DONE
 ```
 
 ---
@@ -614,7 +644,7 @@ The following pairs historically produced overlap. These rules are normative.
 - If Solution Architect's database-strategy contains DDL, column definitions, or index definitions, those sections must be removed and deferred to Database Developer.
 
 ### 6.3 Solution Architect ↔ Backend Developer
-- Backend Developer must not alter `api-contracts.md`. Deviations are recorded in `endpoint-implementation-plan.md` with a reference.
+- Backend Developer must not alter `api-specifications.md`. Deviations are recorded in `endpoint-implementation-plan.md` with a reference.
 - Solution Architect must not produce service implementation details, validation logic, or error handling code.
 
 ### 6.4 UI/UX Developer ↔ Backend Developer
@@ -632,7 +662,7 @@ The following pairs historically produced overlap. These rules are normative.
 
 ### 6.7 DevOps ↔ Solution Architect
 - Deployment infrastructure files are owned exclusively by DevOps & Release.
-- Solution Architect's `deployment-strategy.md` is input guidance, not the final deployment configuration.
+- Solution Architect's `deployment-architecture.md` is input guidance, not the final deployment configuration.
 
 ---
 

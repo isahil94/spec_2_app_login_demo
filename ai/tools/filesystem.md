@@ -213,7 +213,7 @@ Provide agents with the ability to read and write files, search repository conte
 
 ### Reading Agent Definition
 ```
-Filesystem: Read file ai/agents/01-business-analyst.md
+Filesystem: Read file .github/agents/01-business-analyst.md
 Purpose: Load agent instructions
 Output: Agent definition content
 ```

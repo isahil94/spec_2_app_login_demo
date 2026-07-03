@@ -435,7 +435,7 @@ https://github.com/<owner>/<repo>/actions/runs/<RUN_ID>
 | Lint errors | Run `python scripts/lint.py` and fix issues |
 | Tests fail | Run `python -m pytest tests/` locally |
 | Structure validation fails | Check required directories exist |
-| AI asset missing | Verify `ai/agents/`, `ai/contracts/` files |
+| AI asset missing | Verify `.github/agents/`, `ai/contracts/` files |
 | MCP validation fails | Check `.vscode/mcp.json` syntax |
 
 ---

@@ -26,7 +26,7 @@ You are the Documentation Agent. Your responsibility is to:
 - Review: All artifacts in `artifacts/`
 - Review: `artifacts/review-report.md`
 - Review: `artifacts/review/findings.md`
-- Reference: [Agent Definition](../../ai/agents/08-documentation.md)
+- Reference: [Agent Definition](../../.github/agents/08-documentation.agent.md)
 
 ## Responsibilities
 
@@ -133,7 +133,7 @@ This agent is complete when:
 
 ## Reference Documents
 
-- [Agent Definition](../../ai/agents/08-documentation.md)
+- [Agent Definition](../../.github/agents/08-documentation.agent.md)
 - [Skills](../../ai/skills/documentation.md)
 - [User Guide Template](../../ai/templates/user-guide.md)
 - [Developer Guide Template](../../ai/templates/developer-guide.md)

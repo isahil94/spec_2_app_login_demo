@@ -1,0 +1,263 @@
+name: SDLC Agent Pipeline
+
+# Triggered manually, on a schedule, or on issue/PR events — adjust as needed.
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened, labeled]
+
+env:
+  # Copilot CLI reads this for non-interactive auth in Actions.
+  COPILOT_CLI_TOKEN: ${{ secrets.COPILOT_CLI_TOKEN }}
+
+jobs:
+  # ---------------------------------------------------------------------
+  # Each job = one agent stage. `needs:` enforces the canonical sequence.
+  # `retry` (via nick-fields/retry) gives automatic retries per stage.
+  # Failure in any job stops downstream jobs automatically (default behavior).
+  # ---------------------------------------------------------------------
+
+  validate_secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Copilot secret
+        env:
+          COPILOT_CLI_TOKEN: ${{ secrets.COPILOT_CLI_TOKEN }}
+        run: |
+          if [ -z "$COPILOT_CLI_TOKEN" ]; then
+            echo "COPILOT_CLI_TOKEN is not configured."
+            exit 1
+          fi
+          echo "COPILOT_CLI_TOKEN is configured and available to the workflow."
+
+  business_analyst:
+    needs: validate_secret
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run Business Analyst agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/business-analyst.chatmode.md \
+                     --prompt "Execute business analysis stage per workflow_spec.md" \
+                     --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: business-analyst-output
+          path: artifacts/business-analyst/
+
+  solution_architect:
+    needs: business_analyst
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: business-analyst-output
+          path: artifacts/business-analyst/
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run Solution Architect agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/solution-architect.chatmode.md \
+                     --prompt "Execute architecture stage per handoff-contract.md" \
+                     --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: solution-architect-output
+          path: artifacts/solution-architect/
+
+  # -----------------------------------------------------------------
+  # Approval Gate 1 (Architecture). Targeting a protected environment
+  # with required reviewers pauses the workflow until a human approves
+  # or rejects it in the Actions UI — no custom approval plumbing needed.
+  # -----------------------------------------------------------------
+  approval_gate_architecture:
+    needs: solution_architect
+    runs-on: ubuntu-latest
+    environment: architecture-approval   # configure required reviewers in repo settings
+    steps:
+      - run: echo "Architecture approved — proceeding to implementation stages."
+
+  ui_ux:
+    needs: approval_gate_architecture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run UI/UX agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/ui-ux-developer.chatmode.md \
+                     --prompt "Execute UI/UX stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ui-ux-output
+          path: artifacts/ui-ux/
+
+  backend:
+    needs: approval_gate_architecture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run Backend agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/backend-developer.chatmode.md \
+                     --prompt "Execute backend stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backend-output
+          path: artifacts/backend/
+
+  database:
+    needs: [ui_ux, backend]   # UI/UX and Backend run in parallel, Database waits on both
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run Database agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/database-developer.chatmode.md \
+                     --prompt "Execute database stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: database-output
+          path: artifacts/database/
+
+  qa:
+    needs: database
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run QA agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 2
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/qa-engineer.chatmode.md \
+                     --prompt "Execute QA stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qa-output
+          path: artifacts/qa/
+
+  # ---------------------------------------------------------------
+  # Final utility checks (format/imports/lint/test/coverage).
+  # Runs only after Backend, Database, UI/UX, and QA all report
+  # READY, per the Supervisor's completion rule. Reuses the existing
+  # ci.yml as a callable workflow instead of duplicating its logic.
+  # ---------------------------------------------------------------
+  utility_checks:
+    needs: [ui_ux, backend, database, qa]
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  reviewer:
+    needs: utility_checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run Reviewer agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 20
+          max_attempts: 2
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/reviewer.chatmode.md \
+                     --prompt "Execute review stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reviewer-output
+          path: artifacts/reviewer/
+
+  # Approval Gate 2 (Final Review)
+  approval_gate_final_review:
+    needs: reviewer
+    runs-on: ubuntu-latest
+    environment: final-review-approval   # configure required reviewers in repo settings
+    steps:
+      - run: echo "Final review approved — proceeding to documentation and release."
+
+  documentation:
+    needs: approval_gate_final_review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run Documentation agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/documentation.chatmode.md \
+                     --prompt "Execute documentation stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: documentation-output
+          path: artifacts/documentation/
+
+  devops_release:
+    needs: documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot-cli
+      - name: Run DevOps & Release agent (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            copilot --agent-file .github/chatmodes/devops-release.chatmode.md \
+                     --prompt "Execute DevOps & Release stage" --non-interactive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: devops-release-output
+          path: artifacts/devops-release/
+
+  complete:
+    needs: devops_release
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Pipeline complete. All stages executed, both approval gates satisfied."

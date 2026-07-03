@@ -1,12 +1,19 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { authService } from '../services/api/authService';
 
 interface User {
   email: string;
+  displayName?: string;
+}
+
+interface StoredUser extends User {
+  password: string;
 }
 
 interface AuthContextValue {
   user: User | null;
-  login: (email: string) => void;
+  login: (email: string, password: string) => Promise<void>;
+  register: (displayName: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -17,18 +24,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        setUser(JSON.parse(stored));
-      } catch {
-        window.localStorage.removeItem(STORAGE_KEY);
-      }
-    }
+    const token = authService.getToken();
+    if (!token) return;
+    let mounted = true;
+    authService
+      .me()
+      .then((profile) => {
+        if (!mounted) return;
+        const newUser: User = { email: profile.email, displayName: profile.full_name };
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
+        setUser(newUser);
+      })
+      .catch(() => {
+        authService.clearToken();
+      });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  const login = (email: string) => {
-    const newUser = { email };
+  const login = async (email: string, password: string) => {
+    await authService.login(email, password);
+    const profile = await authService.me();
+    const newUser: User = { email: profile.email, displayName: profile.full_name };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
     setUser(newUser);
   };
@@ -38,7 +56,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
-  const value = useMemo(() => ({ user, login, logout }), [user]);
+  const register = async (displayName: string, email: string, password: string) => {
+    await authService.register(displayName, email, password);
+    const profile = await authService.me();
+    const newUser: User = { email: profile.email, displayName: profile.full_name };
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
+    setUser(newUser);
+  };
+
+  const value = useMemo(() => ({ user, login, register, logout }), [user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

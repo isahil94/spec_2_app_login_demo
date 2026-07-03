@@ -1,6 +1,7 @@
 name: CI Pipeline
 
-# Run on push to any branch and pull requests
+# Run on push to any branch, pull requests, AND when called by another
+# workflow (e.g. the SDLC agent pipeline's utility_checks job).
 on:
   push:
     branches:
@@ -11,6 +12,11 @@ on:
     branches:
       - main
       - develop
+  workflow_call:
+    outputs:
+      status:
+        description: "Overall CI result: success or failure"
+        value: ${{ jobs.summary.outputs.status }}
 
 # Cancel in-progress runs when a new run is triggered
 concurrency:
@@ -143,7 +149,7 @@ jobs:
             2>/dev/null || python -m pytest --co -q 2>/dev/null | grep -q "test" && echo "Tests ready" || echo "ℹ️ No tests yet. Ready for implementation."
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results
@@ -180,7 +186,7 @@ jobs:
             2>/dev/null || echo "ℹ️ No tests or coverage data yet"
 
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         if: always()
         with:
           files: ./coverage.xml
@@ -192,15 +198,20 @@ jobs:
     runs-on: ubuntu-latest
     needs: [format, imports, lint, test, coverage]
     if: always()
+    outputs:
+      status: ${{ steps.set_status.outputs.status }}
     steps:
       - name: Check CI Status
+        id: set_status
         run: |
           echo "✓ Format check: ${{ needs.format.result }}"
           echo "✓ Import check: ${{ needs.imports.result }}"
           echo "✓ Linting: ${{ needs.lint.result }}"
           echo "✓ Tests: ${{ needs.test.result }}"
           echo "✓ Coverage: ${{ needs.coverage.result }}"
-          
+
           if [ "${{ needs.test.result }}" = "failure" ]; then
+            echo "status=failure" >> $GITHUB_OUTPUT
             exit 1
           fi
+          echo "status=success" >> $GITHUB_OUTPUT

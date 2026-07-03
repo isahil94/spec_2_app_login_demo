@@ -25,7 +25,7 @@ You are the DevOps & Release Agent. Your responsibility is to:
 
 - Review: `artifacts/app/`
 - Review: `artifacts/review-report.md` (approved)
-- Reference: [Agent Definition](../../ai/agents/09-devops.md)
+- Reference: [Agent Definition](../../.github/agents/09-devops.agent.md)
 
 ## Responsibilities
 
@@ -124,7 +124,7 @@ docker run -p 5000:5000 app:latest
 
 ## Reference Documents
 
-- [Agent Definition](../../ai/agents/09-devops.md)
+- [Agent Definition](../../.github/agents/09-devops.agent.md)
 - [Skills](../../ai/skills/devops.md)
 - [Deployment Plan Template](../../ai/templates/deployment-plan.md)
 - [Release Notes Template](../../ai/templates/release-notes.md)

@@ -25,23 +25,23 @@
 ## AI Usage Summary
 | Field | Value |
 |---|---|
-| Workflow ID | |
-| Correlation ID | |
-| Agent Name | |
-| Stage Name | |
-| Model Name | |
-| Model Provider | |
-| Session ID | |
-| Start Time | |
-| End Time | |
-| Duration | |
-| Input Tokens | |
-| Output Tokens | |
-| Total Tokens | |
-| Estimated Cost | |
-| Retry Count | |
-| Status | |
-| Blocking Reason | |
+| Workflow ID | [workflow_id] |
+| Correlation ID | [correlation_id] |
+| Agent Name | [agent_name] |
+| Stage Name | [stage_name] |
+| Model Name | [model_name] |
+| Model Provider | [model_provider] |
+| Session ID | [session_id or N/A] |
+| Start Time | [ISO-8601 start timestamp or N/A] |
+| End Time | [ISO-8601 end timestamp or N/A] |
+| Duration | [computed duration in seconds/minutes or N/A] |
+| Input Tokens | [input_tokens or N/A] |
+| Output Tokens | [output_tokens or N/A] |
+| Total Tokens | [input_tokens + output_tokens or N/A] |
+| Estimated Cost | [estimated_cost or N/A] |
+| Retry Count | [retry_count] |
+| Status | [completed | failed | blocked | partial] |
+| Blocking Reason | [none or reason] |
 
 ## Execution Automation
 

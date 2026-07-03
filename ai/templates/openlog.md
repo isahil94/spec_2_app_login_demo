@@ -1,4 +1,4 @@
-# Open Log
+# OpenLog
 
 Template Version: 4.0.0
 Owner Agent: [Agent Name]

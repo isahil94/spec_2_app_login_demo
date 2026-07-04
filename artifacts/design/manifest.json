@@ -1,0 +1,23 @@
+{
+  "sourceFile": "Task Management System Screens.make",
+  "reconstructedFiles": [
+    {
+      "path": "src/app/App.tsx",
+      "chars": 153040
+    },
+    {
+      "path": "src/styles/fonts.css",
+      "chars": 139
+    },
+    {
+      "path": "src/styles/theme.css",
+      "chars": 5387
+    }
+  ],
+  "stats": {
+    "write_tool": 3,
+    "edit_tool": 8,
+    "edit_failed": 0,
+    "view_seed": 3
+  }
+}

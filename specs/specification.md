@@ -22,9 +22,10 @@ This document.
 
 ## UI Design
 
-**Figma URL**
-
-https://www.figma.com/make/YnxUzBz6USzrnokLtV4Jd0/Task-Management-System-Screens?t=1gWarwbU89pAMBkw-1
+**Figma make**
+FIGMA_SOURCE_TYPE=MAKE_FILE
+Path = `specs/`
+File_name = `Task Management System Screens.make`
 
 The UI implementation shall closely match the supplied design.
 

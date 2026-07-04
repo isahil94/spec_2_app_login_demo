@@ -1,15 +1,17 @@
-# Main.Tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { store } from './state/store';
+import './styles/globals.css';
 
-Generated from workflow inputs by Ui Ux Developer.
-
-## Summary
-# Ui Ux Developer ## Context ### Specification # Task Management System **Version:** 1.1 --- # Project Overview Develop a modern, secure, responsive web-based **Task Management System** that enables teams to create, orga...
-
-## Main Notes
-- This artifact was derived from the workflow specification and the stage inputs.
-- Ui Ux Developer produced a concrete implementation plan for the requested capability.
-- The content is intended to be refined by the corresponding agent execution when richer context is available.
-
-## Validation
-- Artifact content is grounded in the provided workflow inputs.
-- The document is ready for downstream review and handoff.
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);

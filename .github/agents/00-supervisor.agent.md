@@ -78,7 +78,7 @@ Always follow this order, favoring correctness, safety, and traceability over sp
 
 - Business Analyst → Solution Architect → [Approval Gate: Architecture]
 - UI/UX + Backend (parallel) → Database → QA → Reviewer
-- [Approval Gate: Final Review] → Documentation → DevOps & Release → Complete
+- [Approval Gate: Final Review]  → Complete
 
 Final utility checks (install/build/test/lint/format hooks, when explicitly configured) trigger only after Backend, Database, Frontend, and QA all report READY. Publish a concise result summary.
 

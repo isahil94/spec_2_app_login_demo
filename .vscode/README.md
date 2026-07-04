@@ -13,14 +13,6 @@ This directory contains all VS Code configuration files for the Agentic SDLC Pla
 | **launch.json** | Debug configurations for Python and Node scripts |
 | **tasks.json** | Automation tasks (build, test, format, lint, utility tasks) |
 
-### MCP Configuration
-
-| File | Purpose |
-|------|---------|
-| **mcp.json** | Model Context Protocol server configuration (production-ready) |
-| **MCP.md** | Comprehensive MCP guide with quick start and troubleshooting |
-| **validate-mcp.js** | Automated validation script for MCP configuration |
-| **.env.mcp.example** | Template for MCP server environment variables |
 
 ### Chat Modes
 
@@ -59,19 +51,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Validate Configuration
-```bash
-# Run MCP validation
-node .vscode/validate-mcp.js
-
-# Should show:
-# ✓ JSON Validity
-# ✓ Required Fields
-# ✓ Security Configuration
-# ✓ (all checks passing)
-```
-
-### 4. Start Using Copilot
+### 3. Start Using Copilot
 ```
 In VS Code Chat:
 @chatmode supervisor "Show me the workflow"
@@ -126,74 +106,6 @@ Ctrl+Shift+P → Tasks: Run Task → Test
 
 ---
 
-## MCP Servers
-
-### What is MCP?
-
-MCP (Model Context Protocol) enables GitHub Copilot to:
-- Read and write project files
-- Access Git repository state
-- Execute build/test/lint commands
-- Query GitHub issues and PRs
-- Control Docker containers
-- Inspect databases
-
-### Required Servers
-
-| Server | Purpose | Status |
-|--------|---------|--------|
-| **Filesystem** | Read/write project files | ✅ Enabled |
-| **Git** | Version control operations | ✅ Enabled |
-| **Terminal** | Execute build/test commands | ✅ Enabled |
-| **GitHub** | PR/issue integration (requires token) | ✅ Enabled |
-
-### Optional Servers
-
-| Server | Purpose | Enable When | Status |
-|--------|---------|-------------|--------|
-| **Playwright** | Browser automation | UI testing | ❌ Disabled |
-| **SQLite** | Local database inspection | DB testing | ❌ Disabled |
-| **PostgreSQL** | Production database access | Prod deployments | ❌ Disabled |
-| **Docker** | Container management | DevOps workflows | ❌ Disabled |
-
-### Setup MCP
-
-```bash
-# 1. Review configuration
-cat .vscode/mcp.json
-
-# 2. Validate it
-node .vscode/validate-mcp.js
-
-# 3. Set up environment (if needed)
-cp .vscode/.env.mcp.example .env
-# Edit .env with your tokens/credentials
-
-# 4. Enable optional servers (if needed)
-# Edit mcp.json: move server from optionalServers to mcpServers
-# Set "disabled": false
-
-# 5. Reload VS Code
-Ctrl+Shift+P → Developer: Reload Window
-```
-
-### Verify MCP Works
-
-In Copilot Chat:
-```
-@chatmode supervisor "Test MCP connectivity"
-```
-
-Expected response:
-```
-I can access the following MCP servers:
-✓ Filesystem - Read/write project files
-✓ Git - Version control
-✓ Terminal - Run commands
-✓ GitHub - PR/issue management
-```
-
----
 
 ## Chat Modes
 
@@ -288,8 +200,6 @@ In VS Code Chat:
 3. Debug Copilot interaction:
    Ctrl+Shift+P → Output: Focus Output (MCP)
 
-4. Check MCP audit log:
-   tail -f .vscode/mcp-audit.log
 ```
 
 ### Testing Workflow
@@ -311,29 +221,6 @@ In VS Code Chat:
 ---
 
 ## Troubleshooting
-
-### MCP Not Working
-
-Check:
-1. **Validation passes:**
-   ```bash
-   node .vscode/validate-mcp.js
-   ```
-
-2. **npm packages installed:**
-   ```bash
-   npm list -g @modelcontextprotocol/server-*
-   ```
-
-3. **VS Code reloaded:**
-   ```
-   Ctrl+Shift+P → Developer: Reload Window
-   ```
-
-4. **Audit log shows errors:**
-   ```bash
-   tail -f .vscode/mcp-audit.log
-   ```
 
 ### Tasks Not Running
 
@@ -377,10 +264,8 @@ Check:
 
 Before deploying:
 
-- [ ] All MCP servers validated (`validate-mcp.js` passes)
 - [ ] Python interpreter configured
 - [ ] Required extensions installed
-- [ ] MCP audit logging enabled
 - [ ] Security settings reviewed
 - [ ] Rate limits appropriate
 - [ ] Optional servers disabled (unless needed)
@@ -392,8 +277,6 @@ Before deploying:
 
 ## Reference
 
-- [MCP Configuration Guide](./MCP.md)
-- [MCP Specification](https://modelcontextprotocol.io/)
 - [GitHub Copilot Agent Mode](https://github.com/features/copilot)
 - [VS Code Tasks Documentation](https://code.visualstudio.com/docs/editor/tasks)
 - [VS Code Debugging](https://code.visualstudio.com/docs/editor/debugging)
@@ -401,11 +284,6 @@ Before deploying:
 ---
 
 ## Support
-
-### Internal Resources
-- Read: [.vscode/MCP.md](./MCP.md) for detailed MCP guide
-- Check: [.vscode/mcp-audit.log](./mcp-audit.log) for error logs
-- Validate: `node .vscode/validate-mcp.js`
 
 ### External Resources
 - GitHub: https://github.com/modelcontextprotocol/

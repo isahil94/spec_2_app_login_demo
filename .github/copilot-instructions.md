@@ -4,7 +4,7 @@
 
 This project is a **local-first**, **AI-native**, **configuration-driven** Agentic SDLC platform.
 
-The platform transforms a software specification (and optional Figma design) into a running application using autonomous AI agents coordinated by a Supervisor.
+The platform transforms a software specification (and if available then using Figma design additonally) into a running application using autonomous AI agents coordinated by a Supervisor.
 
 ### Principles
 
@@ -35,23 +35,24 @@ Business Analyst
     ↓
 Solution Architect
     ↓
- ┌──────────────┬──────────────────┬─────────────────┐
- │              │                  │
- ▼              ▼                  ▼
-UI/UX      Backend           Database
-Developer  Developer         Developer
- └──────────────┴──────────────────┘
-                ↓
-          QA Engineer
-                ↓
-            Reviewer
-                ↓
-       DevOps & Release
-                ↓
-         Documentation
+ ┌──────────────┬
+ ▼              ▼                
+UI/UX      Backend           
+Developer  Developer        
+ └──────────────┴
+        ↓
+    Database Engineer
+        ↓
+    QA Engineer
+        ↓
+    Reviewer
+        ↓
+DevOps & Release
+        ↓
+    Documentation
 ```
 
-UI, Backend and Database agents may execute in parallel after the Solution Architect publishes contracts.
+UI and Backend agents may execute in parallel after the Solution Architect publishes contracts.
 
 ---
 
@@ -229,28 +230,6 @@ Avoid:
 
 ---
 
-## Validation Pipeline
-
-Every AI output must pass:
-
-```text
-LLM Output
-↓
-Schema Validation
-↓
-Business Validation
-↓
-Guardrails
-↓
-Quality Review
-↓
-Published Artifact
-```
-
-Never bypass validation.
-
----
-
 ## Retry Policy
 
 Retry only after validation failure.
@@ -307,7 +286,6 @@ Prefer deterministic tests.
 ---
 
 ## Default Demo Application
-
 Do not assume a default application type. Always derive scope, entry point, and features solely from specification.md. Never fall back to a generic demo app.
 
 ---

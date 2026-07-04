@@ -1,0 +1,230 @@
+# User Stories
+
+## Purpose
+Capture implementation-ready user stories for the Task Management System without duplicating acceptance criteria.
+
+## Metadata
+- Version: 1.0
+- Author: Business Analyst
+- Date: 2026-07-04
+- Status: Draft
+- Workflow ID: WF-20260704-001
+- Artifact ID: US-001
+
+## User Stories
+- Story ID: US-001
+- Epic: EPIC-001
+- Feature: FEAT-001
+- Related Functional Requirements: REQ-001
+- Related Screen(s): Login, Register, Forgot Password, Reset Password
+- Related API(s): Business reference only
+- Related Database Entity: User Account
+- Story Statement: As a new user, I want to register and sign in securely, so that I can access the system with my own account.
+- Business Value: Secure access enables trusted participation and protects user data.
+- Preconditions: The user has valid contact details and agrees to the account terms.
+- Trigger: The user starts account creation or sign-in.
+- User Entry Point: Register or Login screen
+- User Exit Point: Dashboard after successful authentication
+- Primary Flow: Enter registration details, submit, verify credentials, access the dashboard.
+- Alternate Flow: Use password recovery when credentials are forgotten.
+- Exception Flow: Show validation feedback for invalid credentials, duplicate email, or failed recovery.
+- Expected User Feedback: Clear success, validation, and recovery guidance.
+- Business Validation Rules: Email format, password length, recovery eligibility.
+- Security Expectations: Authentication must be secure and role-based access must be enforced.
+- Audit Expectations: Sign-in, sign-out, and recovery events are recorded.
+- Business Rules (story-specific only): BR-001, BR-002
+- Authentication/Authorization Behavior: An authenticated user may access permitted content; anonymous users may only use public access flows.
+- Permission/Visibility Rules: Account management is self-service; administrative action requires elevated rights.
+- Dependencies: None
+- Business Detail Coverage: BR-001, VAL-001, VAL-002, AUTH-001
+- Data Constraints: Email required; password minimum length 8; account status must be active to sign in.
+- Priority: Must Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-001.
+- Traceability Check: REQ-001, AC-001 to AC-004 present and complete
+
+- Story ID: US-002
+- Epic: EPIC-002
+- Feature: FEAT-002
+- Related Functional Requirements: REQ-002, REQ-003
+- Related Screen(s): Task List, Task Details, Create Task, Edit Task
+- Related API(s): Business reference only
+- Related Database Entity: Task
+- Story Statement: As a team member, I want to create and update tasks, so that my work is visible and progress is tracked.
+- Business Value: Clear task ownership improves execution and visibility.
+- Preconditions: The user is authenticated and has task access.
+- Trigger: The user creates or edits a task.
+- User Entry Point: Task List or Create Task screen
+- User Exit Point: Task Details or Task List
+- Primary Flow: Enter task details, assign owner/assignee, save, confirm the task appears in list and details.
+- Alternate Flow: Duplicate an existing task and adjust details.
+- Exception Flow: Show validation feedback for missing title, invalid due date, or unsupported status change.
+- Expected User Feedback: Confirmation of save, validation warnings, and status change messages.
+- Business Validation Rules: Required title, valid due date, allowed statuses and priorities.
+- Security Expectations: Only authorized users may modify tasks.
+- Audit Expectations: Create, update, archive, and restore actions are recorded.
+- Business Rules (story-specific only): BR-003, BR-004, BR-005, BR-006, BR-007, BR-008
+- Authentication/Authorization Behavior: Task editing is limited by ownership, assignment, and administrator privileges.
+- Permission/Visibility Rules: Owners and assignees may modify active tasks; administrators may override completion restrictions.
+- Dependencies: US-001
+- Business Detail Coverage: BR-003, BR-004, BR-006, VAL-003, VAL-004, VAL-005, FLOW-002
+- Data Constraints: Title required; description optional; due date must not be earlier than today; allowed values restricted.
+- Priority: Must Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-002.
+- Traceability Check: REQ-002, REQ-003, AC-005 to AC-008 present and complete
+
+- Story ID: US-003
+- Epic: EPIC-003
+- Feature: FEAT-003
+- Related Functional Requirements: REQ-004, REQ-005
+- Related Screen(s): Task List
+- Related API(s): Business reference only
+- Related Database Entity: Task
+- Story Statement: As a user, I want to search and filter tasks, so that I can find relevant work faster.
+- Business Value: Faster discovery improves productivity and reduces missed work.
+- Preconditions: Tasks exist and the user has access to them.
+- Trigger: The user enters search terms or selects filters.
+- User Entry Point: Task List screen
+- User Exit Point: Task List with filtered results
+- Primary Flow: Enter search terms, apply filters, view matching tasks.
+- Alternate Flow: Sort by due date, priority, status, or recency.
+- Exception Flow: Show an empty state when no tasks match the selected criteria.
+- Expected User Feedback: Matching results, empty state, and clear filter summary.
+- Business Validation Rules: Search terms must be evaluated against title, description, and labels.
+- Security Expectations: Only visible tasks are shown.
+- Audit Expectations: Search/filter usage is logged.
+- Business Rules (story-specific only): BR-009
+- Authentication/Authorization Behavior: Search results must respect task visibility and role scope.
+- Permission/Visibility Rules: Administrators and team leads may see broader task sets than team members.
+- Dependencies: US-002
+- Business Detail Coverage: REQ-004, REQ-005, VAL-006
+- Data Constraints: Filters are limited to supported status, priority, assignee, due date, created date, and team values.
+- Priority: Must Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-003.
+- Traceability Check: REQ-004, REQ-005, AC-009 to AC-012 present and complete
+
+- Story ID: US-004
+- Epic: EPIC-003
+- Feature: FEAT-004
+- Related Functional Requirements: REQ-006, REQ-007
+- Related Screen(s): Task Details, Settings
+- Related API(s): Business reference only
+- Related Database Entity: Comment, Notification
+- Story Statement: As a collaborator, I want to comment, attach files, and receive notifications, so that task progress is shared and visible.
+- Business Value: Collaboration reduces ambiguity and helps teams respond quickly.
+- Preconditions: The task exists and the user has access.
+- Trigger: A task update, comment, or mention occurs.
+- User Entry Point: Task Details or Settings screen
+- User Exit Point: Updated task activity or notification view
+- Primary Flow: Add a comment or attachment, receive a notification when relevant, and view the activity history.
+- Alternate Flow: Adjust notification preferences from settings.
+- Exception Flow: Show validation feedback when a comment is empty or an attachment is unsupported.
+- Expected User Feedback: Confirmation of saved collaboration and notification state.
+- Business Validation Rules: Empty comments must not be accepted; attachments must be relevant to the task context.
+- Security Expectations: Collaboration and notifications must remain scoped to authorized users.
+- Audit Expectations: Comment, attachment, and notification actions are recorded.
+- Business Rules (story-specific only): BR-011, BR-012
+- Authentication/Authorization Behavior: Only users with task access may add comments or attachments.
+- Permission/Visibility Rules: Notification visibility is limited to the intended recipient and preferences.
+- Dependencies: US-002
+- Business Detail Coverage: REQ-006, REQ-007, VAL-008, VAL-009
+- Data Constraints: Comments and notifications must be tied to a valid task and recipient.
+- Priority: Should Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-004.
+- Traceability Check: REQ-006, REQ-007, AC-013 to AC-016 present and complete
+
+- Story ID: US-005
+- Epic: EPIC-003
+- Feature: FEAT-006
+- Related Functional Requirements: REQ-008
+- Related Screen(s): Dashboard, Reports
+- Related API(s): Business reference only
+- Related Database Entity: Report
+- Story Statement: As a team lead, I want to view dashboards and reports, so that I can monitor workload and progress.
+- Business Value: Better visibility improves planning and meeting deadlines.
+- Preconditions: Task data and reporting permissions are available.
+- Trigger: The user opens the dashboard or reports area.
+- User Entry Point: Dashboard screen
+- User Exit Point: Report or task list
+- Primary Flow: Open dashboard, review metrics, open a report, and assess workload.
+- Alternate Flow: Filter reports by team or user.
+- Exception Flow: Show an empty state when there is no reportable data.
+- Expected User Feedback: Metrics and report summaries that reflect current activity.
+- Business Validation Rules: Metrics must reflect only visible task data.
+- Security Expectations: Reporting access must follow role-based visibility.
+- Audit Expectations: Report access is recorded.
+- Business Rules (story-specific only): BR-013
+- Authentication/Authorization Behavior: Reporting access is restricted by role and visibility.
+- Permission/Visibility Rules: Team leads and administrators may access aggregated reports; team members access personal scope only.
+- Dependencies: US-002, US-003
+- Business Detail Coverage: REQ-008, VAL-010
+- Data Constraints: Reports must be derived from current, authorized task data.
+- Priority: Must Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-005.
+- Traceability Check: REQ-008, AC-017 to AC-020 present and complete
+
+- Story ID: US-006
+- Epic: EPIC-004
+- Feature: FEAT-005
+- Related Functional Requirements: REQ-009
+- Related Screen(s): User Management, Settings
+- Related API(s): Business reference only
+- Related Database Entity: User, Team
+- Story Statement: As an administrator, I want to manage users and teams, so that access and responsibilities are controlled correctly.
+- Business Value: Proper administration reduces risk and improves accountability.
+- Preconditions: The user has administrator privileges.
+- Trigger: The administrator opens user or team management actions.
+- User Entry Point: Settings or user management screen
+- User Exit Point: Updated user or team state
+- Primary Flow: Invite, enable, disable, assign roles, or remove users and manage team membership.
+- Alternate Flow: Restore or reassign a previously disabled account.
+- Exception Flow: Show validation feedback when a role assignment or membership update is invalid.
+- Expected User Feedback: Confirmation of successful administration changes and clear error feedback.
+- Business Validation Rules: Role assignment must be allowed by policy; duplicate memberships are invalid.
+- Security Expectations: Privileged management actions must be restricted to administrators.
+- Audit Expectations: Administration actions are recorded.
+- Business Rules (story-specific only): BR-014
+- Authentication/Authorization Behavior: Only administrators may perform privileged administration actions.
+- Permission/Visibility Rules: Team management is restricted to administrators and team leads as defined by policy.
+- Dependencies: US-001
+- Business Detail Coverage: REQ-009, VAL-011
+- Data Constraints: User role, status, and team membership must remain consistent.
+- Priority: Must Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-006.
+- Traceability Check: REQ-009, AC-021 to AC-024 present and complete
+
+- Story ID: US-007
+- Epic: EPIC-004
+- Feature: FEAT-007
+- Related Functional Requirements: REQ-010
+- Related Screen(s): Profile, Settings
+- Related API(s): Business reference only
+- Related Database Entity: User Account
+- Story Statement: As a user, I want to manage my profile and preferences, so that my account reflects my needs.
+- Business Value: Personalization improves comfort and reduces friction.
+- Preconditions: The user is authenticated.
+- Trigger: The user opens profile or settings.
+- User Entry Point: Profile or Settings screen
+- User Exit Point: Saved preference confirmation
+- Primary Flow: Update profile fields, upload avatar, adjust notification and language preferences, and save.
+- Alternate Flow: Change password from the profile flow.
+- Exception Flow: Show validation feedback for invalid contact details or unsupported preference values.
+- Expected User Feedback: Saved confirmation, validation feedback, and clear preference state.
+- Business Validation Rules: Contact details and password changes follow policy.
+- Security Expectations: Private profile data is only visible to the owner and authorized administrators.
+- Audit Expectations: Profile and preference changes are recorded.
+- Business Rules (story-specific only): BR-015
+- Authentication/Authorization Behavior: Profile updates are limited to the authenticated owner unless an administrator edits a user account.
+- Permission/Visibility Rules: Users may manage only their own profile and preference settings.
+- Dependencies: US-001
+- Business Detail Coverage: REQ-010, VAL-012
+- Data Constraints: Preference values must match supported options for theme, language, timezone, email, privacy, and notifications.
+- Priority: Should Have
+- Owner: Product/Business
+- Acceptance Criteria Reference: See acceptance_criteria.md under US-007.
+- Traceability Check: REQ-010, AC-025 to AC-028 present and complete

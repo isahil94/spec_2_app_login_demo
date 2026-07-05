@@ -1,26 +1,36 @@
 """Seed script to populate test data in the database."""
 
+import argparse
 import os
 import sys
+import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from sqlalchemy import insert
+from sqlalchemy.orm import Session
 
 # Add backend directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # Set UTF-8 encoding for stdout if on Windows
-if sys.platform == 'win32':
+if sys.platform == "win32":
     import io
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-from sqlalchemy.orm import Session
+
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
 from src.db.database import Base, SessionLocal, engine
 from src.models.models import (
+    AuditEntry,
     Comment,
+    Notification,
+    NotificationPreference,
     Task,
     TaskPriority,
     TaskStatus,
     Team,
     User,
     UserRole,
+    task_history,
 )
 from src.utils.password import hash_password
 
@@ -253,9 +263,169 @@ def create_test_comments(db: Session, users: list, tasks: list):
     return comments
 
 
-def seed_database():
+def create_test_notification_preferences(db: Session, users: list):
+    """Create notification preferences for each user."""
+    preferences = []
+    for user in users:
+        pref = NotificationPreference(
+            user_id=user.id,
+            task_assigned=True,
+            task_created=True,
+            comment_added=True,
+            task_completed=True,
+        )
+        db.add(pref)
+        preferences.append(pref)
+
+    db.commit()
+    for pref in preferences:
+        db.refresh(pref)
+
+    return preferences
+
+
+def create_test_notifications(db: Session, users: list, tasks: list):
+    """Create sample notifications for users."""
+    notifications = []
+    now = datetime.now(timezone.utc)
+
+    notification_data = [
+        {
+            "user": users[1],
+            "task": tasks[0],
+            "title": "New task assignment",
+            "message": "You have been assigned a high-priority task: Fix authentication bug.",
+            "notification_type": "task_assigned",
+        },
+        {
+            "user": users[2],
+            "task": tasks[1],
+            "title": "Design task review needed",
+            "message": "Please review the dashboard layout mockups for the new dashboard layout task.",
+            "notification_type": "task_created",
+        },
+        {
+            "user": users[0],
+            "task": tasks[3],
+            "title": "Task completed",
+            "message": "The comment feature task has been completed successfully.",
+            "notification_type": "task_completed",
+        },
+    ]
+
+    for item in notification_data:
+        notification = Notification(
+            user_id=item["user"].id,
+            task_id=item["task"].id,
+            title=item["title"],
+            message=item["message"],
+            notification_type=item["notification_type"],
+            is_read=False,
+            created_at=now,
+        )
+        db.add(notification)
+        notifications.append(notification)
+
+    db.commit()
+    for notification in notifications:
+        db.refresh(notification)
+
+    return notifications
+
+
+def create_test_audit_entries(db: Session, users: list, tasks: list):
+    """Create audit entries for task lifecycle actions."""
+    audit_entries = []
+    now = datetime.now(timezone.utc)
+
+    audit_data = [
+        {
+            "task": tasks[0],
+            "user": users[0],
+            "action": "created task",
+            "details": "Task created and assigned to Bob Smith.",
+        },
+        {
+            "task": tasks[1],
+            "user": users[0],
+            "action": "created task",
+            "details": "Design task created for the Design team.",
+        },
+        {
+            "task": tasks[2],
+            "user": users[1],
+            "action": "marked task for review",
+            "details": "API documentation task moved to review.",
+        },
+    ]
+
+    for item in audit_data:
+        entry = AuditEntry(
+            task_id=item["task"].id,
+            user_id=item["user"].id,
+            action=item["action"],
+            entity_type="task",
+            entity_id=item["task"].id,
+            details=item["details"],
+            created_at=now,
+        )
+        db.add(entry)
+        audit_entries.append(entry)
+
+    db.commit()
+    for entry in audit_entries:
+        db.refresh(entry)
+
+    return audit_entries
+
+
+def create_test_task_history(db: Session, tasks: list, users: list):
+    """Create task history records for sample activities."""
+    now = datetime.now(timezone.utc)
+    history_entries = [
+        {
+            "id": str(uuid.uuid4()),
+            "task_id": tasks[0].id,
+            "action": "assigned",
+            "actor_id": users[0].id,
+            "details": "Assigned to Bob Smith",
+            "created_at": now - timedelta(days=2),
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "task_id": tasks[1].id,
+            "action": "status_changed",
+            "actor_id": users[0].id,
+            "details": "Status changed to todo",
+            "created_at": now - timedelta(days=1, hours=3),
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "task_id": tasks[3].id,
+            "action": "completed",
+            "actor_id": users[1].id,
+            "details": "Task completed and verified",
+            "created_at": now - timedelta(days=3),
+        },
+    ]
+
+    db.execute(insert(task_history), history_entries)
+    db.commit()
+    return history_entries
+
+
+def reset_database():
+    """Reset the database by dropping and recreating all tables."""
+    print("[>] Resetting database tables...")
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+
+def seed_database(force: bool = False, reset: bool = False):
     """Main function to seed the database."""
     print("[*] Starting database seeding...")
+    if reset:
+        reset_database()
 
     try:
         # Create all tables
@@ -267,10 +437,13 @@ def seed_database():
 
         # Check if data already exists
         existing_users = db.query(User).count()
-        if existing_users > 0:
+        if existing_users > 0 and not force and not reset:
             print("[!] Database already contains data. Skipping seeding.")
             db.close()
             return
+
+        if existing_users > 0 and reset:
+            print("[>] Existing data removed; reseeding fresh sample data.")
 
         # Create test data
         print("[>] Creating test users...")
@@ -288,6 +461,22 @@ def seed_database():
         print("[>] Creating test comments...")
         comments = create_test_comments(db, users, tasks)
         print(f"   Created {len(comments)} comments")
+
+        print("[>] Creating notification preferences...")
+        notification_preferences = create_test_notification_preferences(db, users)
+        print(f"   Created {len(notification_preferences)} notification preferences")
+
+        print("[>] Creating notifications...")
+        notifications = create_test_notifications(db, users, tasks)
+        print(f"   Created {len(notifications)} notifications")
+
+        print("[>] Creating audit entries...")
+        audit_entries = create_test_audit_entries(db, users, tasks)
+        print(f"   Created {len(audit_entries)} audit entries")
+
+        print("[>] Creating task history records...")
+        history_entries = create_test_task_history(db, tasks, users)
+        print(f"   Created {len(history_entries)} task history records")
 
         db.close()
 
@@ -310,4 +499,17 @@ def seed_database():
 
 
 if __name__ == "__main__":
-    seed_database()
+    parser = argparse.ArgumentParser(description="Seed the backend database.")
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        help="Drop all tables and recreate the database before seeding.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force seeding even if the database already contains data.",
+    )
+    args = parser.parse_args()
+
+    seed_database(force=args.force, reset=args.reset)

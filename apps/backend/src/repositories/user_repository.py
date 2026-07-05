@@ -28,12 +28,12 @@ class UserRepository(BaseRepository[User]):
             password_hash=password_hash,
             full_name=full_name,
             role=role,
+            is_active=True,
             theme="system",
             language="en",
             timezone="UTC",
-            privacy="private",
             notifications_in_app=True,
-            notifications_email=True,
+            notifications_email=False,
         )
         self.session.add(user)
         self.session.commit()
@@ -44,7 +44,7 @@ class UserRepository(BaseRepository[User]):
         """Get active users."""
         return (
             self.session.query(User)
-            .filter(User.is_active == True)
+            .filter(User.is_active.is_(True))
             .offset(skip)
             .limit(limit)
             .all()

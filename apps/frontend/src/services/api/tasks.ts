@@ -80,6 +80,7 @@ export interface CreateTaskPayload {
   description?: string;
   status: TaskStatus;
   priority: TaskPriority;
+  assigneeId?: string;
   dueDate?: string;
 }
 
@@ -93,6 +94,7 @@ export interface UpdateTaskPayload {
   description?: string;
   status?: TaskStatus;
   priority?: TaskPriority;
+  assigneeId?: string | null;
   dueDate?: string;
 }
 

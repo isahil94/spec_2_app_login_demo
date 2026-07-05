@@ -1,9 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import FormField from '../components/FormField';
 import { createTask } from '../services/api/tasks';
-import { TaskPriority, TaskStatus } from '../types';
+import { getActiveUsers } from '../services/api/user';
+import type { TaskPriority, TaskStatus, UserSummary } from '../types';
 
 const statusOptions: TaskStatus[] = ['todo', 'in_progress', 'review', 'completed', 'blocked'];
 const priorityOptions: TaskPriority[] = ['low', 'medium', 'high', 'critical'];
@@ -13,10 +14,25 @@ export default function CreateTaskPage() {
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState<TaskStatus>('todo');
   const [priority, setPriority] = useState<TaskPriority>('medium');
+  const [assignee, setAssignee] = useState('');
+  const [users, setUsers] = useState<UserSummary[]>([]);
+  const [userLoading, setUserLoading] = useState(true);
+  const [userError, setUserError] = useState<string | null>(null);
   const [dueDate, setDueDate] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUserLoading(true);
+    getActiveUsers()
+      .then(setUsers)
+      .catch((err) => {
+        console.error('Failed to load assignees', err);
+        setUserError('Unable to load assignees.');
+      })
+      .finally(() => setUserLoading(false));
+  }, []);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -44,6 +60,7 @@ export default function CreateTaskPage() {
         description: description || undefined,
         status,
         priority,
+        assigneeId: assignee || undefined,
         dueDate: dueDate || undefined,
       });
       navigate(`/tasks/${createdTask.taskId}`);
@@ -108,14 +125,32 @@ export default function CreateTaskPage() {
             </select>
           </label>
         </div>
-        <FormField label="Due Date">
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(event) => setDueDate(event.target.value)}
-            className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
-        </FormField>
+        <div className="grid gap-4 md:grid-cols-2">
+          <label className="block text-sm font-medium text-slate-700">
+            Assignee
+            <select
+              value={assignee}
+              onChange={(event) => setAssignee(event.target.value)}
+              className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            >
+              <option value="">Unassigned</option>
+              {users.map((user) => (
+                <option key={user.userId} value={user.userId}>
+                  {user.fullName || user.email}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="block text-sm font-medium text-slate-700">
+            Due Date
+            <input
+              type="date"
+              value={dueDate}
+              onChange={(event) => setDueDate(event.target.value)}
+              className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+          </label>
+        </div>
         {error ? <p className="text-sm text-rose-600">{error}</p> : null}
         <div className="flex flex-wrap items-center gap-3">
           <Button type="submit" disabled={submitting}>

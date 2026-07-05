@@ -55,9 +55,11 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",
     "http://localhost:4173",
+    "http://localhost:4174",
     "http://localhost:5173",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:4173",
+    "http://127.0.0.1:4174",
     "http://127.0.0.1:5173",
 ]
 app.add_middleware(
@@ -176,6 +178,31 @@ async def get_user_profile(
                 "fullName": profile_user.full_name,
                 "email": profile_user.email,
                 "contactInformation": profile_user.contact_information,
+            }
+        }
+    except ApplicationError as e:
+        raise e
+
+
+@app.get("/api/v1/users")
+async def list_active_users(
+    current_user: str = Depends(get_current_user), db: Session = Depends(get_db)
+):
+    """List active users for task assignment."""
+    try:
+        user_repo = UserRepository(db)
+        users = user_repo.get_active_users()
+        return {
+            "data": {
+                "users": [
+                    {
+                        "userId": user.id,
+                        "email": user.email,
+                        "fullName": user.full_name,
+                        "role": user.role,
+                    }
+                    for user in users
+                ]
             }
         }
     except ApplicationError as e:

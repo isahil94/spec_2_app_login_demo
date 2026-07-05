@@ -80,7 +80,7 @@ export default function TaskDetailsPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-card">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-slate-900">{task.title}</h1>
             <p className="mt-1 text-sm text-slate-600">{task.description || 'No description provided.'}</p>
@@ -88,6 +88,12 @@ export default function TaskDetailsPage() {
           <div className="space-y-2 text-sm text-slate-500">
             <p>Status: <span className="font-medium text-slate-900">{task.status.replace('_', ' ')}</span></p>
             <p>Priority: <span className="font-medium text-slate-900">{task.priority}</span></p>
+            <Link
+              to={`/tasks/${task.taskId}/edit`}
+              className="inline-flex rounded-2xl bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
+            >
+              Edit Task
+            </Link>
           </div>
         </div>
       </div>

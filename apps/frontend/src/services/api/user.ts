@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { ProfileData, SettingsData } from '../../types';
+import type { ProfileData, SettingsData, UserSummary } from '../../types';
 
 export const getProfile = async (userId: string) => {
   const response = await apiClient.get<{ data: ProfileData }>(`/users/${userId}/profile`);
@@ -29,6 +29,17 @@ export const changePassword = async (
 export const getSettings = async (userId: string) => {
   const response = await apiClient.get<{ data: SettingsData }>(`/users/${userId}/settings`);
   return response.data.data;
+};
+
+const normalizeUserSummary = (user: any): UserSummary => ({
+  userId: user?.userId ?? user?.user_id ?? '',
+  email: user?.email ?? '',
+  fullName: user?.fullName ?? user?.full_name ?? user?.email ?? '',
+});
+
+export const getActiveUsers = async () => {
+  const response = await apiClient.get<{ data: { users: any[] } }>('/users');
+  return response.data.data.users.map(normalizeUserSummary);
 };
 
 export const updateSettings = async (userId: string, payload: Partial<SettingsData>) => {

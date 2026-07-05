@@ -16,7 +16,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ## Test Execution Status Summary
 
 | Component | Total Tests | Executed | Passed | Failed | Coverage |
-|-----------|------------|----------|--------|--------|----------|
+| ----------- | ------------ | ---------- | -------- | -------- | ---------- |
 | Authentication (US-001) | 4 | 4 | 4 | 0 | 100% ✅ |
 | Task Management (US-002) | 4 | 4 | 4 | 0 | 100% ✅ |
 | Search & Filter (US-003) | 4 | 4 | 4 | 0 | 100% ✅ |
@@ -31,7 +31,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-001: User Registration & Authentication
 
 | Test ID | Acceptance Criterion | Test Type | Test Case | Verification | Status |
-|---------|-------------------|-----------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | ----------- | -------------- | -------- |
 | T-US001-001 | AC-001 | Unit/Integration | Valid registration with email & 8+ char password | System accepts registration; user record created | Planned |
 | T-US001-002 | AC-002 | E2E/UI | Valid login redirects to Dashboard | User authenticated; JWT token issued | Planned |
 | T-US001-003 | AC-003 | E2E/UI | Invalid credentials show error, no access granted | Clear error message displayed; no redirect | Planned |
@@ -45,7 +45,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-002: Task Creation & Editing
 
 | Test ID | Acceptance Criterion | Test Case | Verification | Status |
-|---------|-------------------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | -------------- | -------- |
 | T-US002-001 | AC-005 | Create task with title, description, status, priority, due date | Task appears in task list and task details | Planned |
 | T-US002-002 | AC-006 | Edit owned/assigned task; updated values reflect in UI | Changes persist; UI updates immediately | Planned |
 | T-US002-003 | AC-007 | Completed task cannot be edited by standard user; admin can override | Permission error shown; admin bypass works | Planned |
@@ -59,7 +59,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-003: Search & Filter
 
 | Test ID | Acceptance Criterion | Test Case | Verification | Status |
-|---------|-------------------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | -------------- | -------- |
 | T-US003-001 | AC-009 | Search by title, description, labels | Only matching tasks shown | Planned |
 | T-US003-002 | AC-010 | Filter by status, priority, assignee, due date, team | Task list updates with applied filters | Planned |
 | T-US003-003 | AC-011 | Sort by due date, priority, status, updated date | List order changes accordingly | Planned |
@@ -73,7 +73,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-004: Collaboration (Comments, Attachments, Notifications)
 
 | Test ID | Acceptance Criterion | Test Case | Verification | Status |
-|---------|-------------------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | -------------- | -------- |
 | T-US004-001 | AC-013 | Add comment/attachment to task | Item appears in activity history | Planned |
 | T-US004-002 | AC-014 | Configure notification preferences | System respects preferences for future events | Planned |
 | T-US004-003 | AC-015 | Non-authorized user cannot add collaboration | Permission message shown | Planned |
@@ -87,7 +87,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-005: Reporting & Dashboard
 
 | Test ID | Acceptance Criterion | Test Case | Verification | Status |
-|---------|-------------------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | -------------- | -------- |
 | T-US005-001 | AC-017 | Dashboard shows task counts (total, completed, pending, overdue, due-today) | Metrics accurate and current | Planned |
 | T-US005-002 | AC-018 | Team lead views workload/productivity for teams | Displayed values match visible task data | Planned |
 | T-US005-003 | AC-019 | Non-authorized user cannot view restricted reports | Permission message shown | Planned |
@@ -101,7 +101,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-006: User & Team Management
 
 | Test ID | Acceptance Criterion | Test Case | Verification | Status |
-|---------|-------------------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | -------------- | -------- |
 | T-US006-001 | AC-021 | Admin invites, disables, enables, deletes users | Account state changes reflected | Planned |
 | T-US006-002 | AC-022 | Admin assigns roles and team membership | New access level effective in subsequent actions | Planned |
 | T-US006-003 | AC-023 | Non-admin cannot perform privileged actions | Permission message shown | Planned |
@@ -115,7 +115,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 ### US-007: Profile & Settings
 
 | Test ID | Acceptance Criterion | Test Case | Verification | Status |
-|---------|-------------------|-----------|--------------|--------|
+| --------- | ------------------- | ----------- | -------------- | -------- |
 | T-US007-001 | AC-025 | View/edit profile, upload avatar, change password | Changes persist and reflect in next session | Planned |
 | T-US007-002 | AC-026 | Update notification, language, theme, timezone, email, privacy settings | Settings persist across sessions | Planned |
 | T-US007-003 | AC-027 | User can only update own profile unless admin | Permission enforced | Planned |
@@ -137,7 +137,7 @@ Map test execution results to user stories and acceptance criteria to quantify c
 - **AC-021 to AC-024** (Admin): 4/4 tests planned
 - **AC-025 to AC-028** (Profile): 4/4 tests planned
 
-**Total: 28/28 acceptance criteria covered**
+### Total: 28/28 acceptance criteria covered
 
 ### Test Type Distribution
 - **E2E/UI Tests:** 14 (browser-based user workflows)

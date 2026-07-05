@@ -155,23 +155,23 @@ export default function DashboardPage() {
                 {metrics.upcomingDeadlines.length} tasks
               </span>
             </div>
-            <div className="mt-6 space-y-4">
-              {metrics.upcomingDeadlines.length === 0 ? (
-                <p className="text-sm text-slate-600">No upcoming deadlines this week.</p>
-              ) : (
-                metrics.upcomingDeadlines.map((item) => (
-                  <div key={item.taskId} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <p className="font-semibold text-slate-900">{item.title}</p>
-                        <p className="text-xs uppercase tracking-[0.18em] text-slate-500 mt-1">{item.status.replace('_', ' ')}</p>
+            <div className="mt-6 max-h-[calc(2*5.5rem)] overflow-y-auto space-y-4 pr-2">
+                {metrics.upcomingDeadlines.length === 0 ? (
+                  <p className="text-sm text-slate-600">No upcoming deadlines this week.</p>
+                ) : (
+                  metrics.upcomingDeadlines.map((item) => (
+                    <div key={item.taskId} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="font-semibold text-slate-900">{item.title}</p>
+                          <p className="text-xs uppercase tracking-[0.18em] text-slate-500 mt-1">{item.status.replace('_', ' ')}</p>
+                        </div>
+                        <span className="text-sm font-semibold text-slate-700">{new Date(item.dueDate).toLocaleDateString()}</span>
                       </div>
-                      <span className="text-sm font-semibold text-slate-700">{new Date(item.dueDate).toLocaleDateString()}</span>
                     </div>
-                  </div>
-                ))
-              )}
-            </div>
+                  ))
+                )}
+              </div>
           </div>
 
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-card">
@@ -184,7 +184,7 @@ export default function DashboardPage() {
                 {metrics.recentActivity.length}
               </span>
             </div>
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 max-h-[calc(2*5.5rem)] overflow-y-auto space-y-4 pr-2">
               {metrics.recentActivity.length === 0 ? (
                 <p className="text-sm text-slate-600">No recent activity available yet.</p>
               ) : (

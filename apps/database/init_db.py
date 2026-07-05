@@ -36,7 +36,12 @@ def validate_schema() -> None:
 def initialize_database(seed: bool = False) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     if DB_FILE.exists():
-        DB_FILE.unlink()
+        try:
+            DB_FILE.unlink()
+        except PermissionError:
+            print(
+                f"Warning: Could not delete existing database file. Will overwrite schema."
+            )
     engine = get_engine(DB_URL)
     try:
         Base.metadata.create_all(engine)

@@ -9,7 +9,7 @@
 ### Hook Definition & Strategy
 
 | File | Purpose | Size | Status |
-|------|---------|------|--------|
+| --- | --- | --- | --- |
 | `ai/hooks/hook-implementation-strategy.md` | Hook architecture & design | 300+ lines | ✅ |
 | `ai/hooks/HOOK-INTEGRATION-GUIDE.md` | Complete integration guide | 400+ lines | ✅ |
 | `ai/hooks/QUICK-REFERENCE.md` | Quick reference for daily use | 300+ lines | ✅ |
@@ -18,7 +18,7 @@
 ### Hook Implementation Scripts
 
 | File | Purpose | Type | Status |
-|------|---------|------|--------|
+| --- | --- | --- | --- |
 | `scripts/hooks/__init__.py` | Hook utilities & helpers | Python module | ✅ |
 | `scripts/hooks/setup_hooks.py` | Git hook installer | Python script | ✅ |
 | `scripts/hooks/pre_commit.py` | Pre-commit validation | Python script | ✅ |
@@ -28,7 +28,7 @@
 ### GitHub Actions Workflows
 
 | File | Trigger | Purpose | Status |
-|------|---------|---------|--------|
+| --- | --- | --- | --- |
 | `.github/workflows/on-pull-request.yml` | PR created/updated | Quality & test checks | ✅ |
 | `.github/workflows/on-push-main.yml` | Push to main | Full validation & build | ✅ |
 | `.github/workflows/on-release.yml` | Release created | Version & artifact validation | ✅ |
@@ -37,7 +37,7 @@
 
 ## Directory Structure
 
-```
+```text
 Agentic_SDLC_Platform/
 ├── ai/hooks/
 │   ├── hooks.md                              (existing abstract definitions)
@@ -163,7 +163,7 @@ python scripts/hooks/setup_hooks.py
 ```
 
 **Output:**
-```
+```text
 ✓ Installed pre-commit
 ✓ Installed pre-push
 ✓ Installed commit-msg
@@ -214,7 +214,7 @@ python scripts/hooks/setup_hooks.py
 **Purpose:** Validate commit message format
 
 **Format Required:**
-```
+```text
 [TYPE] Brief description
 ```
 
@@ -241,7 +241,7 @@ python scripts/hooks/setup_hooks.py
 
 ---
 
-### GitHub Actions Workflows
+### Workflow Files
 
 #### `.github/workflows/on-pull-request.yml`
 **Trigger:** PR created or updated
@@ -298,7 +298,7 @@ python scripts/hooks/setup_hooks.py
 5. **publish-release** - Update GitHub release
 
 **Validates:**
-- Version consistency (pyproject.toml, __init__.py)
+- Version consistency (pyproject.toml, `__init__.py`)
 - CHANGELOG.md updated
 - README.md present
 - All tests pass
@@ -318,7 +318,7 @@ python scripts/hooks/setup_hooks.py
 ✅ No duplicate logic - all hooks reuse existing scripts:
 
 | Hook | Reuses | File |
-|------|--------|------|
+| --- | --- | --- |
 | pre-commit | Format check | `scripts/format.py` |
 | pre-commit | Linting | `scripts/lint.py` |
 | pre-commit | Testing | `scripts/test.py` |

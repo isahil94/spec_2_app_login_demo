@@ -20,3 +20,4 @@
 ## Notes
 - The current automated suite provides strong regression and workflow coverage for the implemented task-management scenarios.
 - No failing tests were observed in the latest run.
+- A browser-friendly HTML summary is also generated at `artifacts/tests/qa-report.html` after each QA run.

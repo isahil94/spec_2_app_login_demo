@@ -119,7 +119,8 @@ Create tests that verify multiple components work together correctly, validating
 7. Test database persistence and interactions
 8. Validate data flow across backend, frontend, and database layers
 9. Run persistence E2E tests: `python artifacts/tests/test_scripts/run-all-tests.py --persistence`
-10. Report integration test results with database verification
+10. Generate a full HTML QA summary at `artifacts/tests/qa-report.html` covering suite status, commands, exit codes, and detailed test-case results
+11. Report integration test results with database verification
 
 ### Integration Test Validation
 - [ ] All key workflows tested
@@ -148,7 +149,9 @@ Create tests that verify multiple components work together correctly, validating
 ## Skill: Validate Authentication and Page Workflows
 
 ### Auth Workflow Validation Purpose
-Validate critical user journeys across backend, frontend, and database layers, ensuring authentication, input constraints, and page-level behavior meet the documented requirements.
+Validate critical user journeys across backend, frontend, and database layers,
+ensuring authentication, input constraints, and page-level behavior meet the
+documented requirements.
 
 ### When to Use Auth Validation
 - Verifying signup and login flows
@@ -178,7 +181,8 @@ Validate critical user journeys across backend, frontend, and database layers, e
 1. Run static analysis (mypy, eslint, flake8) for backend, frontend, and database code and capture results.
 2. Generate Playwright E2E tests for acceptance criteria where appropriate; keep one spec file per feature and place in `artifacts/tests/test_scripts/tests/`.
 3. Run generated Playwright tests automatically; capture and save failure screenshots to `artifacts/tests/e2e/screenshots`.
-   - When a frontend or backend instance is already running, do not stop or restart the application. Use the local Playwright runner against the existing running services.
+   - When a frontend or backend instance is already running, do not stop or restart the application.
+     Use the local Playwright runner against the existing running services.
 4. Review authentication requirements for signup and login workflows.
 5. If the required workflow or validation test is missing, generate a new Playwright test case and publish it in `artifacts/tests/test_scripts/tests/`.
 6. Exercise signup scenarios with missing email, invalid email, weak password, duplicate user, and valid data via Playwright.
@@ -214,38 +218,43 @@ Validate critical user journeys across backend, frontend, and database layers, e
 
 ## Skill: Generate Playwright E2E Tests
 
-### Purpose
-Generate maintainable Playwright end-to-end tests from user stories and acceptance criteria, run tests, and capture failure artifacts.
+### Playwright Purpose
+Generate maintainable Playwright end-to-end tests from user stories and acceptance criteria,
+run tests, and capture failure artifacts.
 
-### When to Use
+### Playwright When to Use
 - When an explicit user story or acceptance criterion requires an end-to-end verification
 - For critical workflows (authentication, navigation, data persistence)
 
-### Inputs
+### Playwright Inputs
 - `user_story` (object): User story with acceptance criteria and scenarios
-- `local_url` (string): Local URL where the feature is deployed (e.g., http://localhost:5173/feature)
+- `local_url` (string): Local URL where the feature is deployed (for example,
+  <http://localhost:5173/feature>)
 - `selectors` (object, optional): DOM selectors or page object hints
 
-### Outputs
+### Playwright Outputs
 - Playwright spec file saved under `tests/e2e/<feature-name>.spec.ts` or `.js`
 - Failure screenshots saved under `artifacts/tests/e2e/screenshots`\
 - `ui-live-test-report.md` summarizing execution results and links to screenshots
 
-### Execution Steps
+### Playwright Execution Steps
 1. Parse the `user_story` and extract Gherkin-style scenarios.
-2. Generate a Playwright spec file (one per feature) in `artifacts/tests/test_scripts/tests/<feature-name>.spec.ts` that implements the scenarios using Playwright test API and page objects where helpful.
+2. Generate a Playwright spec file (one per feature) in
+   `artifacts/tests/test_scripts/tests/<feature-name>.spec.ts` that implements the scenarios
+   using Playwright test API and page objects where helpful.
 3. Run Playwright tests automatically using the project's Playwright setup from `apps/frontend` directory.
 4. On test failures, save screenshots and the test trace to `artifacts/tests/e2e/screenshots`.
 5. Use master test runner: `python artifacts/tests/test_scripts/run-all-tests.py --frontend` to execute all frontend E2E tests.
 6. Produce `ui-live-test-report.md` with pass/fail, failure screenshots, and rerun commands.
+7. Generate a full HTML QA report at `artifacts/tests/qa-report.html` after the run so the overall results are available in a shareable format.
 
-### Validation Checklist
+### Playwright Validation Checklist
 - [ ] One spec file per feature is created
 - [ ] Tests implement acceptance criteria exactly (no invented flows)
 - [ ] Failure screenshots captured for each failed test
 - [ ] Report includes target user story and local URL
 
-### Success Criteria
+### Playwright Success Criteria
 - Playwright tests run and report results automatically
 - Failure artifacts are stored and linked from reports
 - Tests are maintainable and aligned with feature names
@@ -254,35 +263,35 @@ Generate maintainable Playwright end-to-end tests from user stories and acceptan
 
 ## Skill: Generate Test Data
 
-### Purpose
+### Test Data Purpose
 Create realistic test data that exercises the system under realistic conditions and edge cases.
 
-### When to Use
+### Test Data When to Use
 - Populating test databases
 - Creating realistic user scenarios
 - Testing with large datasets
 - Testing error conditions
 
-### Inputs
+### Test Data Inputs
 - `data_model` (object): System data model
 - `test_scenarios` (array): Test scenarios requiring data
 - `scale_expectations` (object, optional): How much data to generate
 - `data_constraints` (array, optional): Business rules for data
 - `edge_cases` (array, optional): Edge cases to cover
 
-### Outputs
+### Test Data Outputs
 - `test_datasets` (array): Generated test data
 - `data_generation_scripts` (array): Scripts to generate data
 - `data_documentation` (object): Documentation of test data
 - `seed_data` (object): Initial seed data for tests
 - `edge_case_data` (array): Data for edge case testing
 
-### Dependencies
+### Test Data Dependencies
 - Data model defined
 - Test scenarios documented
 - Database schema available
 
-### Execution Steps
+### Test Data Execution Steps
 1. Understand test data needs for each scenario
 2. Create realistic sample data in `artifacts/tests/test_scripts/seed_data.py`
 3. Generate edge case data (e.g., multiple users, complex task workflows, comment threads)
@@ -294,7 +303,7 @@ Create realistic test data that exercises the system under realistic conditions 
 9. Store database at `apps/data/task_management.db`
 10. Plan data cleanup or database reset procedures
 
-### Validation Checklist
+### Test Data Validation Checklist
 - [ ] Data matches business rules
 - [ ] Edge cases covered
 - [ ] Large datasets generated efficiently
@@ -302,14 +311,14 @@ Create realistic test data that exercises the system under realistic conditions 
 - [ ] Data can be regenerated consistently
 - [ ] Data can be cleaned up after tests
 
-### Success Criteria
+### Test Data Success Criteria
 - Tests have realistic data to work with
 - Edge cases have corresponding data
 - Performance tests have adequate volume
 - Data generation is reproducible
 - Data cleanup is automated
 
-### Failure Conditions
+### Test Data Failure Conditions
 - Data violates business rules
 - Edge cases not covered
 - Data generation is slow
@@ -320,34 +329,34 @@ Create realistic test data that exercises the system under realistic conditions 
 
 ## Skill: Validate Test Coverage
 
-### Purpose
+### Coverage Purpose
 Measure and analyze test coverage to ensure adequate testing and identify untested code paths.
 
-### When to Use
+### Coverage When to Use
 - Reviewing test completeness
 - Identifying gaps in testing
 - Meeting coverage requirements
 - Improving test quality
 
-### Inputs
+### Coverage Inputs
 - `implementation` (object): Code to analyze
 - `tests` (array): Test suite
 - `coverage_targets` (object): Coverage goals by metric
 - `critical_paths` (array, optional): Paths that must be tested
 
-### Outputs
+### Coverage Outputs
 - `coverage_metrics` (object): Line, branch, path coverage
 - `coverage_gaps` (array): Untested code paths
 - `coverage_report` (object): Detailed coverage analysis
 - `recommendations` (array): What to test next
 - `coverage_visualization` (string): Coverage report format
 
-### Dependencies
+### Coverage Dependencies
 - Code and tests available
 - Coverage tool configured
 - Coverage targets defined
 
-### Execution Steps
+### Coverage Execution Steps
 1. Run full test suite using master runner: `python artifacts/tests/test_scripts/run-all-tests.py --all`
 2. Collect coverage metrics from backend unit tests using: `python -m pytest artifacts/tests/test_scripts/backend_tests/unit --cov=apps.backend.src --cov-report=html`
 3. Analyze line coverage results
@@ -358,7 +367,7 @@ Measure and analyze test coverage to ensure adequate testing and identify untest
 8. Generate HTML coverage report in `htmlcov/index.html`
 9. Track coverage over time and require coverage for new code
 
-### Validation Checklist
+### Coverage Validation Checklist
 - [ ] Coverage tool properly configured
 - [ ] All test runs captured
 - [ ] Coverage meets targets
@@ -366,14 +375,14 @@ Measure and analyze test coverage to ensure adequate testing and identify untest
 - [ ] Coverage report is accurate
 - [ ] Trends tracked over time
 
-### Success Criteria
+### Coverage Success Criteria
 - Coverage meets or exceeds targets
 - Critical code paths tested
 - Coverage trends improve
 - New code has test coverage
 - Defects caught by tests
 
-### Failure Conditions
+### Coverage Failure Conditions
 - Coverage below targets
 - Critical paths untested
 - Coverage gaps growing
@@ -384,36 +393,37 @@ Measure and analyze test coverage to ensure adequate testing and identify untest
 
 ## Skill: Run Comprehensive Test Suite (Master Test Runner)
 
-### Purpose
-Execute all test types (backend unit, persistence E2E, frontend E2E) in a coordinated, automated manner with centralized reporting and health checks.
+### Master Runner Purpose
+Execute all test types (backend unit, persistence E2E, frontend E2E) in a coordinated,
+automated manner with centralized reporting and health checks.
 
-### When to Use
+### Master Runner When to Use
 - Full QA validation across all layers (backend, frontend, database)
 - Pre-deployment verification
 - Regression testing after changes
 - Continuous integration and continuous deployment (CI/CD)
 - Validating complete system functionality
 
-### Inputs
+### Master Runner Inputs
 - `test_type` (string, optional): Specific test type to run ("unit", "persistence", "frontend", "all")
 - `environment_config` (object, optional): Backend URL, database path, frontend port
 - `include_coverage` (boolean, optional): Generate code coverage reports
 
-### Outputs
+### Master Runner Outputs
 - `test_execution_summary` (object): Pass/fail counts by test type
 - `test_results_detailed` (array): Individual test results
 - `failure_artifacts` (array): Screenshots and logs for failures
 - `coverage_report` (object, optional): Code coverage metrics if requested
 - `test_report.md` (file): Markdown summary of execution
 
-### Dependencies
+### Master Runner Dependencies
 - Backend running on `http://localhost:8001`
 - Database at `apps/data/task_management.db`
 - Frontend test suite available at `apps/frontend/`
 - Backend test suite available at `artifacts/tests/test_scripts/backend_tests/unit/`
 - Master test runner available at `artifacts/tests/test_scripts/run-all-tests.py`
 
-### Execution Steps
+### Master Runner Execution Steps
 1. Execute master test runner with requested scope:
    - **All tests (default):** `python artifacts/tests/test_scripts/run-all-tests.py --all`
    - **Backend unit tests only:** `python artifacts/tests/test_scripts/run-all-tests.py --unit`
@@ -429,7 +439,7 @@ Execute all test types (backend unit, persistence E2E, frontend E2E) in a coordi
 9. Generate optional code coverage report if `--coverage` flag used
 10. Publish final test report with links to artifacts
 
-### Validation Checklist
+### Master Runner Validation Checklist
 - [ ] Backend server is running and responsive
 - [ ] Database file exists and is accessible
 - [ ] All test dependencies installed (pytest, Playwright, npm packages)
@@ -439,7 +449,7 @@ Execute all test types (backend unit, persistence E2E, frontend E2E) in a coordi
 - [ ] Summary report accessible and human-readable
 - [ ] Exit codes properly indicate success/failure
 
-### Success Criteria
+### Master Runner Success Criteria
 - All requested tests execute without errors
 - Pass/fail status accurately reflects test results
 - Any failures include diagnostic artifacts (screenshots, error logs)
@@ -447,7 +457,7 @@ Execute all test types (backend unit, persistence E2E, frontend E2E) in a coordi
 - Reports are clear and actionable
 - Exit code 0 when all tests pass, 1 when failures exist
 
-### Failure Conditions
+### Master Runner Failure Conditions
 - Backend service unavailable
 - Database cannot be accessed or is corrupted
 - Test timeout without completion
@@ -458,7 +468,7 @@ Execute all test types (backend unit, persistence E2E, frontend E2E) in a coordi
 ### Test Execution Matrix
 
 | Command | Backend Unit | Persistence E2E | Frontend E2E | Estimated Time |
-|---------|--------------|-----------------|--------------|----------------|
+| --- | --- | --- | --- | --- |
 | `--unit` | ✅ | ❌ | ❌ | ~10s |
 | `--persistence` | ❌ | ✅ | ❌ | ~2-3m |
 | `--frontend` | ❌ | ❌ | ✅ | ~5-10m |

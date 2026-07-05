@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Master test runner for all QA tests (unit, integration, E2E, backend)."""
 
 import subprocess
 import sys
 from enum import Enum
 from pathlib import Path
+
+# Ensure UTF-8 output on Windows
+if sys.platform == "win32":
+    import io
+
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from artifacts.tests.generate_html_report import save_html_report
 
 # Colors
 GREEN = "\033[92m"
@@ -78,10 +88,33 @@ def run_persistence_e2e_tests():
     print_header("Persistence End-to-End Tests (Database Persistence)")
 
     try:
+        # Check backend health first
+        import requests
+
+        try:
+            response = requests.get("http://localhost:8001/health", timeout=5)
+            if response.status_code != 200:
+                print_status("Backend is not healthy", "error")
+                return False
+            print_status("Backend is healthy", "success")
+        except:
+            print_status("Backend is not responding", "error")
+            return False
+
+        # Run persistence integration tests from test_scripts directory
         result = subprocess.run(
-            [sys.executable, "artifacts/tests/test_scripts/run-integration-tests.py"],
+            "npm test -- persistence-integration.spec.ts",
+            cwd="artifacts/tests/test_scripts",
+            shell=True,
             timeout=600,
         )
+
+        # Print report location
+        print_status(
+            "HTML Chromium report saved to: artifacts/tests/test_scripts/test-results/html-report/index.html",
+            "success",
+        )
+
         if result.returncode == 0:
             print_status("Persistence E2E tests PASSED", "success")
             return True
@@ -101,28 +134,21 @@ def run_frontend_e2e_tests():
     print_header("Frontend End-to-End Tests")
 
     try:
-        # Run all E2E tests except persistence-integration.spec.ts (handled by --persistence)
-        # List test files explicitly to avoid duplicate runs
+        # Run all E2E tests - report is auto-saved with open: 'never' in config
         result = subprocess.run(
-            [
-                "npm",
-                "test",
-                "--",
-                "auth.spec.ts",
-                "tasks.spec.ts",
-                "comments.spec.ts",
-                "comments-history.spec.ts",
-                "profile-settings.spec.ts",
-                "dashboard.spec.ts",
-                "team-and-history.spec.ts",
-                "admin-management.spec.ts",
-                "session-landing.spec.ts",
-                "dependency-unavailable.spec.ts",
-                "integration.spec.ts",
-            ],
-            cwd="apps/frontend",
+            "npm test",
+            cwd="artifacts/tests/test_scripts",
+            shell=True,
             timeout=600,
+            capture_output=False,  # Show output but don't block on interactive server
         )
+
+        # Print report location
+        print_status(
+            "HTML Chromium report saved to: artifacts/tests/test_scripts/test-results/html-report/index.html",
+            "success",
+        )
+
         if result.returncode == 0:
             print_status("Frontend E2E tests PASSED", "success")
             return True
@@ -154,6 +180,22 @@ def run_all_tests():
     # Frontend E2E tests
     print_status("Starting frontend E2E tests...", "info")
     results["frontend_e2e"] = run_frontend_e2e_tests()
+
+    report_output = Path("artifacts/tests/qa-report.html")
+    save_html_report(
+        {
+            suite_name: {
+                "status": "passed" if result else "failed",
+                "command": suite_name,
+                "exit_code": 0 if result else 1,
+                "duration_sec": None,
+                "test_cases": [],
+            }
+            for suite_name, result in results.items()
+        },
+        report_output,
+    )
+    print_status(f"HTML report written to {report_output}", "success")
 
     return results
 

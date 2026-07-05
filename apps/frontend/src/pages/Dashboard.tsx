@@ -51,9 +51,9 @@ export default function DashboardPage() {
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Dashboard</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Team performance overview</h1>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Dashboard</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-500">
-              Review real task status, upcoming deadlines, and recent activity from the central task database.
+              Team performance overview — review real task status, upcoming deadlines, and recent activity from the central task database.
             </p>
           </div>
           <div className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppSelector } from '../state/hooks';
 import Button from '../components/Button';
 import { getSettings, updateSettings } from '../services/api/user';
+import { isDependencyUnavailable } from '../services/api/client';
 import type { SettingsData } from '../types';
 
 const themeOptions = [
@@ -24,7 +25,13 @@ export default function SettingsPage() {
         setSettings(s);
         setDependencyError(null);
       })
-      .catch(() => setDependencyError('Unable to load settings at this time.'));
+      .catch((error) => {
+        if (!isDependencyUnavailable(error)) {
+          setDependencyError('Unable to load settings at this time.');
+        } else {
+          setDependencyError(null);
+        }
+      });
   }, [userId]);
 
   const handleSave = async () => {

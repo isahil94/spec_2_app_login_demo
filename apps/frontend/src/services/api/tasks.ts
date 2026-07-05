@@ -18,49 +18,51 @@ export interface TaskListParams {
 }
 
 const normalizeUserSummary = (user: any): UserSummary => ({
-  userId: user?.user_id ?? user?.userId ?? '',
+  userId: user?.user_id ?? user?.userId ?? user?.id ?? '',
   email: user?.email ?? '',
-  fullName: user?.full_name ?? user?.fullName ?? user?.email ?? '',
+  fullName:
+    user?.full_name ?? user?.fullName ?? user?.name ?? user?.email ?? '',
 });
 
 const normalizeTaskListItem = (task: any): TaskListItem => ({
-  taskId: task.task_id,
-  title: task.title,
-  status: task.status,
-  priority: task.priority,
-  owner: normalizeUserSummary(task.owner),
+  taskId: task.task_id ?? task.taskId ?? task.id ?? '',
+  title: task.title ?? task.name ?? '',
+  status: task.status ?? 'todo',
+  priority: task.priority ?? 'medium',
+  owner: normalizeUserSummary(task.owner ?? {}),
   assignee: task.assignee ? normalizeUserSummary(task.assignee) : null,
-  dueDate: task.due_date ?? null,
-  updatedAt: task.updated_at,
+  dueDate: task.due_date ?? task.dueDate ?? null,
+  updatedAt: task.updated_at ?? task.updatedAt ?? '',
 });
 
 const normalizeCommentItem = (comment: any): CommentItem => ({
-  commentId: comment.comment_id,
-  author: normalizeUserSummary(comment.author),
-  content: comment.content,
-  createdAt: comment.created_at,
-  updatedAt: comment.updated_at ?? null,
+  commentId: comment.comment_id ?? comment.commentId ?? comment.id ?? '',
+  author: normalizeUserSummary(comment.author ?? {}),
+  content: comment.content ?? comment.body ?? '',
+  createdAt: comment.created_at ?? comment.createdAt ?? '',
+  updatedAt: comment.updated_at ?? comment.updatedAt ?? null,
 });
 
 const normalizeHistoryItem = (entry: any): TaskHistoryItem => ({
-  action: entry.action,
+  action: entry.action ?? entry.type ?? '',
   actor: normalizeUserSummary(entry.author ?? entry.user ?? {}),
-  timestamp: entry.created_at ?? entry.timestamp,
-  details: entry.details ?? null,
+  timestamp:
+    entry.created_at ?? entry.timestamp ?? entry.createdAt ?? entry.time ?? '',
+  details: entry.details ?? entry.detail ?? null,
 });
 
 const normalizeTaskDetail = (task: any): TaskDetail => ({
-  taskId: task.task_id,
-  title: task.title,
-  description: task.description,
-  status: task.status,
-  priority: task.priority,
+  taskId: task.task_id ?? task.taskId ?? task.id ?? '',
+  title: task.title ?? task.name ?? '',
+  description: task.description ?? task.details ?? '',
+  status: task.status ?? 'todo',
+  priority: task.priority ?? 'medium',
   owner: normalizeUserSummary(task.owner ?? {}),
   assignee: task.assignee ? normalizeUserSummary(task.assignee) : null,
-  dueDate: task.due_date ?? null,
-  labels: task.labels ?? [],
-  createdAt: task.created_at,
-  updatedAt: task.updated_at,
+  dueDate: task.due_date ?? task.dueDate ?? null,
+  labels: task.labels ?? task.tags ?? [],
+  createdAt: task.created_at ?? task.createdAt ?? '',
+  updatedAt: task.updated_at ?? task.updatedAt ?? '',
   history: Array.isArray(task.history) ? task.history.map(normalizeHistoryItem) : [],
   comments: Array.isArray(task.comments) ? task.comments.map(normalizeCommentItem) : [],
 });

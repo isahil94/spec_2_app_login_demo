@@ -22,6 +22,7 @@ from src.schemas.schemas import (
     CommentCreate,
     LoginRequest,
     PasswordChangeRequest,
+    ProfileUpdateRequest,
     RegisterRequest,
     SettingsUpdateRequest,
     TaskCreate,
@@ -243,6 +244,42 @@ async def get_user_settings(
                         else True
                     ),
                 },
+            }
+        }
+    except ApplicationError as e:
+        raise e
+
+
+@app.patch("/api/v1/users/{user_id}/profile")
+async def update_user_profile(
+    user_id: str,
+    profile_data: ProfileUpdateRequest,
+    current_user: str = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Update the signed-in user's profile data."""
+    try:
+        user_repo = UserRepository(db)
+        profile_user = user_repo.get_by_id(user_id)
+        if not profile_user:
+            raise NotFoundError("User not found")
+        if current_user != profile_user.id:
+            raise ForbiddenError("You do not have access to this profile")
+
+        if profile_data.full_name is not None:
+            profile_user.full_name = profile_data.full_name
+        if profile_data.contact_information is not None:
+            profile_user.contact_information = profile_data.contact_information
+
+        db.commit()
+        db.refresh(profile_user)
+
+        return {
+            "data": {
+                "userId": profile_user.id,
+                "fullName": profile_user.full_name,
+                "email": profile_user.email,
+                "contactInformation": profile_user.contact_information,
             }
         }
     except ApplicationError as e:
@@ -577,26 +614,34 @@ async def create_task(
         task = task_service.create_task(current_user, task_data)
         return {
             "data": {
+                "taskId": task.task_id,
                 "task_id": task.task_id,
+                "id": task.task_id,
+                "ownerId": task.owner.user_id,
                 "title": task.title,
+                "description": task.description,
                 "status": task.status,
                 "priority": task.priority,
                 "owner": {
+                    "userId": task.owner.user_id,
                     "user_id": task.owner.user_id,
+                    "id": task.owner.user_id,
                     "email": task.owner.email,
-                    "full_name": task.owner.full_name,
+                    "fullName": task.owner.full_name,
                 },
                 "assignee": (
                     {
+                        "userId": task.assignee.user_id,
                         "user_id": task.assignee.user_id,
+                        "id": task.assignee.user_id,
                         "email": task.assignee.email,
-                        "full_name": task.assignee.full_name,
+                        "fullName": task.assignee.full_name,
                     }
                     if task.assignee
                     else None
                 ),
-                "due_date": task.due_date,
-                "created_at": task.created_at,
+                "dueDate": task.due_date,
+                "createdAt": task.created_at,
             }
         }
     except ApplicationError as e:
@@ -640,25 +685,35 @@ async def list_tasks(
             "data": {
                 "tasks": [
                     {
+                        "taskId": t.task_id,
                         "task_id": t.task_id,
+                        "id": t.task_id,
                         "title": t.title,
                         "description": t.description,
                         "status": t.status,
                         "priority": t.priority,
+                        "ownerId": t.owner.user_id,
                         "owner": {
+                            "userId": t.owner.user_id,
                             "user_id": t.owner.user_id,
+                            "id": t.owner.user_id,
                             "email": t.owner.email,
-                            "full_name": t.owner.full_name,
+                            "fullName": t.owner.full_name,
                         },
                         "assignee": (
-                            {"user_id": t.assignee.user_id, "email": t.assignee.email}
+                            {
+                                "userId": t.assignee.user_id,
+                                "user_id": t.assignee.user_id,
+                                "id": t.assignee.user_id,
+                                "email": t.assignee.email,
+                            }
                             if t.assignee
                             else None
                         ),
-                        "due_date": t.due_date,
-                        "created_at": t.created_at,
-                        "updated_at": t.updated_at,
-                        "archived_at": t.archived_at,
+                        "dueDate": t.due_date,
+                        "createdAt": t.created_at,
+                        "updatedAt": t.updated_at,
+                        "archivedAt": t.archived_at,
                     }
                     for t in tasks
                 ]
@@ -667,7 +722,7 @@ async def list_tasks(
                 "page": page,
                 "limit": limit,
                 "total": total,
-                "total_pages": (total + limit - 1) // limit,
+                "totalPages": (total + limit - 1) // limit,
             },
         }
     except ApplicationError as e:
@@ -695,38 +750,60 @@ async def get_task(
 
         return {
             "data": {
+                "taskId": task.task_id,
                 "task_id": task.task_id,
+                "id": task.task_id,
+                "ownerId": task.owner.user_id,
                 "title": task.title,
                 "description": task.description,
                 "status": task.status,
                 "priority": task.priority,
                 "owner": {
+                    "userId": task.owner.user_id,
                     "user_id": task.owner.user_id,
+                    "id": task.owner.user_id,
                     "email": task.owner.email,
-                    "full_name": task.owner.full_name,
+                    "fullName": task.owner.full_name,
                 },
                 "assignee": (
-                    {"user_id": task.assignee.user_id, "email": task.assignee.email}
+                    {
+                        "userId": task.assignee.user_id,
+                        "user_id": task.assignee.user_id,
+                        "id": task.assignee.user_id,
+                        "email": task.assignee.email,
+                        "fullName": task.assignee.full_name,
+                    }
                     if task.assignee
                     else None
                 ),
-                "due_date": task.due_date,
-                "created_at": task.created_at,
-                "updated_at": task.updated_at,
-                "archived_at": task.archived_at,
+                "dueDate": task.due_date,
+                "createdAt": task.created_at,
+                "updatedAt": task.updated_at,
+                "archivedAt": task.archived_at,
                 "comments": [
                     {
+                        "commentId": c.comment_id,
                         "comment_id": c.comment_id,
+                        "id": c.comment_id,
                         "author": {
+                            "userId": c.author.user_id,
                             "user_id": c.author.user_id,
+                            "id": c.author.user_id,
                             "email": c.author.email,
-                            "full_name": c.author.full_name,
+                            "fullName": c.author.full_name,
                         },
                         "content": c.content,
-                        "created_at": c.created_at,
-                        "updated_at": c.updated_at,
+                        "createdAt": c.created_at,
+                        "updatedAt": c.updated_at,
                     }
                     for c in comments
+                ],
+                "history": [
+                    {
+                        "action": "created",
+                        "timestamp": task.created_at,
+                        "details": "Task created",
+                    }
                 ],
             }
         }
@@ -747,29 +824,36 @@ async def update_task(
         task = task_service.update_task(task_id, current_user, task_data)
         return {
             "data": {
+                "taskId": task.task_id,
                 "task_id": task.task_id,
+                "id": task.task_id,
+                "ownerId": task.owner.user_id,
                 "title": task.title,
                 "description": task.description,
                 "status": task.status,
                 "priority": task.priority,
                 "owner": {
+                    "userId": task.owner.user_id,
                     "user_id": task.owner.user_id,
+                    "id": task.owner.user_id,
                     "email": task.owner.email,
-                    "full_name": task.owner.full_name,
+                    "fullName": task.owner.full_name,
                 },
                 "assignee": (
                     {
+                        "userId": task.assignee.user_id,
                         "user_id": task.assignee.user_id,
+                        "id": task.assignee.user_id,
                         "email": task.assignee.email,
-                        "full_name": task.assignee.full_name,
+                        "fullName": task.assignee.full_name,
                     }
                     if task.assignee
                     else None
                 ),
-                "due_date": task.due_date,
-                "created_at": task.created_at,
-                "updated_at": task.updated_at,
-                "archived_at": task.archived_at,
+                "dueDate": task.due_date,
+                "createdAt": task.created_at,
+                "updatedAt": task.updated_at,
+                "archivedAt": task.archived_at,
             }
         }
     except ApplicationError as e:
@@ -860,13 +944,17 @@ async def add_comment(
         )
         return {
             "data": {
+                "commentId": comment.comment_id,
                 "comment_id": comment.comment_id,
+                "id": comment.comment_id,
                 "author": {
+                    "userId": comment.author.user_id,
                     "user_id": comment.author.user_id,
+                    "id": comment.author.user_id,
                     "email": comment.author.email,
                 },
                 "content": comment.content,
-                "created_at": comment.created_at,
+                "createdAt": comment.created_at,
             }
         }
     except ApplicationError as e:
@@ -892,15 +980,15 @@ async def get_task_comments(
             "data": {
                 "comments": [
                     {
-                        "comment_id": c.comment_id,
+                        "commentId": c.comment_id,
                         "author": {
-                            "user_id": c.author.user_id,
+                            "userId": c.author.user_id,
                             "email": c.author.email,
-                            "full_name": c.author.full_name,
+                            "fullName": c.author.full_name,
                         },
                         "content": c.content,
-                        "created_at": c.created_at,
-                        "updated_at": c.updated_at,
+                        "createdAt": c.created_at,
+                        "updatedAt": c.updated_at,
                     }
                     for c in comments
                 ]
@@ -927,9 +1015,9 @@ async def update_comment(
         )
         return {
             "data": {
-                "comment_id": comment.comment_id,
+                "commentId": comment.comment_id,
                 "content": comment.content,
-                "updated_at": comment.updated_at,
+                "updatedAt": comment.updated_at,
             }
         }
     except ApplicationError as e:

@@ -41,7 +41,7 @@ The hook system consists of **two separate but complementary categories**:
 **Hook Categories:**
 
 | # | Category | Hooks | Purpose | Scope |
-|---|----------|-------|---------|-------|
+| --- | --- | --- | --- | --- |
 | 1 | Workflow | 8 | Workflow lifecycle | Start, complete, fail, cancel, pause, resume |
 | 2 | Agent | 9 | Agent execution | Start, complete, fail, block, retry, skip |
 | 3 | Validation | 4 | Validation results | Before, after, pass, fail |
@@ -52,7 +52,7 @@ The hook system consists of **two separate but complementary categories**:
 | 8 | Error | 6 | Error handling | Execution, validation, runtime, recovery |
 | 9 | Observability | 5 | Monitoring & audit | Logging, metrics, tracing, audit, performance |
 
-**Total: 60+ abstract hook definitions**
+Total: 60+ abstract hook definitions
 
 ### Consistency Check: ✓ PASS
 
@@ -92,7 +92,7 @@ The hook system consists of **two separate but complementary categories**:
 ### Location: `scripts/hooks/` + `.github/workflows/`
 
 **Files Implemented:**
-```
+```text
 scripts/hooks/
 ├── __init__.py                  ✓ Utilities module
 ├── setup_hooks.py               ✓ Git hook installer
@@ -108,7 +108,7 @@ scripts/hooks/
 
 ### Hook Implementations: ✓ PASS
 
-**Pre-Commit Hook (pre_commit.py)**
+#### Pre-Commit Hook (pre_commit.py)
 - [x] Reuses existing scripts (format.py, lint.py, test.py)
 - [x] Clear responsibility (format, import, lint, test)
 - [x] Proper logging (.vscode/hook-logs/pre-commit.log)
@@ -116,7 +116,7 @@ scripts/hooks/
 - [x] No duplicate logic found
 - Size: ~80 lines (appropriately small)
 
-**Pre-Push Hook (pre_push.py)**
+#### Pre-Push Hook (pre_push.py)
 - [x] Reuses existing scripts (pytest)
 - [x] Clear responsibility (status, sync, integration tests)
 - [x] Proper logging (.vscode/hook-logs/pre-push.log)
@@ -124,21 +124,21 @@ scripts/hooks/
 - [x] No duplicate logic found
 - Size: ~120 lines (appropriately small)
 
-**Commit Message Validator (commit_msg_validator.py)**
+#### Commit Message Validator (commit_msg_validator.py)
 - [x] Clear validation rules (format, length, types)
 - [x] Proper logging (.vscode/hook-logs/commit-msg.log)
 - [x] Non-blocking, clear error messages
 - [x] No duplicate logic found
 - Size: ~80 lines (appropriately small)
 
-**Hook Utilities (__init__.py)**
+#### Hook Utilities (`__init__.py`)
 - [x] Centralized command execution wrapper
 - [x] Consistent error handling
 - [x] Reusable for all hooks
 - [x] No duplicate logic with individual hooks
 - Size: ~95 lines (appropriately sized)
 
-**Hook Setup (setup_hooks.py)**
+#### Hook Setup (setup_hooks.py)
 - [x] Creates git hooks in .git/hooks/
 - [x] Makes hooks executable (chmod)
 - [x] Idempotent (safe to run multiple times)
@@ -148,7 +148,7 @@ scripts/hooks/
 
 ### GitHub Actions Workflows: ✓ PASS
 
-**On Pull Request (on-pull-request.yml)**
+#### On Pull Request (on-pull-request.yml)
 - [x] Clear job dependencies
 - [x] Parallel execution where possible (quality-checks, testing, validation all run in parallel)
 - [x] Configurable failure handling (continue-on-error for warnings)
@@ -156,7 +156,7 @@ scripts/hooks/
 - [x] Posts actionable feedback as PR comment
 - Size: ~200 lines (appropriate)
 
-**On Push Main (on-push-main.yml)**
+#### On Push Main (on-push-main.yml)
 - [x] Clear sequencing (quality → testing → build → security → docs)
 - [x] Builds Docker image
 - [x] Includes security scanning
@@ -164,7 +164,7 @@ scripts/hooks/
 - [x] Proper status checking
 - Size: ~220 lines (appropriate)
 
-**On Release (on-release.yml)**
+#### On Release (on-release.yml)
 - [x] Validates version consistency
 - [x] Verifies CHANGELOG updated
 - [x] Builds artifacts
@@ -173,7 +173,7 @@ scripts/hooks/
 - [x] Creates GitHub deployment
 - Size: ~280 lines (appropriate)
 
-### Consistency Check: ✓ PASS
+### Consistency Check Results
 
 - [x] All implementations follow consistent error handling patterns
 - [x] All scripts properly exit with codes (0/1)
@@ -188,7 +188,7 @@ scripts/hooks/
 
 ### Hook Trigger Flow
 
-```
+```text
 ai/hooks/*.md (Configuration)
         ↓
 Define: what, when, expected outcome
@@ -207,7 +207,7 @@ Status reported back to developer
 ### Mapping Table: Abstract → Concrete
 
 | Abstract Hook | Category | Concrete Implementation | Trigger |
-|---------------|----------|-------------------------|---------|
+| --- | --- | --- | --- |
 | Before Agent | Validation | pre-commit.py (before commit) | git commit |
 | After Agent | Validation | GitHub Actions PR workflow | git push → PR |
 | Approval Requested | Gate | PR review status check | GitHub PR |
@@ -271,7 +271,7 @@ Status reported back to developer
 ### Unreferenced Assets
 
 **Checked:**
-- All helper functions in __init__.py are used by at least one script ✓
+- All helper functions in `__init__.py` are used by at least one script ✓
 - All referenced Python scripts exist (format.py, lint.py, test.py) ✓
 - All workflow steps reference valid actions/tools ✓
 
@@ -294,7 +294,7 @@ Status reported back to developer
 **Check:** ✓ PASS
 
 | Layer | Location | Type | Purpose |
-|-------|----------|------|---------|
+| --- | --- | --- | --- |
 | Config | `ai/hooks/hooks.md` | Markdown | Define abstract hooks |
 | Config | `ai/hooks/*.md` (strategy guides) | Markdown | Document implementation |
 | Execution | `scripts/hooks/*.py` | Python | Execute concrete hooks |
@@ -310,7 +310,7 @@ Status reported back to developer
 **Check:** ✓ PASS
 
 | Asset | Status | Reuse |
-|-------|--------|-------|
+| --- | --- | --- |
 | format.py | ✓ Unchanged | Called by pre-commit hook |
 | lint.py | ✓ Unchanged | Called by pre-commit hook |
 | test.py | ✓ Unchanged | Called by pre-commit hook |
@@ -334,7 +334,7 @@ Status reported back to developer
 ### Documentation Files
 
 | File | Purpose | Quality | Status |
-|------|---------|---------|--------|
+| --- | --- | --- | --- |
 | hooks.md | Abstract runtime hook definitions | Complete | ✓ |
 | hook-implementation-strategy.md | Strategy for concrete hooks | Complete | ✓ |
 | HOOK-INTEGRATION-GUIDE.md | Complete integration guide | Complete | ✓ |
@@ -356,7 +356,7 @@ Status reported back to developer
 
 ### Priority 1: Immediate Actions (Required)
 
-**1. Clarify Hook Categories in hooks.md**
+#### 1. Clarify Hook Categories in hooks.md
 
 Add a new section at the beginning of `ai/hooks/hooks.md`:
 
@@ -375,14 +375,14 @@ pre-push, GitHub Actions) see:
 - .github/workflows/
 ```
 
-**Why:** Clarifies that hooks.md is NOT the complete hook system, but only the 
+Why: Clarifies that hooks.md is NOT the complete hook system, but only the
 abstract/runtime portion. Prevents confusion.
 
 **Effort:** 5 minutes (add section)
 
 ---
 
-**2. Create Hook Category Index in ai/hooks/README.md**
+#### 2. Create Hook Category Index in ai/hooks/README.md
 
 Create new file `ai/hooks/README.md`:
 
@@ -424,7 +424,7 @@ See: ai/hooks/hook-implementation-strategy.md (Section: Integration with Existin
 
 ### Priority 2: Enhancements (Recommended)
 
-**3. Create Abstract-to-Concrete Mapping Document**
+#### 1. Create Abstract-to-Concrete Mapping Document
 
 Create new file `ai/hooks/ARCHITECTURE-MAPPING.md`:
 
@@ -467,11 +467,11 @@ Trigger: Git commands, GitHub Actions
 
 ---
 
-**4. Add Hook Lifecycle Diagram**
+#### 2. Add Hook Lifecycle Diagram
 
 Update `ai/hooks/hook-implementation-strategy.md` Section 2 to include:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │  Developer Commits Code                                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -517,7 +517,7 @@ Update `ai/hooks/hook-implementation-strategy.md` Section 2 to include:
 
 ### Priority 3: Future Enhancements (Optional)
 
-**5. Integrate Copilot Chat Mode Invocation (Future)**
+#### 1. Integrate Copilot Chat Mode Invocation (Future)
 
 When Copilot API becomes available, implement:
 - Invoke `@chatmode reviewer` automatically on PR
@@ -528,7 +528,7 @@ When Copilot API becomes available, implement:
 
 ---
 
-**6. Add Slack Notifications (Future)**
+#### 6. Add Slack Notifications (Future)
 
 Extend GitHub Actions workflows to post Slack notifications on:
 - Release publication success/failure
@@ -551,7 +551,7 @@ Extend GitHub Actions workflows to post Slack notifications on:
 - FILES-SUMMARY.md - PASS
 
 ✓ **Implementation Files (scripts/hooks/):**
-- __init__.py (utilities) - PASS
+- `__init__.py` (utilities) - PASS
 - setup_hooks.py (installer) - PASS
 - pre_commit.py - PASS
 - pre_push.py - PASS
@@ -565,7 +565,7 @@ Extend GitHub Actions workflows to post Slack notifications on:
 ### Findings
 
 | Category | Status | Details |
-|----------|--------|---------|
+| --- | --- | --- |
 | **Structure** | ✓ | Clean two-layer separation (abstract + concrete) |
 | **Consistency** | ✓ | All files follow consistent patterns |
 | **Duplication** | ✓ | No duplicate definitions or implementations |
@@ -593,18 +593,18 @@ Extend GitHub Actions workflows to post Slack notifications on:
 
 ### Must Do (Required)
 
-1. **Add clarification to hooks.md** - Add section distinguishing abstract vs concrete hooks
-2. **Create ai/hooks/README.md** - Navigation guide for two-layer system
+1. Add clarification to hooks.md - Add section distinguishing abstract vs concrete hooks
+2. Create ai/hooks/README.md - Navigation guide for two-layer system
 
 ### Should Do (Recommended)
 
-3. **Create ARCHITECTURE-MAPPING.md** - Show abstract-to-concrete mapping
-4. **Add diagrams** - Update existing docs with visual flowcharts
+1. Create ARCHITECTURE-MAPPING.md - Show abstract-to-concrete mapping
+2. Add diagrams - Update existing docs with visual flowcharts
 
 ### Nice To Have (Optional)
 
-5. **Implement Copilot API integration** - Auto-invoke chat modes
-6. **Add Slack notifications** - Alert team on important events
+1. Implement Copilot API integration - Auto-invoke chat modes
+2. Add Slack notifications - Alert team on important events
 
 ---
 

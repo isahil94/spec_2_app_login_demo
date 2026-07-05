@@ -10,6 +10,9 @@ from pathlib import Path
 
 import requests
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from artifacts.tests.generate_html_report import save_html_report
+
 # Colors for output
 GREEN = "\033[92m"
 RED = "\033[91m"
@@ -126,6 +129,24 @@ def run_tests(
             cwd=frontend_dir,
             timeout=300,  # 5 minute timeout
         )
+
+        report_results = {
+            "integration": {
+                "status": "passed" if result.returncode == 0 else "failed",
+                "command": f"npm test -- {test_file}",
+                "exit_code": result.returncode,
+                "duration_sec": None,
+                "test_cases": [
+                    {
+                        "name": test_file,
+                        "status": "passed" if result.returncode == 0 else "failed",
+                        "details": "Playwright integration run completed",
+                    }
+                ],
+            }
+        }
+        save_html_report(report_results, "artifacts/tests/qa-report.html")
+        print_status("HTML report written to artifacts/tests/qa-report.html", "success")
 
         if result.returncode == 0:
             print_status("All tests passed!", "success")

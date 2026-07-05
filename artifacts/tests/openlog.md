@@ -847,3 +847,24 @@ Final recommendation on release readiness based on QA testing results.
 - **Date:** 2026-07-04
 - **Status:** Complete
 - **Next Review:** After Supervisor decision on US-006 & US-007 timeline
+## ENTRY-007: Playwright Runtime Blocker - 2026-07-05
+
+**Category:** Risk / Blocker
+**Priority:** CRITICAL
+**Status:** NEW
+
+**Description:** Full frontend and persistence end-to-end test execution is blocked by a Playwright runtime/harness failure in the frontend workspace. Backend unit tests passed and backend/frontend servers are running, but Playwright cannot load '@playwright/test' successfully.
+
+**Details:**
+- Backend service healthy at http://127.0.0.1:8001
+- Frontend dev server ready at http://localhost:4174
+- Playwright execution error: "Error: Requiring @playwright/test second time"
+- Blocker occurs before any browser tests run
+
+**Impact:**
+- Cannot verify frontend E2E or persistence E2E acceptance criteria
+- QA stage cannot complete successfully until the environment/harness issue is resolved
+
+**Owner Agent:** 06-qa-engineer
+**Target Stage:** QA Execution
+**Related Artifacts:** artifacts/tests/quality-report.md, artifacts/tests/qa-blockers.md, artifacts/tests/handoff-contract.md

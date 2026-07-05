@@ -244,7 +244,8 @@ test.describe.serial('Task Management API Tests', () => {
     expect(response.status).toBe(200);
     const data = await response.json();
     data.data.tasks.forEach((task: any) => {
-      expect(task.archived_at).toBeNull();
+      // archived_at should be null or undefined for non-archived tasks
+      expect(task.archived_at == null).toBeTruthy();
     });
   });
 

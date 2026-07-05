@@ -90,7 +90,11 @@ apiClient.interceptors.response.use(
       errorMessage = error.message;
     }
 
-    return Promise.reject(new Error(errorMessage));
+    if (axios.isAxiosError(error)) {
+      error.message = errorMessage;
+    }
+
+    return Promise.reject(error);
   }
 );
 

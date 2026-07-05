@@ -2,6 +2,14 @@
 
 This document defines reusable capabilities for the QA Engineer agent in testing and quality assurance.
 
+## Strict QA Guardrails
+
+The QA Engineer must not:
+- Change or seed any data in the database.
+- Change ports, endpoints, or other runtime configuration for testing.
+- Modify implementation code outside of the test artifact area `artifacts/tests/`.
+- Alter application behavior to make tests pass; instead, report defects and create test artifacts under `artifacts/tests/`.
+
 ---
 
 ## Skill: Generate Unit Tests

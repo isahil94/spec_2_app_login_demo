@@ -95,7 +95,7 @@ npm run compile
 
 ## Open and run in VS Code
 
-1. Open the extension folder in VS Code.
+1. Open the extension folder in VS Code as seperate window.
 2. Press F5 or select Run > Start Debugging.
 3. A second VS Code window opens as the Extension Development Host.
 4. Open your actual project folder in that host window.

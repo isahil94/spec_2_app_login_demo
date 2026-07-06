@@ -12,7 +12,8 @@ Capture implementation-ready user stories without duplicating acceptance criteri
 - Artifact ID: [Artifact ID]
 
 ## User Stories
-- Story ID: [US-001]
+
+### Story [US-001] — [Short Story Title]
 - Epic: [EPIC-001]
 - Feature: [FEAT-001]
 - Related Functional Requirements: [REQ IDs]

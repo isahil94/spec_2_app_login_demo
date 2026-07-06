@@ -12,7 +12,8 @@ Capture implementation-ready user stories for the Task Management System without
 - Artifact ID: US-001
 
 ## User Stories
-- Story ID: US-001
+
+### Story US-001 — Secure Registration and Sign-In
 - Epic: EPIC-001
 - Feature: FEAT-001
 - Related Functional Requirements: REQ-001
@@ -43,7 +44,7 @@ Capture implementation-ready user stories for the Task Management System without
 - Acceptance Criteria Reference: See acceptance_criteria.md under US-001.
 - Traceability Check: REQ-001, AC-001 to AC-004 present and complete
 
-- Story ID: US-002
+### Story US-002 — Create and Update Tasks
 - Epic: EPIC-002
 - Feature: FEAT-002
 - Related Functional Requirements: REQ-002, REQ-003
@@ -74,7 +75,7 @@ Capture implementation-ready user stories for the Task Management System without
 - Acceptance Criteria Reference: See acceptance_criteria.md under US-002.
 - Traceability Check: REQ-002, REQ-003, AC-005 to AC-008 present and complete
 
-- Story ID: US-003
+### Story US-003 — Search and Filter Tasks
 - Epic: EPIC-003
 - Feature: FEAT-003
 - Related Functional Requirements: REQ-004, REQ-005
@@ -105,7 +106,7 @@ Capture implementation-ready user stories for the Task Management System without
 - Acceptance Criteria Reference: See acceptance_criteria.md under US-003.
 - Traceability Check: REQ-004, REQ-005, AC-009 to AC-012 present and complete
 
-- Story ID: US-004
+### Story US-004 — Collaborate and Receive Notifications
 - Epic: EPIC-003
 - Feature: FEAT-004
 - Related Functional Requirements: REQ-006, REQ-007
@@ -136,7 +137,7 @@ Capture implementation-ready user stories for the Task Management System without
 - Acceptance Criteria Reference: See acceptance_criteria.md under US-004.
 - Traceability Check: REQ-006, REQ-007, AC-013 to AC-016 present and complete
 
-- Story ID: US-005
+### Story US-005 — Review Dashboards and Reports
 - Epic: EPIC-003
 - Feature: FEAT-006
 - Related Functional Requirements: REQ-008
@@ -167,7 +168,7 @@ Capture implementation-ready user stories for the Task Management System without
 - Acceptance Criteria Reference: See acceptance_criteria.md under US-005.
 - Traceability Check: REQ-008, AC-017 to AC-020 present and complete
 
-- Story ID: US-006
+### Story US-006 — Manage Users and Teams
 - Epic: EPIC-004
 - Feature: FEAT-005
 - Related Functional Requirements: REQ-009
@@ -198,7 +199,7 @@ Capture implementation-ready user stories for the Task Management System without
 - Acceptance Criteria Reference: See acceptance_criteria.md under US-006.
 - Traceability Check: REQ-009, AC-021 to AC-024 present and complete
 
-- Story ID: US-007
+### Story US-007 — Manage Profile and Preferences
 - Epic: EPIC-004
 - Feature: FEAT-007
 - Related Functional Requirements: REQ-010

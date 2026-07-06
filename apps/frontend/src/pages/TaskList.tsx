@@ -21,14 +21,32 @@ const priorityOptions = [
   { label: 'Critical', value: 'critical' }
 ];
 
+const statusStyles: Record<string, string> = {
+  todo: 'bg-slate-100 text-slate-700',
+  in_progress: 'bg-sky-100 text-sky-700',
+  review: 'bg-amber-100 text-amber-700',
+  completed: 'bg-emerald-100 text-emerald-700',
+  blocked: 'bg-rose-100 text-rose-700'
+};
+
+const priorityStyles: Record<string, string> = {
+  low: 'bg-emerald-100 text-emerald-700',
+  medium: 'bg-amber-100 text-amber-700',
+  high: 'bg-orange-100 text-orange-700',
+  critical: 'bg-rose-100 text-rose-700'
+};
+
 export default function TaskListPage() {
   const [tasks, setTasks] = useState<TaskListItem[]>([]);
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('');
   const [priority, setPriority] = useState('');
   const [sort, setSort] = useState('recently_updated');
+  const [page, setPage] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
+  const limit = 6;
 
   const loadTasks = async (params: TaskListParams = {}) => {
     setError(null);
@@ -36,6 +54,7 @@ export default function TaskListPage() {
     try {
       const response = await getTasks(params);
       setTasks(response);
+      setHasMore(response.length === limit);
     } catch {
       setError('Unable to load tasks. Please check your connection or try again later.');
     } finally {
@@ -44,8 +63,12 @@ export default function TaskListPage() {
   };
 
   useEffect(() => {
-    loadTasks({ search, status, priority, sort, order: 'asc', page: 1, limit: 20 });
+    setPage(1);
   }, [search, status, priority, sort]);
+
+  useEffect(() => {
+    loadTasks({ search, status, priority, sort, order: 'asc', page, limit });
+  }, [search, status, priority, sort, page]);
 
   return (
     <div className="space-y-6">
@@ -141,8 +164,16 @@ export default function TaskListPage() {
                       {task.title}
                     </Link>
                   </td>
-                  <td className="px-6 py-4 capitalize">{task.status.replace('_', ' ')}</td>
-                  <td className="px-6 py-4 capitalize">{task.priority}</td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${statusStyles[task.status]}`}>
+                      {task.status.replace('_', ' ')}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${priorityStyles[task.priority]}`}>
+                      {task.priority}
+                    </span>
+                  </td>
                   <td className="px-6 py-4">{task.assignee?.fullName ?? 'Unassigned'}</td>
                   <td className="px-6 py-4">{task.dueDate ?? '—'}</td>
                   <td className="px-6 py-4">{new Date(task.updatedAt).toLocaleDateString()}</td>
@@ -150,6 +181,29 @@ export default function TaskListPage() {
               ))}
             </tbody>
           </table>
+          <div className="flex flex-col gap-3 border-t border-slate-200 bg-slate-50 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-slate-600">
+              Showing page {page} · {tasks.length} task{tasks.length === 1 ? '' : 's'}
+            </p>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                disabled={page === 1}
+                onClick={() => setPage((current) => Math.max(current - 1, 1))}
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                disabled={!hasMore}
+                onClick={() => setPage((current) => current + 1)}
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

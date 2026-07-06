@@ -12,8 +12,6 @@ import TaskListPage from './pages/TaskList';
 import TaskDetailsPage from './pages/TaskDetails';
 import CreateTaskPage from './pages/CreateTask';
 import EditTaskPage from './pages/EditTask';
-import ReportsPage from './pages/Reports';
-import TeamsPage from './pages/Teams';
 import ProfilePage from './pages/Profile';
 import SettingsPage from './pages/Settings';
 
@@ -54,8 +52,6 @@ export default function App() {
         <Route path="/tasks/create" element={<MainLayout><CreateTaskPage /></MainLayout>} />
         <Route path="/tasks/:id" element={<MainLayout><TaskDetailsPage /></MainLayout>} />
         <Route path="/tasks/:id/edit" element={<MainLayout><EditTaskPage /></MainLayout>} />
-        <Route path="/reports" element={<MainLayout><ReportsPage /></MainLayout>} />
-        <Route path="/teams" element={<MainLayout><TeamsPage /></MainLayout>} />
         <Route path="/profile" element={<MainLayout><ProfilePage /></MainLayout>} />
         <Route path="/settings" element={<MainLayout><SettingsPage /></MainLayout>} />
       </Route>

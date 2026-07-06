@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import { getSettings, updateSettings } from '../services/api/user';
 import { isDependencyUnavailable } from '../services/api/client';
 import type { SettingsData } from '../types';
+import { applyTheme, persistTheme } from '../theme';
 
 const themeOptions = [
   { value: 'system', label: 'System' },
@@ -23,6 +24,8 @@ export default function SettingsPage() {
     getSettings(userId)
       .then((s) => {
         setSettings(s);
+        applyTheme(s.theme);
+        persistTheme(s.theme);
         setDependencyError(null);
       })
       .catch((error) => {
@@ -40,6 +43,8 @@ export default function SettingsPage() {
     try {
       const updated = await updateSettings(userId, settings);
       setSettings(updated);
+      applyTheme(updated.theme);
+      persistTheme(updated.theme);
       setMessage('Settings saved successfully.');
     } catch {
       setMessage('Unable to save settings at this time.');
@@ -49,6 +54,12 @@ export default function SettingsPage() {
   };
 
   const updateSetting = (field: keyof SettingsData, value: string | boolean | SettingsData['notifications']) => {
+    if (field === 'theme') {
+      const themeValue = value as SettingsData['theme'];
+      applyTheme(themeValue);
+      persistTheme(themeValue);
+    }
+
     setSettings((current) => (current ? { ...current, [field]: value } : current));
   };
 

@@ -35,6 +35,14 @@ Provide the single source of truth for navigation and UX flows.
 ## Screen Details
 ---
 
+## Mermaid Diagram Example
+```mermaid
+flowchart TD
+    Start([Entry]) --> Screen[Screen]
+    Screen -->|Success| Next[Next state]
+    Screen -->|Error| Error[Error state]
+```
+
 ### Screen: [Screen Name]
 - Purpose: [Purpose]
 - Route: [Route]

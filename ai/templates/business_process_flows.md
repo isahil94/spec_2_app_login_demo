@@ -32,6 +32,15 @@ Document business workflows in a technology-agnostic manner for the Business Ana
 - Related Business Rules: [Rule IDs or descriptions]
 - Related Acceptance Criteria: [AC IDs]
 
+## Summary Diagram
+```mermaid
+flowchart TD
+    A([Trigger]) --> B[Main flow]
+    B --> C[Alternate flow]
+    B --> D[Exception handling]
+    D --> E[Postconditions]
+```
+
 ## Notes
 - Keep the content business-oriented and implementation-neutral.
 - Do not include APIs, database, services, sequence diagrams, or infrastructure.

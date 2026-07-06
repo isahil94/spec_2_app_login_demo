@@ -1,9 +1,12 @@
 # Acceptance Criteria
 
+## Purpose
+Define objective, verifiable conditions required for each story to be accepted.
+
 ## Metadata
 - Version: 1.0
 - Author: Business Analyst
-- Date: 2026-07-05
+- Date: 2026-07-04
 - Status: Draft
 - Artifact ID: AC-001
 - Traceability: US-001 to US-007, REQ-001 to REQ-010
@@ -11,54 +14,58 @@
 ## Acceptance Criteria by User Story
 
 ### US-001
-- AC-001: A new user can register with a valid email, password, and required profile details.
-- AC-002: A registered user can sign in with valid credentials and reach the dashboard.
-- AC-003: Invalid credentials show an error state and do not grant access.
-- AC-004: A user can use password recovery and receive a reset path without exposing account details.
-- AC-005: When authentication services are unavailable, the system shows the Login screen with a dependency-unavailable state and no false success message.
+- AC-001: A user can create an account using a valid email address and a password of at least 8 characters, and the system accepts the registration request.
+- AC-002: A user can sign in with valid credentials and is taken to the Dashboard after successful authentication.
+- AC-003: An invalid credential attempt shows a clear error message and does not grant access.
+- AC-004: When a backend or data dependency for authentication cannot be reached, the user is shown the Login screen with an explicit service-unavailable message and no access is granted.
 
 ### US-002
-- AC-006: A user with permission can create a task with title, status, priority, due date, and assignment details.
-- AC-007: An authorized user can update an existing task and see the revised values in the task list and details view.
-- AC-008: A task cannot be saved if required fields are missing or due date violates the business rule.
-- AC-009: A completed task cannot be edited by a non-administrator and shows a permission-denied state.
-- AC-010: When the task service is unavailable, the task form remains on the same screen and shows a dependency-unavailable state.
+- AC-005: An authenticated user can create a task with a title, description, status, priority, and due date and the task appears in the task list.
+- AC-006: An authenticated user can edit an owned or assigned task and the updated values are reflected in the task details and task list.
+- AC-007: A completed task cannot be edited by a standard user and the system shows a permission-related message; an administrator may override that restriction.
+- AC-008: When the task service or data dependency is unavailable, the user remains on the task form or task list and sees an explicit dependency-unavailable state rather than a silent failure.
 
 ### US-003
-- AC-011: A user can search by title, description, and labels and see matching results.
-- AC-012: A user can filter by status, priority, assignee, due date, created date, and team.
-- AC-013: A user can sort results by due date, priority, status, or recent update.
-- AC-014: A search with no matching results shows an empty state and no misleading success message.
-- AC-015: When the search index or data dependency is unavailable, the task list shows a dependency-unavailable state and preserves the current filter context.
+- AC-009: A user can search by title, description, or labels and see only matching tasks.
+- AC-010: A user can filter by status, priority, assignee, due date, created date, or team and the task list updates accordingly.
+- AC-011: A user can sort by due date, priority, status, or recently updated and the list order changes accordingly.
+- AC-012: When the search or filter dependency cannot be reached, the user sees the Task List with a dependency-unavailable state and no misleading empty results.
 
 ### US-004
-- AC-016: A user with task access can add a comment and attachment to an existing task.
-- AC-017: New comment or attachment activity is visible in the task history and task details view.
-- AC-018: A user without access cannot add comments or attachments and is shown a permission state.
-- AC-019: A failed upload or comment save shows a clear error state without losing the current task context.
-- AC-020: When the collaboration service is unavailable, the task details screen shows a dependency-unavailable state and preserves the entered content.
+- AC-013: A user with task access can add a comment or attachment to a task and the new item appears in the task activity history.
+- AC-014: A user can configure notification preferences and the system respects those preferences for subsequent task events.
+- AC-015: A user without task access cannot add collaboration content and is shown a permission message.
+- AC-016: When notifications or collaboration data cannot be retrieved, the user sees an explicit dependency-unavailable state in the task details or settings experience.
 
 ### US-005
-- AC-021: An administrator or team lead can invite users, assign roles, and manage team membership.
-- AC-022: A user can be disabled or removed only by an authorized role.
-- AC-023: A role assignment that violates permission rules is rejected and shown as a validation error.
-- AC-024: A non-authorized user attempting team or user management sees an access-denied state.
-- AC-025: When team or user management services are unavailable, the management screen remains open and shows a dependency-unavailable state.
+- AC-017: A user with report access can open the Dashboard and view total tasks, completed tasks, pending tasks, overdue tasks, and due-today tasks.
+- AC-018: A team lead can view workload and productivity summaries for assigned teams and the displayed values match the visible task data.
+- AC-019: A user without report access cannot view restricted report content and is shown a permission message.
+- AC-020: When reporting data cannot be reached, the Dashboard or Reports screen shows a dependency-unavailable state and a clear explanation.
 
 ### US-006
-- AC-026: A user receives notifications for task assignments, updates, comments, due-date reminders, and overdue tasks where applicable.
-- AC-027: A user can open the notifications or reports view and review the available items.
-- AC-028: A user without reporting access cannot view reports and is shown an access-denied state.
-- AC-029: A report with no data shows an empty state rather than an error.
-- AC-030: When notification or reporting data cannot be retrieved, the relevant screen shows a dependency-unavailable state and preserves the last successful view.
+- AC-021: An administrator can invite, disable, enable, or delete users and the account state changes accordingly.
+- AC-022: An administrator can assign roles and team membership and the new access level is reflected in subsequent actions.
+- AC-023: A non-administrator cannot perform privileged administration actions and is shown a permission message.
+- AC-024: When the user-management or team-management dependency is unavailable, the administration screen shows a dependency-unavailable state and retains the current user or team state.
 
 ### US-007
-- AC-031: A user can view and edit profile information and settings.
-- AC-032: Password changes require valid current credentials and meet minimum policy requirements.
-- AC-033: Invalid profile or settings values are rejected with clear validation feedback.
-- AC-034: A user can upload an avatar and see the updated profile image.
-- AC-035: When profile or settings services are unavailable, the settings screen shows a dependency-unavailable state and preserves the unsaved changes.
+- AC-025: A user can view and edit profile details, upload an avatar, and change a password.
+- AC-026: A user can update notification, language, theme, timezone, email, and privacy settings and the changes persist for future sessions.
+- AC-027: A user can only update their own profile and settings unless an administrator performs an account-level change.
+- AC-028: When profile or settings data cannot be reached, the Profile or Settings screen shows a dependency-unavailable state and preserves the user’s last known values.
 
 ## Coverage Expectations
-- Each story includes happy path, validation, authorization, and dependency-unavailable criteria.
-- All criteria are measurable and aligned to the business requirements and user stories.
+- Each story includes acceptance criteria for happy path, alternate path, validation, error, authorization, and dependency-unavailable behavior.
+- Each criterion is measurable, testable, and aligned to the business requirement set.
+- Dependency-Unavailable Criteria are included for every story as required.
+
+## Rules
+- This file is the single source of truth for acceptance criteria.
+- Each AC maps to a story and related requirement through the traceability package.
+- No implementation technology or design details are included.
+
+## Approval
+- Prepared By: Business Analyst
+- Reviewed By: Pending
+- Approved By: Pending

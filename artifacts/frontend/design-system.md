@@ -1,25 +1,43 @@
 # Design System
 
+## Purpose
+Define the implementation-ready visual foundation for the frontend presentation layer.
+
 ## Metadata
 - Version: 1.0
 - Author: UI/UX Developer
-- Date: 2026-07-06
+- Date: 2026-07-04
 - Status: Draft
-- Workflow ID: WF-20260705-001
-- Correlation ID: WF-1783283413777
-- Traceability: ui-specification.md, screen_specification.md
+- Artifact ID: DS-001
+- Source References: artifacts/requirements/requirements_spec.md, artifacts/requirements/ui_observations.md, artifacts/architecture/architecture-design.md
 
-## Design Principles
-- Consistency across authentication, task, and administration flows.
-- Clear hierarchy for primary actions, navigation, and status information.
-- Accessibility-first interaction patterns and readable content.
+## Design Foundation
+- The design system shall prioritize clarity, accessibility, and consistency over decorative styling.
+- A specific Figma-derived visual token set is not available in the current workspace package, so the baseline below is a conservative, accessible implementation foundation.
 
-## System Tokens
-- Color usage: neutral surfaces with clear semantic states for success, warning, error, and informational content.
-- Typography: readable sans-serif hierarchy with strong emphasis for headings and primary actions.
-- Spacing and layout: consistent rhythm across forms, lists, and detail views.
+## Typography
+- Font family: system sans-serif stack with strong readability.
+- Heading scale: responsive, with clear hierarchy for screens, cards, and forms.
+- Body copy: legible line-height and sufficient spacing for mobile and desktop.
 
-## Component Patterns
-- Form layouts with labels, helper text, and validation messaging.
-- Data lists and detail panels for tasks and reports.
-- Navigation and stateful controls for notifications, filters, and administration actions.
+## Color Tokens
+- Background: neutral surface color for app shell and content panes.
+- Primary: strong, high-contrast accent for primary actions.
+- Secondary: supporting action color for secondary controls.
+- Success: confirmation and completed-state treatment.
+- Warning: overdue or attention-needed indication.
+- Error: validation and failure states.
+- Text: high-contrast body and label color.
+
+## Spacing and Layout
+- Use consistent spacing increments for cards, form fields, and screen sections.
+- Keep content grouping clear and aligned with task-oriented workflows.
+- Support responsive stacking for narrow viewports.
+
+## Component States
+- Default, hover, focus, active, disabled, loading, empty, error, and dependency-unavailable states must all be designed and implemented consistently.
+
+## Interaction Principles
+- Buttons and links must have clear labels and obvious hierarchy.
+- Form fields should provide immediate validation feedback.
+- Status and priority indicators must be visually distinct and accessible.

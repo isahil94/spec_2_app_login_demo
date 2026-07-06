@@ -7,7 +7,7 @@
 - Status: Draft
 - Architecture ID: ARCH-011
 - Workflow ID: WF-20260705-001
-- Correlation ID: WF-1783283413777
+- Correlation ID: WF-1783335798071
 - Traceability: data_requirements.md, business_rules.md, requirements_spec.md
 
 ## Entity and Relationship Overview

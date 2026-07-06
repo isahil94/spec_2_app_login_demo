@@ -60,4 +60,4 @@
 
 ## Next Agents
 - Primary: backend-developer
-- Parallel (if applicable): database-developer
+- Sequential order: database-developer after backend completion

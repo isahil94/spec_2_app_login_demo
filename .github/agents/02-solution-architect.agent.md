@@ -56,7 +56,7 @@ Before any analysis, validate inputs. If any required item is invalid, stop imme
 
 ### Validation Rules
 
-- Each of the 14 required files under `REQUIREMENTS_ROOT` (`requirements_spec.md`, `user_stories.md`, `acceptance_criteria.md`, `non_functional_requirements.md`, `screen_specification.md`, `personas.md`, `business_process_flows.md`, `business_rules.md`, `data_requirements.md`, `glossary.md`, `traceability.md`, `quality_report.md`, `handoff_contract.md`, `openlog.md`) must exist and be readable. If any is missing → BLOCKED, report that path first, checked in the order listed.
+- Each of the 14 required files under `REQUIREMENTS_ROOT` (`requirements_spec.md`, `user_stories.md`, `acceptance_criteria.md`, `non_functional_requirements.md`, `screen_specification.md`, `personas.md`, `business_process_flows.md`, `business_rules.md`, `data_requirements.md`, `glossary.md`, `traceability.md`, `quality_report.md`, `handoff-contract.md`, `openlog.md`) must exist and be readable. If any is missing → BLOCKED, report that path first, checked in the order listed.
 - `BA_WORKFLOW_STATUS` must not be BLOCKED or an unresolved WAITING_FOR_APPROVAL. If it is, stop and report — do not proceed on partial BA output.
 - If exactly one item is invalid, report only that one. If multiple, report the first in the order above.
 
@@ -78,7 +78,7 @@ Load only required upstream artifacts, this chat mode, and referenced templates.
 - `artifacts/requirements/glossary.md`
 - `artifacts/requirements/traceability.md`
 - `artifacts/requirements/quality_report.md`
-- `artifacts/requirements/handoff_contract.md`
+- `artifacts/requirements/handoff-contract.md`
 - `artifacts/requirements/openlog.md`
 - `config.yaml` (optional)
 
@@ -193,4 +193,4 @@ Persist outputs to artifact files before finalizing the response. Final chat res
 
 ## Next Agent
 
-`ui-ux-developer`, `backend-developer` (parallel)
+`ui-ux-developer` first, followed by `backend-developer`, then `database-developer` in sequence.

@@ -12,11 +12,11 @@
 | Artifact | Status |
 |---|---|
 | backend-design.md | Created |
-| handoff_contract.md | Created |
+| handoff-contract.md | Created |
 | openlog.md | Created |
 
 ## Artifact Status
-- Created: backend-design.md, handoff_contract.md, openlog.md
+- Created: backend-design.md, handoff-contract.md, openlog.md
 - Updated: None
 - Skipped: None
 - Artifact Versions: v1.0
@@ -54,4 +54,4 @@
 
 ## Next Agents
 - Primary: database-developer
-- Parallel (if applicable): qa-engineer
+- Sequential order: qa-engineer after database completion

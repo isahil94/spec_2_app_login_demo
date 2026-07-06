@@ -30,18 +30,16 @@ Business Analyst
     ↓
 Solution Architect
     ↓
- ┌──────────────┬
- ▼              ▼                
-UI/UX      Backend           
-Developer  Developer        
- └──────────────┴
-        ↓
+UI/UX Developer
+    ↓
+Backend Developer
+    ↓
 Database Developer
-        ↓
+    ↓
 QA Engineer
 ```
 
-UI and Backend agents may execute in parallel after the Solution Architect publishes contracts.
+Implementation proceeds sequentially after the Solution Architect publishes contracts: frontend first, then backend, then database.
 
 ---
 

@@ -82,7 +82,7 @@ Break down the architecture into discrete, independently deployable components w
 ### When to Use
 - Defining component responsibilities and boundaries
 - Planning component interactions
-- Enabling parallel development
+- Enabling sequential implementation handoffs
 - Defining component APIs
 
 ### Inputs
@@ -126,7 +126,7 @@ Break down the architecture into discrete, independently deployable components w
 - [ ] Navigation/workflow/state-transition responsibilities are explicit where applicable
 
 ### Success Criteria
-- Teams can develop components in parallel
+- Teams can implement components in the defined sequential order
 - Components can be tested independently
 - Components can be deployed on different cadences
 - System integrates properly

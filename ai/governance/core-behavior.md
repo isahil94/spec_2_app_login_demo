@@ -160,7 +160,7 @@ Hard input policy (non-negotiable):
 1. Every artifact listed under an agent's Inputs section is required.
 2. If any required input is missing or unreadable, stop execution immediately and return an error.
 3. Do not continue with partial context, fallback assumptions, or speculative generation.
-4. Record the blocker in openlog.md, handoff_contract.md, and quality_report.md with Workflow Status set to BLOCKED.
+4. Record the blocker in openlog.md, handoff-contract.md, and quality_report.md with Workflow Status set to BLOCKED.
 
 ## 6. Completion Checklist
 Before finishing execution, every agent must verify all items below.

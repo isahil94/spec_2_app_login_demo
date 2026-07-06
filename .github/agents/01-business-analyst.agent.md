@@ -82,7 +82,7 @@ Produce exactly this package, no more, no less:
 - `<OUTPUT_ROOT>/glossary.md`
 - `<OUTPUT_ROOT>/traceability.md`
 - `<OUTPUT_ROOT>/quality_report.md`
-- `<OUTPUT_ROOT>/handoff_contract.md`
+- `<OUTPUT_ROOT>/handoff-contract.md`
 - `<OUTPUT_ROOT>/openlog.md`
 
 ## Primary Objective
@@ -122,7 +122,7 @@ Every invocation:
 - `traceability.md`: Epic to Feature to FR to Business Rule to User Story to Acceptance Criteria to Screen to Screen Element to API to Database Entity to Test Case; flag missing links.
 - `business_process_flows.md`: objective, trigger, actors, pre/postconditions, main/alternate/exception flows, related stories/screens/rules/AC, plus a Mermaid diagram per major workflow.
 - `quality_report.md`: evidence checked per category against artifact/line; "Not Verified" where unverifiable, never a flat Pass.
-- `handoff_contract.md`: produced artifacts, decisions, assumptions, risks, open questions, next agent contract.
+- `handoff-contract.md`: produced artifacts, decisions, assumptions, risks, open questions, next agent contract.
 
 ## Template & Formatting Discipline
 

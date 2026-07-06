@@ -7,7 +7,7 @@
 - Status: Draft
 - Architecture ID: ARCH-010
 - Workflow ID: WF-20260705-001
-- Correlation ID: WF-1783283413777
+- Correlation ID: WF-1783335798071
 - Traceability: non_functional_requirements.md, quality_report.md
 
 ## Runtime Architecture

@@ -28,7 +28,7 @@ Required structure:
 
 5. Next Agent(s)
 - Primary next agent.
-- Parallel agents if any.
+- Sequential execution order (frontend → backend → database) if applicable.
 - Preconditions before start.
 
 6. Workflow Status
@@ -53,7 +53,7 @@ Required structure:
 
 Validation checklist:
 - [ ] Required artifacts generated or marked Not Applicable.
-- [ ] quality_report.md, handoff_contract.md, and openlog.md produced.
+- [ ] quality_report.md, handoff-contract.md, and openlog.md produced.
 - [ ] No separate open-questions.md, assumptions.md, risks.md, approval-log.md, decision-log.md, or escalation-log.md created.
 - [ ] Artifact ownership boundaries respected.
 - [ ] Workflow Status reflects openlog.md state.
@@ -137,7 +137,7 @@ After Human decision, Supervisor appends to the item's History in openlog.md:
 The originating agent then progresses to RESOLVED → CLOSED.
 
 ## 5.2.1 AI Usage Tracking (Mandatory)
-Agents must include an AI Usage section in both `quality_report.md` and `handoff_contract.md`.
+Agents must include an AI Usage section in both `quality_report.md` and `handoff-contract.md`.
 
 AI Usage policy:
 - Metadata only.
@@ -190,7 +190,7 @@ Every agent must use identical required section structure for the following arti
 - Workflow Status
 - Open Items (entries containing all mandatory OpenLog fields)
 
-2. `handoff_contract.md`
+2. `handoff-contract.md`
 - Workflow Context (Workflow ID, Correlation ID, Agent, Stage)
 - Artifacts Produced
 - Artifact Status (Created/Updated/Skipped)
@@ -260,7 +260,7 @@ Business Analyst required artifact package (16 total):
 12. glossary.md
 13. traceability.md
 14. quality_report.md
-15. handoff_contract.md
+15. handoff-contract.md
 16. openlog.md
 
 Business Analyst completion contract:

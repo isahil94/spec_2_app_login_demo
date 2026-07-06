@@ -80,7 +80,7 @@ Business Analyst boundary checks (when agentId = business_analyst):
   - openlog.md
   - traceability.md
   - quality_report.md
-  - handoff_contract.md
+  - handoff-contract.md
 - No additional BA artifacts are produced outside the package.
 - No duplicate information is spread across BA artifacts.
 - If a Figma URL exists in `specification.md`, it is consumed automatically and preserved unchanged in BA outputs.
@@ -116,7 +116,7 @@ Checks:
 - Enumerations and field types match contract.
 - Compact-content policy is applied without removing required sections/fields.
 - `openlog.md` includes all mandatory fields per entry.
-- `handoff_contract.md` includes mandatory sections: Workflow Context, Artifacts Produced, Artifact Status, OpenLog Summary, AI Usage Summary, Workflow Status, Next Agent.
+- `handoff-contract.md` includes mandatory sections: Workflow Context, Artifacts Produced, Artifact Status, OpenLog Summary, AI Usage Summary, Workflow Status, Next Agent.
 - `quality_report.md` includes mandatory sections: Validation Summary, Coverage Summary, OpenLog Summary, AI Usage Summary, Confidence Score, Readiness, Blocking Issues.
 - AI Usage sections contain metadata fields only (no narrative explanations).
 
@@ -222,11 +222,11 @@ validationResult:
 - Retry is not allowed for approval-related failures.
 - Retry metadata must be recorded in memory.
 - Second failure transitions to Failed.
-- On second failure, the agent must update openlog.md, handoff_contract.md, and quality_report.md, then return control to Supervisor.
+- On second failure, the agent must update openlog.md, handoff-contract.md, and quality_report.md, then return control to Supervisor.
 
 ## 6.1 Timeout Behavior
 - If execution exceeds the stage budget, status must transition to TIMEOUT.
-- TIMEOUT must be recorded in AI Usage, openlog.md, handoff_contract.md, and quality_report.md.
+- TIMEOUT must be recorded in AI Usage, openlog.md, handoff-contract.md, and quality_report.md.
 - After TIMEOUT recording, control must return to Supervisor.
 
 ## 7. Blocking Conditions

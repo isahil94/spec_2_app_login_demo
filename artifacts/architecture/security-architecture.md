@@ -7,7 +7,7 @@
 - Status: Draft
 - Architecture ID: ARCH-009
 - Workflow ID: WF-20260705-001
-- Correlation ID: WF-1783283413777
+- Correlation ID: WF-1783335798071
 - Traceability: non_functional_requirements.md, business_rules.md, user_stories.md
 
 ## Security Principles

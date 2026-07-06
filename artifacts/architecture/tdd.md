@@ -7,7 +7,7 @@
 - Status: Draft
 - Architecture ID: ARCH-005
 - Workflow ID: WF-20260705-001
-- Correlation ID: WF-1783283413777
+- Correlation ID: WF-1783335798071
 - Traceability: acceptance_criteria.md, non_functional_requirements.md
 
 ## Test Strategy Overview

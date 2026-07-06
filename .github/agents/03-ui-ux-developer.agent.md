@@ -110,7 +110,7 @@ Treat `<DESIGN_ROOT>/figma_design.md` as the authoritative pixel-level technical
 - `artifacts/requirements/data_requirements.md`
 - `artifacts/requirements/glossary.md`
 - `artifacts/requirements/traceability.md`
-- `artifacts/requirements/quality_report.md`, `handoff_contract.md`, `openlog.md` (reference)
+- `artifacts/requirements/quality_report.md`, `handoff-contract.md`, `openlog.md` (reference)
 
 **Architecture package** (authoritative technical source):
 
@@ -279,8 +279,8 @@ No network/HTTP/live-API tool required — design intake is local file processin
 
 Persist implementation code and governance artifacts to their correct paths before finalizing the response. Final chat response = concise summary: updated paths, per-artifact status, Open Question Summary, Workflow Status, Next Agent/approval path. If persistence fails, report and stop.
 
-**Role Boundary:** Design-file intake, UI specification package, and Presentation Layer implementation + owned governance artifacts only. Runs in parallel with Backend Developer and Database Developer; validate any API/data assumption against `api-specifications.md`, not the other agents' actual output.
+**Role Boundary:** Design-file intake, UI specification package, and Presentation Layer implementation + owned governance artifacts only. Runs after Solution Architect and before Backend Developer and Database Developer; validate any API/data assumption against `api-specifications.md`, not the other agents' actual output.
 
 ## Next Agent
 
-`qa-engineer` (after Backend Developer and Database Developer also complete)
+`backend-developer` after frontend completion, then `database-developer` after backend completion, followed by `qa-engineer`.

@@ -1,8 +1,8 @@
-- 2026-07-05T16:53:12.317Z — business_analyst missing artifacts: requirements_spec.md, user_stories.md, acceptance_criteria.md, business_rules.md, data_requirements.md, traceability.md, handoff_contract.md, openlog.md (attempt 1/2)
-- 2026-07-05T16:55:12.360Z — business_analyst missing artifacts: requirements_spec.md, user_stories.md, acceptance_criteria.md, business_rules.md, data_requirements.md, traceability.md, handoff_contract.md, openlog.md (attempt 2/2)
+- 2026-07-05T16:53:12.317Z — business_analyst missing artifacts: requirements_spec.md, user_stories.md, acceptance_criteria.md, business_rules.md, data_requirements.md, traceability.md, handoff-contract.md, openlog.md (attempt 1/2)
+- 2026-07-05T16:55:12.360Z — business_analyst missing artifacts: requirements_spec.md, user_stories.md, acceptance_criteria.md, business_rules.md, data_requirements.md, traceability.md, handoff-contract.md, openlog.md (attempt 2/2)
 - 2026-07-05T16:56:02.588Z — Stage business_analyst complete.
-- 2026-07-05T16:56:13.165Z — solution_architect missing artifacts: architecture-design.md, module-design.md, api-specifications.md, handoff_contract.md, openlog.md (attempt 1/2)
-- 2026-07-05T16:57:12.355Z — solution_architect missing artifacts: architecture-design.md, module-design.md, api-specifications.md, handoff_contract.md, openlog.md (attempt 2/2)
+- 2026-07-05T16:56:13.165Z — solution_architect missing artifacts: architecture-design.md, module-design.md, api-specifications.md, handoff-contract.md, openlog.md (attempt 1/2)
+- 2026-07-05T16:57:12.355Z — solution_architect missing artifacts: architecture-design.md, module-design.md, api-specifications.md, handoff-contract.md, openlog.md (attempt 2/2)
 - 2026-07-05T16:57:28.611Z — BLOCKED: Artifacts still missing after 2 retries: solution_architect — architecture-design.md, module-design.md, api-specifications.md, openlog.md
 - 2026-07-05T16:57:33.369Z — BLOCKED: Artifacts still missing after 2 retries: solution_architect — architecture-design.md, module-design.md, api-specifications.md
 - 2026-07-05T16:59:12.365Z — Stage solution_architect complete.
@@ -12,8 +12,8 @@
 - 2026-07-05T17:20:57.534Z — Gate human_gate_architecture APPROVED via chat.
 - 2026-07-05T17:20:57.586Z — frontend: no artifacts yet, likely still running initial invocation. Waiting.
 - 2026-07-05T17:20:57.592Z — backend: no artifacts yet, likely still running initial invocation. Waiting.
-- 2026-07-05T17:21:47.533Z — frontend missing artifacts: handoff_contract.md, openlog.md (attempt 2/2)
-- 2026-07-05T17:21:47.599Z — backend missing artifacts: backend-design.md, handoff_contract.md, openlog.md (attempt 2/3)
+- 2026-07-05T17:21:47.533Z — frontend missing artifacts: handoff-contract.md, openlog.md (attempt 2/2)
+- 2026-07-05T17:21:47.599Z — backend missing artifacts: backend-design.md, handoff-contract.md, openlog.md (attempt 2/3)
 - 2026-07-05T17:23:06.901Z — backend: still within cooldown (1.3/3 min), not re-invoking yet.
 - 2026-07-05T17:23:14.779Z — backend: still within cooldown (1.5/3 min), not re-invoking yet.
 - 2026-07-05T17:23:47.528Z — backend: still within cooldown (2.0/3 min), not re-invoking yet.
@@ -74,3 +74,169 @@
 - 2026-07-05T21:03:53.235Z — BLOCKED: Artifacts still missing: backend — Still missing after 3 retries: handoff-contract.md
 - 2026-07-05T21:05:53.248Z — BLOCKED: Artifacts still missing: backend — Still missing after 3 retries: handoff-contract.md
 - 2026-07-05T21:07:53.258Z — BLOCKED: Artifacts still missing: backend — Still missing after 3 retries: handoff-contract.md
+- 2026-07-06T09:09:53.788Z — Kickoff complete. specPath=specification.md (no Figma reference provided)
+- 2026-07-06T09:09:53.791Z — Pipeline starting -- invoking first stage: business_analyst
+- 2026-07-06T09:11:26.993Z — Stage business_analyst complete.
+- 2026-07-06T09:15:36.720Z — Kickoff complete. specPath=specification.md (no Figma reference provided)
+- 2026-07-06T09:15:36.722Z — Pipeline starting -- invoking first stage: business_analyst
+- 2026-07-06T09:17:25.229Z — Stage business_analyst complete.
+- 2026-07-06T09:19:25.240Z — Stage solution_architect complete.
+- 2026-07-06T09:19:25.259Z — Gate reached: human_gate_architecture (reviewing solution_architect). Announcing in chat.
+- 2026-07-06T09:21:08.533Z — Kickoff complete. specPath=specification.md (no Figma reference provided)
+- 2026-07-06T09:21:08.536Z — Pipeline starting -- invoking first stage: business_analyst
+- 2026-07-06T09:22:58.492Z — Stage business_analyst complete.
+- 2026-07-06T09:24:58.495Z — Stage solution_architect complete.
+- 2026-07-06T09:24:58.519Z — Gate reached: human_gate_architecture (reviewing solution_architect). Announcing in chat.
+- 2026-07-06T11:03:56.120Z — Kickoff complete. specPath=specification.md, resetMode=keep, (no Figma reference provided)
+- 2026-07-06T11:03:56.201Z — Pipeline starting -- invoking first stage: business_analyst
+- 2026-07-06T11:04:52.792Z — Stage business_analyst complete.
+- 2026-07-06T11:06:52.799Z — Stage solution_architect complete.
+- 2026-07-06T11:06:52.830Z — Gate reached: human_gate_architecture (reviewing solution_architect). Announcing in chat.
+- 2026-07-06T11:10:21.619Z — Gate solution_architect APPROVED via chat.
+- 2026-07-06T11:10:21.658Z — backend missing artifacts: handoff-contract.md (attempt 1/3)
+- 2026-07-06T11:10:52.811Z — Parallel stage complete: frontend, backend
+- 2026-07-06T11:12:52.805Z — Stage database complete.
+- 2026-07-06T11:14:52.807Z — qa: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-06T11:16:36.339Z — qa missing artifacts: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md (attempt 1/2)
+- 2026-07-06T11:16:52.812Z — qa: still within cooldown (0.3/3 min), not re-invoking yet.
+- 2026-07-06T11:17:02.688Z — qa: still within cooldown (0.4/3 min), not re-invoking yet.
+- 2026-07-06T11:18:52.822Z — qa: still within cooldown (2.3/3 min), not re-invoking yet.
+- 2026-07-06T11:20:52.840Z — qa missing artifacts: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md (attempt 2/2)
+- 2026-07-06T11:22:52.871Z — qa: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-06T11:24:52.885Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:26:52.898Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:28:52.908Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:30:52.909Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:32:52.911Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:34:52.914Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:36:52.935Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:38:52.920Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:40:52.940Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:42:52.938Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:44:52.954Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:46:53.061Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:48:52.970Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:50:52.998Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:52:52.986Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:54:53.002Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:56:53.005Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T11:58:53.013Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T12:28:55.585Z — BLOCKED: Artifacts still missing: qa — Still missing after 2 retries: coverage-matrix.md, gap-analysis.md, qa-blockers.md, test-execution-log.md, quality-report.md, handoff-contract.md
+- 2026-07-06T12:29:38.287Z — Kickoff complete. specPath=specification.md, resetMode=keep, (no Figma reference provided)
+- 2026-07-06T12:29:38.289Z — Pipeline starting -- business_analyst already has partial output kept from before; invoking with missing-only prompt (1/14 missing).
+- 2026-07-06T12:30:35.261Z — Stage business_analyst complete.
+- 2026-07-06T12:30:46.316Z — Stage solution_architect complete.
+- 2026-07-06T12:30:46.338Z — Gate reached: human_gate_architecture (reviewing solution_architect). Announcing in chat.
+- 2026-07-06T12:33:07.178Z — Gate solution_architect APPROVED via chat.
+- 2026-07-06T12:33:07.220Z — Stage frontend complete.
+- 2026-07-06T12:33:08.160Z — Stage backend complete.
+- 2026-07-06T12:34:55.440Z — Stage database complete.
+- 2026-07-06T12:36:55.445Z — qa: still within its run window (2.0/25 min), not re-invoking yet -- an invocation is still running.
+- 2026-07-06T12:38:55.454Z — qa: still within its run window (4.0/25 min), not re-invoking yet -- an invocation is still running.
+- 2026-07-06T12:40:55.459Z — qa: still within its run window (6.0/25 min), not re-invoking yet -- an invocation is still running.
+- 2026-07-06T12:42:21.883Z — Stage qa complete.
+- 2026-07-06T12:42:21.904Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T12:43:43.016Z — Gate qa REJECTED via chat: run full end to end test
+- 2026-07-06T12:44:17.912Z — Stage qa complete.
+- 2026-07-06T12:44:17.913Z — QA-fix loop-back; returning to human_gate_final
+- 2026-07-06T12:44:17.934Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:21:05.344Z — Kickoff complete. specPath=specification.md, resetMode=keep, (no Figma reference provided)
+- 2026-07-06T13:21:05.348Z — Gate reached: human_gate_architecture (reviewing solution_architect). Announcing in chat.
+- 2026-07-06T13:21:17.243Z — Gate solution_architect APPROVED via chat.
+- 2026-07-06T13:21:17.262Z — frontend: reached for the first time this run -- invoking with start prompt.
+- 2026-07-06T13:22:13.028Z — Pipeline ended by human via chat (was at frontend).
+- 2026-07-06T13:30:48.928Z — Pipeline RESET to fresh start via chat.
+- 2026-07-06T13:31:23.787Z — Kickoff complete. specPath=specification.md, resetMode=keep, (no Figma reference provided)
+- 2026-07-06T13:31:23.790Z — Pipeline starting -- invoking first stage: business_analyst
+- 2026-07-06T13:31:43.887Z — Pipeline manually restarted at stage: qa (mode=keep)
+- 2026-07-06T13:31:43.947Z — Pipeline manually restarted at qa via chat (mode=keep).
+- 2026-07-06T13:33:01.494Z — Stage qa complete.
+- 2026-07-06T13:33:01.509Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:38:22.434Z — Pipeline manually restarted at stage: qa (mode=keep)
+- 2026-07-06T13:38:22.485Z — Pipeline manually restarted at qa via chat (mode=keep).
+- 2026-07-06T13:39:01.534Z — Stage qa complete.
+- 2026-07-06T13:39:01.585Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:43:12.144Z — Pipeline manually restarted at stage: qa (mode=keep)
+- 2026-07-06T13:43:12.185Z — Pipeline manually restarted at qa via chat (mode=keep).
+- 2026-07-06T13:43:52.140Z — Stage qa complete.
+- 2026-07-06T13:43:52.157Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:44:16.248Z — Pipeline manually restarted at stage: qa (mode=keep)
+- 2026-07-06T13:44:16.336Z — Pipeline manually restarted at qa via chat (mode=keep).
+- 2026-07-06T13:45:51.337Z — Stage qa complete.
+- 2026-07-06T13:45:51.356Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:47:36.192Z — Pipeline manually restarted at stage: qa (mode=keep)
+- 2026-07-06T13:47:36.344Z — Pipeline manually restarted at qa via chat (mode=keep).
+- 2026-07-06T13:49:10.350Z — Stage qa complete.
+- 2026-07-06T13:49:10.366Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:59:01.520Z — Gate qa REJECTED via chat: fix issue report by qa
+- 2026-07-06T13:59:10.369Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T13:59:47.866Z — Gate qa REJECTED via chat: send it back to the stage's agent with this feedback so it can fix issue reported by qa
+- 2026-07-06T14:01:10.378Z — Stage qa complete.
+- 2026-07-06T14:01:10.379Z — QA-fix loop-back; returning to human_gate_final
+- 2026-07-06T14:01:10.420Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T15:20:34.568Z — Gate qa REJECTED via chat: there are issue in system which needs to be fixed
+- 2026-07-06T15:21:33.313Z — Stage qa complete.
+- 2026-07-06T15:21:33.314Z — QA-fix loop-back; returning to human_gate_final
+- 2026-07-06T15:21:33.338Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T15:22:11.733Z — Gate qa REJECTED via chat: ## Critical Issues
+
+### B1 - Comment submission UI is unstable
+
+- Severity: Major
+- Target Agent: frontend
+- User Story / Requirement: US-004 / AC-016, AC-017
+- Evidence: The Playwright comments flow timed out while clicking Post Comment because the button detached from the DOM during the interaction.
+- Impact: Users may be unable to add comments reliably from the task-details view.
+
+### B2 - Dependency-unavailable state is not shown for task detail failures
+
+- Severity: Major
+- Target Agent: frontend
+- User Story / Requirement: US-002 / AC-010
+- Evidence: The task-details page did not render the expected dependency-unavailable message after a simulated 500 response from the task service.
+- Impact: Error handling for unavailable services is not matching the documented acceptance criteria.
+fix it
+- 2026-07-06T15:23:33.321Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T15:26:08.696Z — Gate qa REJECTED via chat: ## Critical Issues
+
+### B1 - Comment submission UI is unstable
+
+- Severity: Major
+- Target Agent: frontend
+- User Story / Requirement: US-004 / AC-016, AC-017
+- Evidence: The Playwright comments flow timed out while clicking Post Comment because the button detached from the DOM during the interaction.
+- Impact: Users may be unable to add comments reliably from the task-details view.
+
+### B2 - Dependency-unavailable state is not shown for task detail failures
+
+- Severity: Major
+- Target Agent: frontend
+- User Story / Requirement: US-002 / AC-010
+- Evidence: The task-details page did not render the expected dependency-unavailable message after a simulated 500 response from the task service.
+- Impact: Error handling for unavailable services is not matching the documented acceptance criteria.
+fix it
+- 2026-07-06T15:26:58.374Z — Stage qa complete.
+- 2026-07-06T15:26:58.375Z — QA-fix loop-back; returning to human_gate_final
+- 2026-07-06T15:26:58.394Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T16:20:16.903Z — Gate qa REJECTED via chat: : ## Critical Issues
+
+### B1 - Comment submission UI is unstable
+
+- Severity: Major
+- Target Agent: frontend
+- User Story / Requirement: US-004 / AC-016, AC-017
+- Evidence: The Playwright comments flow timed out while clicking Post Comment because the button detached from the DOM during the interaction.
+- Impact: Users may be unable to add comments reliably from the task-details view.
+
+### B2 - Dependency-unavailable state is not shown for task detail failures
+
+- Severity: Major
+- Target Agent: frontend
+- User Story / Requirement: US-002 / AC-010
+- Evidence: The task-details page did not render the expected dependency-unavailable message after a simulated 500 response from the task service.
+- Impact: Error handling for unavailable services is not matching the documented acceptance criteria.
+- 2026-07-06T16:20:35.251Z — Gate rejection on qa: human manually routed fix to frontend (attempt 1/2); will return to qa before re-gating.
+- 2026-07-06T16:21:55.057Z — Stage frontend complete.
+- 2026-07-06T16:21:55.058Z — QA-fix loop-back; returning to qa
+- 2026-07-06T16:23:55.023Z — Stage qa complete.
+- 2026-07-06T16:23:55.044Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.

@@ -2,7 +2,7 @@
 
 ## Workflow Context
 - Workflow ID: WF-20260705-001
-- Correlation ID: CORR-20260705-001
+- Correlation ID: WF-1783335798071
 - Agent: solution-architect
 - Stage: Architecture
 - Figma Reference (if present): specs/Task Management System Screens.make
@@ -12,11 +12,11 @@
 | Artifact | Status |
 |---|---|
 | architecture_design.md | Created |
-| handoff_contract.md | Created |
+| handoff-contract.md | Created |
 | openlog.md | Created |
 
 ## Artifact Status
-- Created: architecture_design.md, handoff_contract.md, openlog.md
+- Created: architecture_design.md, handoff-contract.md, openlog.md
 - Updated: None
 - Skipped: None
 - Artifact Versions: v1.0
@@ -54,4 +54,4 @@
 
 ## Next Agents
 - Primary: ui-ux-developer
-- Parallel (if applicable): backend-developer, database-developer
+- Sequential order: backend-developer, then database-developer

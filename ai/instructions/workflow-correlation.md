@@ -490,7 +490,7 @@ Solution Architect → Supervisor (in handoff):
   ├─ workflow_id: WF-20260701-0001 [UNCHANGED]
   ├─ correlation_ids_used: [CORR-C3E9K7]
   ├─ activity_id_last: ACT-000012
-  └─ Result: READY for Parallel Developers
+  └─ Result: READY for Sequential Frontend Execution
 ```
 
 ---

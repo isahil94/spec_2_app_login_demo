@@ -2,20 +2,21 @@
 
 ## Workflow Context
 - Workflow ID: WF-20260705-001
-- Correlation ID: CORR-20260705-001
-- Agent: ui-ux-developer
-- Stage: Frontend
+- Correlation ID: WF-20260705-001
+- Agent: backend-developer
+- Stage: Backend
 - Figma Reference (if present): specs/Task Management System Screens.make
 - Design Intake Artifact: artifacts/design/figma_design.md
 
 ## Artifacts Produced
 | Artifact | Status |
 |---|---|
+| backend-design.md | Created |
 | handoff-contract.md | Created |
 | openlog.md | Created |
 
 ## Artifact Status
-- Created: handoff-contract.md, openlog.md
+- Created: backend-design.md, handoff-contract.md, openlog.md
 - Updated: None
 - Skipped: None
 - Artifact Versions: v1.0
@@ -29,9 +30,9 @@
 | Field | Value |
 |---|---|
 | Workflow ID | WF-20260705-001 |
-| Correlation ID | CORR-20260705-001 |
-| Agent Name | ui-ux-developer |
-| Stage Name | Frontend |
+| Correlation ID | WF-20260705-001 |
+| Agent Name | backend-developer |
+| Stage Name | Backend |
 | Model Name | MAI-Code-1-Flash |
 | Model Provider | copilot |
 | Session ID | N/A |
@@ -48,9 +49,9 @@
 
 ## Workflow Status
 - Status: READY
-- Reason: Frontend handoff artifacts are present and aligned with the approved design inputs.
+- Reason: Backend design artifacts are present and aligned with the task-management requirements.
 - Ready for Next Stage: Yes
 
 ## Next Agents
-- Primary: backend-developer
-- Sequential order: database-developer after backend completion
+- Primary: database-developer
+- Sequential order: qa-engineer after database completion

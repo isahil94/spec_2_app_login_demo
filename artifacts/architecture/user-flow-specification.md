@@ -7,7 +7,7 @@
 - Status: Draft
 - Architecture ID: ARCH-007
 - Workflow ID: WF-20260705-001
-- Correlation ID: WF-1783283413777
+- Correlation ID: WF-1783335798071
 - Traceability: screen_specification.md, user_stories.md
 
 ## Route and Flow Map

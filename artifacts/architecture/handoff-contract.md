@@ -2,7 +2,7 @@
 
 ## Workflow Context
 - Workflow ID: WF-20260705-001
-- Correlation ID: CORR-20260705-001
+- Correlation ID: WF-1783340956452
 - Agent: solution-architect
 - Stage: Architecture
 - Figma Reference (if present): specs/Task Management System Screens.make
@@ -42,7 +42,7 @@
 | Field | Value |
 |---|---|
 | Workflow ID | WF-20260705-001 |
-| Correlation ID | CORR-20260705-001 |
+| Correlation ID | WF-1783340956452 |
 | Agent Name | solution-architect |
 | Stage Name | Architecture |
 | Model Name | MAI-Code-1-Flash |
@@ -66,4 +66,4 @@
 
 ## Next Agents
 - Primary: ui-ux-developer
-- Parallel (if applicable): backend-developer, database-developer
+- Sequential order: backend-developer, then database-developer

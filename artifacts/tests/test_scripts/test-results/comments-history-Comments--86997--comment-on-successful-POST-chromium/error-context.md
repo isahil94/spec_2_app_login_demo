@@ -31,14 +31,11 @@ Call log:
     - element is outside of the viewport
   - retrying click action
     - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not stable
-    - retrying click action
-      - waiting 100ms
     - waiting for element to be visible, enabled and stable
     - element is not stable
   - retrying click action
-    - waiting 500ms
+    - waiting 100ms
+    - waiting for element to be visible, enabled and stable
   - element was detached from the DOM, retrying
 
 ```

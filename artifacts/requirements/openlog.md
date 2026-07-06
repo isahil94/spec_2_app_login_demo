@@ -63,7 +63,7 @@ NEW -> UNDER_REVIEW -> WAITING_FOR_APPROVAL -> APPROVED/REJECTED -> RESOLVED -> 
 | Default Assumption | UI/UX developer will use the provided design reference in downstream implementation.
 | Owner Agent | business-analyst |
 | Target Stage | ui-ux-developer |
-| Related Artifact(s) | requirements_spec.md, handoff_contract.md |
+| Related Artifact(s) | requirements_spec.md, handoff-contract.md |
 | Related Requirement(s) | REQ-001, REQ-003, REQ-010 |
 | Related User Story(ies) | US-001, US-002, US-007 |
 | Potential Risk | Downstream UI may need design clarification if the Figma source is incomplete.

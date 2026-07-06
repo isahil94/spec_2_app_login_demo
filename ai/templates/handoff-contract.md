@@ -74,7 +74,7 @@
 
 ## Next Agents
 - Primary:
-- Parallel (if applicable):
+- Sequential order: frontend → backend → database (if applicable):
 
 ## Rules
 - Compact the content, never compact the schema.

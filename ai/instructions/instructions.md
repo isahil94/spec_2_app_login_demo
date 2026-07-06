@@ -40,7 +40,7 @@ Mandatory inheritance includes:
 1. Retry governance (max retries and retry eligibility).
 2. Execution budgets and timeout handling.
 3. Provider-agnostic model profile requirements.
-4. Required failure and timeout recording in `openlog.md`, `handoff_contract.md`, and `quality_report.md`.
+4. Required failure and timeout recording in `openlog.md`, `handoff-contract.md`, and `quality_report.md`.
 
 Conflict rule:
 
@@ -199,7 +199,7 @@ Hard input policy (non-negotiable):
 1. Every artifact listed under an agent's Inputs section is required.
 2. If any required input is missing or unreadable, stop execution immediately and return an error.
 3. Do not continue with partial context, fallback assumptions, or speculative generation.
-4. Record the blocker in openlog.md, handoff_contract.md, and quality_report.md with Workflow Status set to BLOCKED.
+4. Record the blocker in openlog.md, handoff-contract.md, and quality_report.md with Workflow Status set to BLOCKED.
 
 ## 5.1 Universal Handoff Contract (Mandatory)
 Every agent output must end with a final section titled Handoff Contract following `ai/templates/handoff-contract.md`. This section is mandatory for all stages, including blocked paths.
@@ -222,7 +222,7 @@ Required structure:
 
 5. Next Agent(s)
 - Primary next agent.
-- Parallel agents if any.
+- Sequential execution order (frontend → backend → database) if applicable.
 - Preconditions before start.
 
 6. Workflow Status
@@ -248,7 +248,7 @@ Required structure:
 Validation checklist:
 - [ ] All required artifacts generated or marked Not Applicable.
 - [ ] quality_report.md produced.
-- [ ] handoff_contract.md produced.
+- [ ] handoff-contract.md produced.
 - [ ] openlog.md produced.
 - [ ] No separate open-questions.md, assumptions.md, risks.md, approval-log.md, decision-log.md, or escalation-log.md created.
 - [ ] Artifact ownership boundaries respected.
@@ -333,7 +333,7 @@ After Human decision, Supervisor appends to the item's History in openlog.md:
 The originating agent then progresses to RESOLVED → CLOSED.
 
 ## 5.2.1 AI Usage Tracking (Mandatory)
-Agents must include an AI Usage section in both `quality_report.md` and `handoff_contract.md`.
+Agents must include an AI Usage section in both `quality_report.md` and `handoff-contract.md`.
 
 AI Usage policy:
 - Metadata only.
@@ -386,7 +386,7 @@ Every agent must use identical required section structure for the following arti
 - Workflow Status
 - Open Items (entries containing all mandatory OpenLog fields)
 
-2. `handoff_contract.md`
+2. `handoff-contract.md`
 - Workflow Context (Workflow ID, Correlation ID, Agent, Stage)
 - Artifacts Produced
 - Artifact Status (Created/Updated/Skipped)
@@ -449,7 +449,7 @@ Business Analyst required artifact package:
 5. ui_observations.md
 6. traceability.md
 7. quality_report.md
-8. handoff_contract.md
+8. handoff-contract.md
 9. openlog.md
 
 Business Analyst completion contract:

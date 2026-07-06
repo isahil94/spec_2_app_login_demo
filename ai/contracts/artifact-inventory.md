@@ -128,5 +128,5 @@ These artifacts are owned by the agent that produces them for a given execution,
 | Artifact | Primary Use | Owner |
 |---|---|---|
 | quality_report.md | Validation evidence, completeness checks, and stage readiness summary. | Owning agent for the current stage |
-| handoff_contract.md | Handoff summary, produced artifacts, and next-agent contract. | Owning agent for the current stage |
+| handoff-contract.md | Handoff summary, produced artifacts, and next-agent contract. | Owning agent for the current stage |
 | openlog.md | Append-only log of open questions, assumptions, risks, decisions, and blockers. | Owning agent for the current stage |

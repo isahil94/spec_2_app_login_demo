@@ -1,21 +1,23 @@
 # Handoff Contract
 
 ## Workflow Context
-- Workflow ID: WF-20260705-001
-- Correlation ID: CORR-20260705-001
-- Agent: ui-ux-developer
-- Stage: Frontend
+- Workflow ID: WF-1783270392315
+- Correlation ID: WF-1783335798071
+- Agent: database-developer
+- Stage: Database
 - Figma Reference (if present): specs/Task Management System Screens.make
 - Design Intake Artifact: artifacts/design/figma_design.md
 
 ## Artifacts Produced
 | Artifact | Status |
 |---|---|
+| database-design.md | Created |
 | handoff-contract.md | Created |
 | openlog.md | Created |
+| quality-report.md | Created |
 
 ## Artifact Status
-- Created: handoff-contract.md, openlog.md
+- Created: database-design.md, handoff-contract.md, openlog.md, quality-report.md
 - Updated: None
 - Skipped: None
 - Artifact Versions: v1.0
@@ -28,15 +30,15 @@
 ## AI Usage Summary
 | Field | Value |
 |---|---|
-| Workflow ID | WF-20260705-001 |
-| Correlation ID | CORR-20260705-001 |
-| Agent Name | ui-ux-developer |
-| Stage Name | Frontend |
+| Workflow ID | WF-1783270392315 |
+| Correlation ID | WF-1783335798071 |
+| Agent Name | database-developer |
+| Stage Name | Database |
 | Model Name | MAI-Code-1-Flash |
 | Model Provider | copilot |
 | Session ID | N/A |
-| Start Time | 2026-07-05 |
-| End Time | 2026-07-05 |
+| Start Time | 2026-07-06 |
+| End Time | 2026-07-06 |
 | Duration | Short |
 | Input Tokens | N/A |
 | Output Tokens | N/A |
@@ -48,9 +50,9 @@
 
 ## Workflow Status
 - Status: READY
-- Reason: Frontend handoff artifacts are present and aligned with the approved design inputs.
+- Reason: Database artifacts are present and runnable, and validation evidence is recorded.
 - Ready for Next Stage: Yes
 
 ## Next Agents
-- Primary: backend-developer
-- Sequential order: database-developer after backend completion
+- Primary: qa-engineer
+- Sequential order: none

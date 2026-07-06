@@ -105,7 +105,7 @@ npm run compile
 
 When the extension activates in the target workspace, it:
 
-- registers the command SDLC: Run Supervisor Tick
+- registers the command SDLC: Run Supervisor Tick with command pallete CTRL+SHIFT+P
 - watches artifacts for changes in openlog, handoff-contract, and QA report files
 - starts a polling timer every 2 minutes
 - registers the supervisor chat participant for approvals and human commands

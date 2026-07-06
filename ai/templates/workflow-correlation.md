@@ -213,20 +213,20 @@ ACT-000029-ACT-000035: QA Testing
 
 ---
 
-### Phase 5: Review
+### Phase 5: QA Completion
 
-**Agent:** Reviewer  
-**Correlation ID:** CORR-R9N2K4 (NEW)  
-**Activity IDs:** ACT-000036 to ACT-000040
+**Agent:** QA Engineer  
+**Correlation ID:** CORR-Q8M3L6 (REUSED)  
+**Activity IDs:** ACT-000029 to ACT-000035
 
 #### Activity Sequence (Simplified)
 
 ```
-ACT-000036-ACT-000040: Review
+ACT-000029-ACT-000035: QA and completion
   ├─ All logs include: workflow_id=WF-20260701-0001 [PRESERVED]
-  ├─ All logs include: correlation_id=CORR-R9N2K4 [NEW for Review]
-  ├─ ARTIFACTS: review-report.md, findings.md
-  │  └─ Each with header: workflow_id=WF-20260701-0001, correlation_id=CORR-R9N2K4
+  ├─ All logs include: correlation_id=CORR-Q8M3L6 [REUSED for QA]
+  ├─ ARTIFACTS: quality-report.md, handoff-contract.md, openlog.md
+  │  └─ Each with header: workflow_id=WF-20260701-0001, correlation_id=CORR-Q8M3L6
   └─ HANDOFF: workflow_id preserved
 ```
 

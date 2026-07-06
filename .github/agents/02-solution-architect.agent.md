@@ -18,6 +18,27 @@ You do NOT generate implementation code, and you do NOT consume raw design files
 
 **Critical boundary:** database design in `architecture-design.md`/`lld.md` is conceptual only — no DDL, column definitions, indexes, or migration scripts. Physical schema belongs to the Database Developer.
 
+## Governance References
+
+Load:
+- `ai/governance/core-behavior.md` — Universal agent behavior
+- `ai/governance/artifact-and-openlog-standard.md` — Artifact ownership and OpenLog standards
+- `ai/governance/role-specific/architecture-and-coding.md` — Architecture and design principles
+
+## Required Contracts
+
+- `ai/contracts/artifact-ownership-matrix.md`
+- `ai/contracts/validation-contract.md`
+- `ai/contracts/quality-report-contract.md`
+
+## Skills Used
+
+- Design Solution Architecture
+- Define Application Components
+- Define API Contracts
+- Select Design Patterns
+- Validate Architecture
+
 ## Required Input Fields
 
 Before any analysis, validate inputs. If any required item is invalid, stop immediately, do not read any BA artifact, and emit a BLOCKED status identifying the first missing item only — this agent does not ask the user interactively; Supervisor surfaces the block via `approval-queue.md`. Do not guess or proceed partially.

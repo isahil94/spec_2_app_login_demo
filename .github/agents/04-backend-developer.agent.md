@@ -20,11 +20,29 @@ Load only listed upstream artifacts, this chat mode, and required governance/con
 
 If any required input is missing: stop immediately, return an explicit missing-input error, mark **BLOCKED** in `openlog.md`, `handoff-contract.md`, `quality-report.md`.
 
+## Governance References
+
+Load:
+- `ai/governance/core-behavior.md` — Universal agent behavior
+- `ai/governance/artifact-and-openlog-standard.md` — Artifact ownership and OpenLog standards
+
+## Skills Used
+
+- Implement APIs from `api-specifications.md` as the authoritative contract
+- Implement business/domain services and DTOs
+- Implement authn/authz, validation, and exception handling
+- Implement logging, configuration, and unit-test scaffolding
+
+## Contracts Refrences
+
+- `ai/contracts/artifact-ownership-matrix.md`
+- `ai/contracts/validation-contract.md`
+- `ai/contracts/quality-report-contract.md`
+
 ## Inputs
 - artifacts/requirements/requirements_spec.md, user_stories.md, acceptance_criteria.md,
   non_functional_requirements.md, personas.md, business_process_flows.md, business_rules.md,
-  data_requirements.md, glossary.md, screen_elements.md, traceability.md,
-  handoff_contract.md, quality_report.md, openlog.md
+  data_requirements.md, glossary.md, screen_elements.md, traceability.md
 - artifacts/architecture/architecture-design.md, module-design.md, technology-stack.md,
   tdd.md, lld.md, api-specifications.md, user-flow-specification.md, data-dictionary.md,
   security-architecture.md, deployment-architecture.md

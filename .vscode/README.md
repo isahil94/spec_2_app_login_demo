@@ -142,12 +142,7 @@ Each agent is a specialized Copilot chat mode:
    - Generates tests
    - Reports coverage
 
-8. **Reviewer** (@chatmode reviewer)
-   - Reviews code quality
-   - Checks security
-   - [APPROVAL GATE]
-
-9. **DevOps & Release** (@chatmode devops-release)
+8. **DevOps & Release** (@chatmode devops-release)
    - Creates Dockerfile
    - Builds image
 

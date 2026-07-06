@@ -4,7 +4,7 @@
 
 This project is a **local-first**, **AI-native**, **configuration-driven** Agentic SDLC platform.
 
-The platform transforms a software specification (and if available then using Figma design additonally) into a running application using autonomous AI agents coordinated by a Supervisor.
+The platform transforms a software specification (and if available then using Figma design additionally) into a running application using autonomous AI agents coordinated through stage-specific handoffs and validation checkpoints.
 
 ### Principles
 
@@ -26,11 +26,6 @@ The platform transforms a software specification (and if available then using Fi
 ```text
 Specification
     ↓
-Supervisor
-    ↓
-    ## Agent Definitions
-
-    Agent behavior must be defined in Markdown under `.github/agents`.
 Business Analyst
     ↓
 Solution Architect
@@ -41,15 +36,9 @@ UI/UX      Backend
 Developer  Developer        
  └──────────────┴
         ↓
-    Database Engineer
+Database Developer
         ↓
-    QA Engineer
-        ↓
-    Reviewer
-        ↓
-DevOps & Release
-        ↓
-    Documentation
+QA Engineer
 ```
 
 UI and Backend agents may execute in parallel after the Solution Architect publishes contracts.
@@ -59,6 +48,9 @@ UI and Backend agents may execute in parallel after the Solution Architect publi
 ## Repository Structure
 
 ```text
+.github/
+    agents/
+    workflows/
 ai/
     agents/
     prompts/
@@ -66,21 +58,9 @@ ai/
     templates/
     hooks/
     guardrails/
-    workflows/
-
-orchestration/
-    supervisor/
-    workflow/
-    execution/
-    memory/
-    event-bus/
-    approval/
+    governance/
+    contracts/
     tools/
-    artifacts/
-    audit/
-    observability/
-
-configs/
 apps/
 docs/
 tests/
@@ -157,11 +137,11 @@ When blocked:
 - Generate `open-questions.md`
 - Emit `<AgentName>Blocked`
 
-Supervisor creates an approval request through the Approval Service.
+The workflow may pause for approval when a blocking decision is required.
 
-The Approval Service presents the request in the local dashboard or CLI.
+The approval request is surfaced through the local dashboard or CLI.
 
-Supervisor resumes execution after approval.
+Execution resumes after the approval decision is recorded.
 
 ---
 
@@ -195,9 +175,6 @@ Examples:
 - BackendCompleted
 - DatabaseCompleted
 - QACompleted
-- ReviewCompleted
-- ReleaseCompleted
-- DocumentationCompleted
 
 Blocked events:
 

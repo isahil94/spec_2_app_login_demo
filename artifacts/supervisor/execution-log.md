@@ -1,0 +1,76 @@
+- 2026-07-05T16:53:12.317Z — business_analyst missing artifacts: requirements_spec.md, user_stories.md, acceptance_criteria.md, business_rules.md, data_requirements.md, traceability.md, handoff_contract.md, openlog.md (attempt 1/2)
+- 2026-07-05T16:55:12.360Z — business_analyst missing artifacts: requirements_spec.md, user_stories.md, acceptance_criteria.md, business_rules.md, data_requirements.md, traceability.md, handoff_contract.md, openlog.md (attempt 2/2)
+- 2026-07-05T16:56:02.588Z — Stage business_analyst complete.
+- 2026-07-05T16:56:13.165Z — solution_architect missing artifacts: architecture-design.md, module-design.md, api-specifications.md, handoff_contract.md, openlog.md (attempt 1/2)
+- 2026-07-05T16:57:12.355Z — solution_architect missing artifacts: architecture-design.md, module-design.md, api-specifications.md, handoff_contract.md, openlog.md (attempt 2/2)
+- 2026-07-05T16:57:28.611Z — BLOCKED: Artifacts still missing after 2 retries: solution_architect — architecture-design.md, module-design.md, api-specifications.md, openlog.md
+- 2026-07-05T16:57:33.369Z — BLOCKED: Artifacts still missing after 2 retries: solution_architect — architecture-design.md, module-design.md, api-specifications.md
+- 2026-07-05T16:59:12.365Z — Stage solution_architect complete.
+- 2026-07-05T17:18:01.884Z — Gate human_gate_architecture REJECTED: undefined
+- 2026-07-05T17:20:28.464Z — Kickoff complete. specPath=specs/specification.md (no Figma reference provided)
+- 2026-07-05T17:20:28.467Z — Gate reached: human_gate_architecture. Announcing in chat.
+- 2026-07-05T17:20:57.534Z — Gate human_gate_architecture APPROVED via chat.
+- 2026-07-05T17:20:57.586Z — frontend: no artifacts yet, likely still running initial invocation. Waiting.
+- 2026-07-05T17:20:57.592Z — backend: no artifacts yet, likely still running initial invocation. Waiting.
+- 2026-07-05T17:21:47.533Z — frontend missing artifacts: handoff_contract.md, openlog.md (attempt 2/2)
+- 2026-07-05T17:21:47.599Z — backend missing artifacts: backend-design.md, handoff_contract.md, openlog.md (attempt 2/3)
+- 2026-07-05T17:23:06.901Z — backend: still within cooldown (1.3/3 min), not re-invoking yet.
+- 2026-07-05T17:23:14.779Z — backend: still within cooldown (1.5/3 min), not re-invoking yet.
+- 2026-07-05T17:23:47.528Z — backend: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-05T17:24:09.772Z — Parallel stage complete: frontend, backend
+- 2026-07-05T17:24:14.864Z — database: still within cooldown (0.1/3 min), not re-invoking yet.
+- 2026-07-05T17:24:55.862Z — Stage database complete.
+- 2026-07-05T17:25:18.978Z — qa: still within cooldown (0.4/3 min), not re-invoking yet.
+- 2026-07-05T17:25:47.539Z — qa: still within cooldown (0.9/3 min), not re-invoking yet.
+- 2026-07-05T17:27:47.540Z — qa: still within cooldown (2.9/3 min), not re-invoking yet.
+- 2026-07-05T18:00:32.903Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:15:21.885Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:25:39.505Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:27:39.513Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:29:39.521Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:31:39.531Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:33:39.543Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:35:39.561Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:37:39.550Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:39:39.565Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:41:39.594Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:43:39.580Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:45:39.584Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:47:39.590Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T18:49:39.601Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: qa-report.md, openlog.md
+- 2026-07-05T20:25:53.126Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md, openlog.md
+- 2026-07-05T20:26:02.840Z — Blocked question on qa resolved via chat: start from fresh
+- 2026-07-05T20:26:02.862Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md
+- 2026-07-05T20:26:07.046Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md
+- 2026-07-05T20:27:53.081Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md
+- 2026-07-05T20:28:05.276Z — Blocked question on qa resolved via chat: start from BA again
+- 2026-07-05T20:28:05.280Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md
+- 2026-07-05T20:28:09.387Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md
+- 2026-07-05T20:29:53.091Z — BLOCKED: Timeout: qa — Timed out after 25 min, still missing: coverage-matrix.md, gap-analysis.md, qa-blockers.md, quality-report.md, handoff-contract.md
+- 2026-07-05T20:30:13.777Z — Pipeline RESET to fresh start via chat.
+- 2026-07-05T20:31:56.423Z — Pipeline ended by human via chat (was at business_analyst).
+- 2026-07-05T20:35:10.093Z — Pipeline manually restarted at stage: business_analyst (mode=keep)
+- 2026-07-05T20:35:10.129Z — Pipeline manually restarted at business_analyst via chat (mode=keep).
+- 2026-07-05T20:35:59.644Z — Kickoff complete. specPath=specification.md (no Figma reference provided)
+- 2026-07-05T20:35:59.647Z — business_analyst: still within cooldown (0.8/3 min), not re-invoking yet.
+- 2026-07-05T20:37:53.135Z — business_analyst: still within cooldown (2.7/3 min), not re-invoking yet.
+- 2026-07-05T20:39:53.149Z — business_analyst missing artifacts: non_functional_requirements.md, screen_specification.md, personas.md, business_process_flows.md, glossary.md, quality_report.md (attempt 1/2)
+- 2026-07-05T20:41:53.154Z — business_analyst: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-05T20:43:53.157Z — business_analyst missing artifacts: screen_specification.md (attempt 2/2)
+- 2026-07-05T20:45:53.163Z — Stage business_analyst complete.
+- 2026-07-05T20:47:53.168Z — solution_architect: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-05T20:49:53.176Z — solution_architect missing artifacts: handoff-contract.md (attempt 1/2)
+- 2026-07-05T20:51:53.181Z — Stage solution_architect complete.
+- 2026-07-05T20:51:53.217Z — Gate reached: human_gate_architecture. Announcing in chat.
+- 2026-07-05T20:52:16.026Z — Gate human_gate_architecture APPROVED via chat.
+- 2026-07-05T20:52:16.045Z — frontend missing artifacts: ui-specification.md, design-system.md, component-specification.md, interaction-flow.md, frontend-handoff.md, accessibility-report.md, quality-report.md, handoff-contract.md (attempt 1/2)
+- 2026-07-05T20:52:16.105Z — backend missing artifacts: endpoint-implementation.md, business-logic.md, validation-rules.md, integration-implementation.md, backend-spec.md, backend-development-report.md, quality-report.md, handoff-contract.md (attempt 1/3)
+- 2026-07-05T20:53:53.198Z — backend: still within cooldown (1.6/3 min), not re-invoking yet.
+- 2026-07-05T20:53:56.729Z — backend: still within cooldown (1.7/3 min), not re-invoking yet.
+- 2026-07-05T20:55:53.206Z — backend missing artifacts: endpoint-implementation.md, business-logic.md, validation-rules.md, integration-implementation.md, backend-spec.md, backend-development-report.md, quality-report.md, handoff-contract.md (attempt 2/3)
+- 2026-07-05T20:57:53.217Z — backend: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-05T20:59:53.221Z — backend missing artifacts: handoff-contract.md (attempt 3/3)
+- 2026-07-05T21:01:53.224Z — backend: still within cooldown (2.0/3 min), not re-invoking yet.
+- 2026-07-05T21:03:53.235Z — BLOCKED: Artifacts still missing: backend — Still missing after 3 retries: handoff-contract.md
+- 2026-07-05T21:05:53.248Z — BLOCKED: Artifacts still missing: backend — Still missing after 3 retries: handoff-contract.md
+- 2026-07-05T21:07:53.258Z — BLOCKED: Artifacts still missing: backend — Still missing after 3 retries: handoff-contract.md

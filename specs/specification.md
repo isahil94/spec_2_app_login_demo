@@ -537,11 +537,6 @@ Only deviate where required for accessibility compliance or unavoidable technica
 - Test Cases
 - Automated Tests
 
-## Reviewer
-
-- Code Review Report
-- Quality Assessment
-
 ## Documentation
 
 - README

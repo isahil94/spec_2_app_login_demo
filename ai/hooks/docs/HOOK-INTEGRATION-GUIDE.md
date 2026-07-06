@@ -324,22 +324,22 @@ The hooks **reuse** existing Python scripts in `scripts/`:
 
 ### On Pull Request
 
-Copilot can be invoked to review PRs. To add this:
+Copilot can be invoked to validate PR quality. To add this:
 
-1. **Manual Review** (Current):
+1. **Manual Validation** (Current):
    ```
    In Copilot Chat:
-   @chatmode reviewer "Review PR #123"
+   @chatmode qa-engineer "Validate PR #123"
    ```
 
 2. **Automated via API** (Advanced):
    Add to `.github/workflows/on-pull-request.yml`:
    ```yaml
-   - name: Invoke Copilot Reviewer
+   - name: Invoke Copilot QA Workflow
      run: |
        # Requires Copilot API token
-       # Calls @chatmode reviewer with PR context
-       python scripts/hooks/invoke_reviewer.py
+       # Calls the QA chat mode with PR context
+       python scripts/hooks/invoke_qa.py
    ```
 
 ### On Release

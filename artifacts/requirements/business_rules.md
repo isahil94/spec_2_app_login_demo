@@ -1,97 +1,94 @@
 # Business Rules
 
-## Purpose
-Capture canonical business rules for the Task Management System in a compact, traceable format.
-
 ## Metadata
 - Version: 1.0
 - Author: Business Analyst
-- Date: 2026-07-04
+- Date: 2026-07-05
 - Status: Draft
-- Workflow ID: WF-20260704-001
+- Workflow ID: WF-20260705-001
 
 ## Business Rules
 
 ### Rule ID: BR-001
-- Rule Name: Single Ownership
+- Rule Name: Single Owner and Assignee
 - Description: Every task must have one owner and at most one assignee.
-- Business Justification: Clear accountability improves task execution and visibility.
-- Applies To: All tasks
-- Validation: Ownership and assignee values must be present or optional according to policy and task state.
-- Exception: Administrators may reassign ownership when required.
+- Business Justification: Prevents ambiguous ownership and responsibility.
+- Applies To: Task creation and assignment.
+- Validation: The task must have an owner and assignee assignment state that satisfies the rule.
+- Exception: Administrators may override assignment if the business process requires it.
 - Priority: Critical
-- Related Stories: US-002
+- Related Stories: US-002, US-005
 
 ### Rule ID: BR-002
-- Rule Name: Permanent Deletion Restriction
+- Rule Name: Permanent Delete Restriction
 - Description: Only administrators may permanently delete tasks.
-- Business Justification: Protect task integrity and audit history.
-- Applies To: Task deletion actions
-- Validation: Destructive actions require administrative permission.
+- Business Justification: Protects task history and governance.
+- Applies To: Task deletion.
+- Validation: Delete actions are allowed only for administrators.
 - Exception: Standard users may archive their own tasks.
+- Priority: High
+- Related Stories: US-002, US-005
+
+### Rule ID: BR-003
+- Rule Name: Archived Task Read-Only
+- Description: Archived tasks remain searchable but are read-only until restored by an authorized role.
+- Business Justification: Preserves historical visibility while preventing accidental edits.
+- Applies To: Archived tasks.
+- Validation: Archived tasks cannot be edited except through restore and authorized flows.
+- Exception: Administrators may restore or reconfigure archived tasks.
 - Priority: High
 - Related Stories: US-002
 
-### Rule ID: BR-003
-- Rule Name: Archive Visibility
-- Description: Archived tasks remain searchable but are read-only for standard users.
-- Business Justification: Preserve visibility while preventing unintended edits.
-- Applies To: Archived tasks
-- Validation: Archived tasks remain discoverable in search and list views.
-- Exception: Administrators may restore or manage archived tasks.
-- Priority: Medium
-- Related Stories: US-002
-
 ### Rule ID: BR-004
-- Rule Name: Completed Task Protection
-- Description: Completed tasks cannot be edited by standard users.
-- Business Justification: Prevent unauthorized alteration after completion.
-- Applies To: Completed tasks
-- Validation: The system blocks non-administrator edits for completed tasks.
-- Exception: Administrators may override the restriction.
+- Rule Name: Status Lifecycle
+- Description: Task status transitions must follow the approved workflow: Todo, In Progress, Review, Completed, Blocked.
+- Business Justification: Ensures consistent workflow handling and reporting.
+- Applies To: Task status changes.
+- Validation: The target state must be allowed by the lifecycle rules.
+- Exception: Administrators may perform exceptional recovery actions when required.
 - Priority: High
 - Related Stories: US-002
 
 ### Rule ID: BR-005
-- Rule Name: Immutable History
-- Description: Task history is immutable and every update records audit information.
-- Business Justification: Maintain accountability and traceability.
-- Applies To: Task updates and state changes
-- Validation: Each update creates an auditable history entry.
-- Exception: System-generated audit metadata is not editable by users.
+- Rule Name: Completed Task Protection
+- Description: Completed tasks cannot be edited except by administrators.
+- Business Justification: Protects completed work from unintended modification.
+- Applies To: Completed tasks.
+- Validation: Edit requests on completed tasks are blocked unless the actor is an administrator.
+- Exception: Administrators may reopen or adjust completed tasks when approved.
 - Priority: High
-- Related Stories: US-002, US-004
+- Related Stories: US-002
 
 ### Rule ID: BR-006
-- Rule Name: Due Date Policy
-- Description: Due dates must not be earlier than the current date.
-- Business Justification: Prevent invalid scheduling and missed-date misrepresentation.
-- Applies To: Task creation and edit
-- Validation: The system blocks due dates earlier than today.
-- Exception: Administrators may adjust policy if business requirements change.
-- Priority: High
-- Related Stories: US-002
+- Rule Name: Audit History
+- Description: Every task update records audit information.
+- Business Justification: Supports traceability and accountability.
+- Applies To: Task create, edit, archive, restore, and status changes.
+- Validation: Each save action must create a history record.
+- Exception: Unavailable persistence services must surface a dependency state.
+- Priority: Critical
+- Related Stories: US-002, US-004, US-007
 
 ### Rule ID: BR-007
-- Rule Name: Allowed Statuses
-- Description: Supported task statuses are Todo, In Progress, Review, Completed, and Blocked.
-- Business Justification: Standardize workflow states across the product.
-- Applies To: Task status field
-- Validation: Status values must be selected from the approved set.
-- Exception: No unapproved status values are permitted.
+- Rule Name: Collaboration Visibility
+- Description: Users may only contribute to tasks they can view and that are relevant to their role.
+- Business Justification: Protects task confidentiality and team scope.
+- Applies To: Comments, attachments, and task discussions.
+- Validation: Permission checks occur before allowing contribution.
+- Exception: Administrators may override scope if required by governance.
 - Priority: High
-- Related Stories: US-002
+- Related Stories: US-004
 
 ### Rule ID: BR-008
-- Rule Name: Allowed Priorities
-- Description: Supported task priorities are Low, Medium, High, and Critical.
-- Business Justification: Standardize prioritization language and reporting.
-- Applies To: Task priority field
-- Validation: Priority values must be selected from the approved set.
-- Exception: No unapproved priority values are permitted.
+- Rule Name: Notification Relevance
+- Description: Notifications are triggered only for relevant task events such as assignment, update, comment, reminder, or overdue state.
+- Business Justification: Reduces noise and improves responsiveness.
+- Applies To: Notifications and reminders.
+- Validation: Notification rules apply based on task events and recipient role.
+- Exception: Users may configure their notification preferences.
 - Priority: Medium
-- Related Stories: US-002
+- Related Stories: US-006
 
 ## Notes
-- The rules above are business-oriented and testable.
-- No implementation, API, or database design detail is included.
+- Rules are business-oriented and testable.
+- Implementation detail is intentionally omitted.

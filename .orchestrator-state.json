@@ -1,0 +1,19 @@
+{
+  "currentStage": "parallel_frontend_backend",
+  "retries": {
+    "missing_business_analyst": 2,
+    "missing_solution_architect": 1,
+    "missing_frontend": 1,
+    "missing_backend": 6
+  },
+  "correlationId": "WF-1783283413777",
+  "pipelineStarted": true,
+  "invokedAt": {
+    "business_analyst": 1783284233157,
+    "solution_architect": 1783284593178,
+    "frontend": 1783284736045,
+    "backend": 1783285193224
+  },
+  "specPath": "specification.md",
+  "kickoffDone": true
+}

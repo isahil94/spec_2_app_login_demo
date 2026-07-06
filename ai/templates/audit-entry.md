@@ -130,7 +130,7 @@ approved_by:
 decision_notes: "Architecture is scalable and aligns with requirements."
 approval_deadline: 2026-07-02T00:00:00.000Z
 ```
-For approval-related decisions. Include request ID, status, reviewer info.
+For approval-related decisions. Include request ID, status, and approval context.
 
 **Version**
 ```

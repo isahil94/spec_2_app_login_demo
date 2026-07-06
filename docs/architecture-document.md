@@ -34,8 +34,8 @@
 - Project purpose: Agentic SDLC Platform that transforms Software Requirements Specifications (SRS) and optional Figma inputs into runnable applications and artifacts.
 - Primary technologies: Python-centric runtime (FastAPI, Uvicorn, SQLAlchemy), configuration-driven agents and workflows.
 - Repository size: Not detected (detailed file counts not computed).
-- Detected architecture style: Orchestration / event-driven, artifact-driven, multi-agent supervisor-mediated workflow (as described in README).
-- High-level description: Supervisor-led pipeline coordinates specialized agents (Business Analyst, Solution Architect, Developers, QA) to progress SRS→App through validation and approval gates; artifacts are produced in `artifacts/` and the platform uses reproducible configuration-driven stages.
+- Detected architecture style: Orchestration / event-driven, artifact-driven, multi-agent workflow.
+- High-level description: A staged pipeline coordinates specialized agents (Business Analyst, Solution Architect, UI/UX, Backend, Database, QA) to progress SRS→App through validation and artifact handoffs; artifacts are produced in `artifacts/` and the platform uses reproducible configuration-driven stages.
 
 ---
 
@@ -89,12 +89,12 @@ Repository
 ## 4 Layer Detection
 Detected layers (based on folder names and README descriptions):
 
-- Orchestration / Supervisor
-  - Purpose: Control execution lifecycle, stage progression, approvals, and validation gates.
+- Orchestration / Workflow Runtime
+  - Purpose: Control execution lifecycle, stage progression, and validation gates.
   - Folder locations: `orchestration/`
   - Primary technologies: Python
   - Number of files: Not detected
-  - Major responsibilities: Workflow sequencing, Supervisor role, validation/approval integration
+  - Major responsibilities: Workflow sequencing and execution coordination
 
 - AI / Agents
   - Purpose: Agent definitions, prompts, skills, and governance for automated stages.
@@ -156,12 +156,12 @@ Detected layers (based on folder names and README descriptions):
 ## 6 Component Catalog
 Below are major components inferred from repo layout and README. Each entry reflects observed folders/files; where details are missing they are marked "Not detected." Only items present or described in repo documentation are included.
 
-- Supervisor (orchestration.supervisor)
-  - Purpose: Orchestrates workflows and agents, exposes menu in `main.py`.
-  - Files: `orchestration/supervisor/` (detailed files not enumerated in this scan)
+- Workflow Orchestrator (orchestration runtime)
+  - Purpose: Coordinates agent execution and workflow progression.
+  - Files: `orchestration/` (detailed files not enumerated in this scan)
   - Classes/Functions: Not detected (module exists; class names referenced in `main.py`)
   - Dependencies: Core orchestration modules, agent definitions
-  - Interactions: Coordinates agents, artifacts, validation gates
+  - Interactions: Coordinates agents, artifacts, and validation gates
 
 - Agents (ai/)
   - Purpose: Agent definitions, prompts, skills, contracts.
@@ -201,15 +201,15 @@ High-level execution flow (sourced from README and `main.py`):
 
 ```mermaid
 flowchart TD
-  SRS["SRS + optional Figma"] --> Supervisor[Supervisor]
-  Supervisor --> BusinessAnalyst[Business Analyst Agent]
-  BusinessAnalyst --> SolutionArchitect[Solution Architect Agent]
-  SolutionArchitect --> Developers[UI/Backend/DB Developers]
-  Developers --> QA[QA Engineer]
-  QA --> Reviewer[Reviewer]
-  Reviewer --> Documentation[Documentation]
-  Documentation --> DevOps[DevOps/Release]
-  DevOps --> RunningApp[Running Application]
+  SRS["SRS + optional Figma"] --> BA[Business Analyst Agent]
+  BA --> SA[Solution Architect Agent]
+  SA --> UI[UI/UX Developer]
+  SA --> BE[Backend Developer]
+  SA --> DB[Database Developer]
+  UI --> QA[QA Engineer]
+  BE --> QA
+  DB --> QA
+  QA --> RunningApp[Running Application]
 ```
 
 This mirrors the documented lifecycle in `README.md` and the `main.py` platform launcher.
@@ -217,7 +217,7 @@ This mirrors the documented lifecycle in `README.md` and the `main.py` platform 
 ---
 
 ## 9 Request Flow
-Major request flow (user-driven analysis / run requests to Supervisor):
+Major request flow (user-driven analysis / run requests to the workflow runtime):
 
 ```mermaid
 sequenceDiagram

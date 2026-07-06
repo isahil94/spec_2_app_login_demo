@@ -1,6 +1,3 @@
-# Reviewer Skills
-
-This document defines reusable capabilities for the Reviewer agent in code review and quality assessment.
 
 ---
 

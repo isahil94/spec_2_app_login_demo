@@ -21,7 +21,7 @@ Developer Actions          Hook Trigger              Implementation             
 ─────────────────        ─────────────             ──────────────             ─────────────
 git commit        →  pre-commit hook       →  run tests & lint       →  Block if fails
 git push          →  pre-push hook         →  integration tests      →  Block if fails
-PR created        →  GitHub Actions        →  run reviewer mode      →  Copilot chat
+PR created        →  GitHub Actions        →  run quality checks      →  Copilot chat
 Push to main      →  GitHub Actions        →  run release checks     →  Copilot chat
 VS Code save      →  File watcher          →  format + lint          →  On save
 Project open      →  VS Code activation   →  validate environment   →  On startup
@@ -54,7 +54,7 @@ Project open      →  VS Code activation   →  validate environment   →  On 
 
 | Workflow | Trigger | Action | Blocks |
 |----------|---------|--------|--------|
-| `on-pull-request.yml` | PR created | Run reviewer mode | Yes (PR checks) |
+| `on-pull-request.yml` | PR created | Run quality checks | Yes (PR checks) |
 | `on-release.yml` | Release created | Verify artifacts | Yes (release checks) |
 | `on-push-main.yml` | Push to main | Build & deploy | Yes (workflow) |
 
@@ -165,7 +165,7 @@ Runs:
   3. Security scan (Bandit, safety)
   4. Test coverage (pytest + coverage)
   5. Type checking (mypy, tsc)
-  6. Invoke Reviewer chatmode via API
+  6. Invoke QA validation via API
 
 Blocks merge if:
   - Tests fail
@@ -284,11 +284,11 @@ Existing tasks in `.vscode/tasks.json`:
 ### Reuse Chat Modes
 
 Existing chat modes in `.github/chatmodes/`:
-- reviewer.chatmode.md - Code review
+- qa-engineer.chatmode.md - Quality validation
 - devops-release.chatmode.md - Release checks
 
 **GitHub Actions will:**
-1. Invoke Reviewer chat mode on PR
+1. Invoke QA chat mode on PR
 2. Invoke DevOps chat mode on release
 3. Pass validation results as context
 4. Wait for approval
@@ -404,9 +404,9 @@ Developer: Pushes branch and creates PR
     5. Type checking
        mypy, tsc
          ↓
-    6. Invoke Reviewer chatmode
-       Copilot reviews code
-       Posts review as PR comment
+    6. Invoke QA validation
+       Copilot validates quality
+       Posts results as PR comment
          ↓
     If all pass: PR can be merged ✓
     If any fail: PR blocked until fixed ✗

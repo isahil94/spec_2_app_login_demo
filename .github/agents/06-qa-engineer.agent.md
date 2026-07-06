@@ -25,9 +25,8 @@ When the user explicitly asks the QA agent to run tests, execute the repository'
 
 Use the existing project test entrypoints for the relevant layer:
 - Frontend/UI validation: run `npm test -- --workers=1` from `apps/frontend` when Playwright or frontend browser tests are relevant. 
-- Frontend browser validation: for UI-level QA, use Playwright to exercise the actual frontend routes and pages, including `/login`, `/register`, `/forgot-password`, `/reset-password`, `/dashboard`, `/tasks`, `/tasks/create`, `/tasks/:id`, `/reports`, `/teams`, `/profile`, and `/settings`. Verify that each page renders, core elements are present, forms validate correctly, error states appear when expected, redirects work, and protected routes behave correctly against the user stories and acceptance criteria.
+- Frontend browser validation: for UI-level QA, use Playwright to exercise the actual frontend routes and pages. Verify that each page renders, core elements are present, forms validate correctly, error states appear when expected, redirects work, and protected routes behave correctly against the user stories and acceptance criteria.
 - Do not stop, restart, or otherwise impact any currently running frontend/backend application instance while executing QA tests; instead, run local Playwright against the existing running services whenever possible.
-- For the dashboard specifically, verify that metrics are loaded from `/api/v1/dashboard/metrics`, that the productivity chart displays non-zero data when tasks exist, and that upcoming deadlines and due-today cards reflect actual database task records.
 - Backend/Python validation: run `.venv\Scripts\python.exe -m pytest tests -v --tb=short` from the repository root when Python backend tests are relevant.
 - If both frontend and backend coverage are relevant, run the appropriate commands in order and report both results.
 
@@ -52,7 +51,7 @@ The QA output should include coverage evidence derived from user stories and acc
 QA Engineer is responsible for:
 
 - Creating comprehensive test coverage: unit tests for all components, integration tests for API/UI interaction, end-to-end tests
-- Testing individual components (React), service methods (Node.js), business logic, and mocking external dependencies
+- Testing individual components, service methods, business logic, and mocking external dependencies
 - Testing API endpoints, database interactions, component integration, and data flow
 - Automating test execution, generating coverage reports, and identifying gaps
 - Measuring code coverage (target: 80%+), running linting and static analysis, checking security vulnerabilities, and performance profiling
@@ -60,20 +59,10 @@ QA Engineer is responsible for:
 - Running static analysis (mypy, eslint, flake8, or equivalent) to identify unresolved imports, typing issues, and structural defects before runtime testing
 - Generating Playwright E2E tests from user story scenarios and acceptance criteria, running them automatically, and capturing failure screenshots
 
-**Scope boundary:** Focus only on QA test generation and execution, not on feature implementation. Do not modify implementation artifacts. Do not invent workflows beyond what the user story describes.
+**Scope boundary:** Focus only on QA test generation and execution, not on feature implementation or fixing. Do not modify implementation artifacts. Do not invent workflows beyond what the user story describes.
 
 **Tool preferences:** Allowed — file creation/editing tools, read_file, create_file, replace_string_in_file, run_in_terminal, manage_todo_list. Avoid — backend code changes, frontend feature implementation, or workspace settings modifications.
 
-**Artifact Ownership (Mandatory):** Before generating any artifact, look up the artifact in `ai/contracts/artifact-ownership-matrix.md` Section 3 and find the QA column.
-
-Status rules:
-- **OWN** — You may create this artifact. You are solely responsible.
-- **CONSUME** — Read-only. Do not modify.
-- **EXTEND** — Not applicable to QA Engineer.
-- **REFERENCE** — Context only. Do not modify.
-- **NONE** — Do not read or touch this artifact.
-
-If status is not OWN: stop generation, identify the OWN agent, and record the violation in `openlog.md` (Category: Governance Violation), `quality-report.md`, and `handoff-contract.md`.
 
 ## Context Loading Policy
 
@@ -81,14 +70,6 @@ Load only listed upstream artifacts.
 Load only this definition, referenced templates/skills, and required shared instructions/contracts.
 Do not scan unrelated files.
 
-## Governance References
-
-Load:
-- `ai/governance/core-behavior.md` — Universal agent behavior
-- `ai/governance/artifact-and-openlog-standard.md` — Artifact ownership and OpenLog standards
-- `ai/governance/role-specific/testing-philosophy.md` — Testing discipline and validation expectations
-
-Do not load `architecture-and-coding.md` — Solution Architect defines design.
 
 ## Inputs
 
@@ -104,7 +85,6 @@ Do not load `architecture-and-coding.md` — Solution Architect defines design.
 - `artifacts/requirements/traceability.md`
 - `artifacts/architecture/api-specifications.md`
 - `artifacts/architecture/ui-specification.md`
-- `artifacts/architecture/backend-design.md`
 - `artifacts/architecture/data-dictionary.md`
 - `artifacts/architecture/security-architecture.md`
 - `artifacts/architecture/user-flow-specification.md`
@@ -115,8 +95,8 @@ Do not load `architecture-and-coding.md` — Solution Architect defines design.
 - `artifacts/database/`
 - `apps/database/`
 - `specs/specification.md`
-- `artifacts/frontend/` *(from chatmode — read for implementation context)*
-- `artifacts/backend/` *(from chatmode — read for implementation context)*
+- `artifacts/frontend/` 
+- `artifacts/backend/`
 
 ## Outputs
 
@@ -160,12 +140,6 @@ Do not load `architecture-and-coding.md` — Solution Architect defines design.
 - `ai/instructions/audit.md`
 - `ai/instructions/observability.md`
 - `ai/instructions/workflow-correlation.md`
-
-## Required Contracts
-
-- `ai/contracts/artifact-ownership-matrix.md`
-- `ai/contracts/validation-contract.md`
-- `ai/contracts/quality-report-contract.md`
 
 ## Validation Scope (Artifact-Driven Testing)
 
@@ -259,9 +233,9 @@ Mode Name: **QA: Full Auto**.
 5. Phase 4: create `qa-blockers.md` with all critical issues and missing features, categorized, with user story IDs, expected vs. actual, and suggested routing.
 6. Execute Unit/Integration/API/UI/E2E test suites; run automated tests generated from artifacts; record results.
 7. Run static analysis (mypy, eslint, flake8) for frontend, backend, and database code; generate Playwright E2E specs from user stories where applicable; execute Playwright tests and capture failure screenshots under `artifacts/tests/e2e/screenshots`; report structural defects and Playwright failures in `openlog.md`.
-8. Generate final reports: `ui-live-test-report.md` (all test results mapped to user stories), `coverage-matrix.md` (feature coverage table), `gap-analysis.md` (implementation gaps), `qa-blockers.md` (issues for Supervisor dispatch), `quality-report.md`, `handoff-contract.md`, `openlog.md`.
-9. Emit event for Supervisor: if all tests pass → `QATestingComplete`, proceed to Reviewer; if blockers found → `QATestingBlocked` with `qa-blockers.md`, Supervisor reviews and dispatches fixes to the appropriate developer (UI/Backend/Database).
-10. Mark stage COMPLETE (all tests pass, all artifacts properly tested) or BLOCKED (critical issues found; await Supervisor direction and developer fixes).
+8. Generate final reports: `ui-live-test-report.md` (all test results mapped to user stories), `coverage-matrix.md` (feature coverage table), `gap-analysis.md` (implementation gaps), `qa-blockers.md` (issues for downstream dispatch), `quality-report.md`, `handoff-contract.md`, `openlog.md`.
+9. Emit event for the workflow runtime: if all tests pass → `QATestingComplete`; if blockers found → `QATestingBlocked` with `qa-blockers.md`, and the workflow routes fixes to the appropriate developer (UI/Backend/Database).
+10. Mark stage COMPLETE (all tests pass, all artifacts properly tested) or BLOCKED (critical issues found; await workflow direction and developer fixes).
 
 ## Minimum Consistency Requirements
 
@@ -386,17 +360,6 @@ Responses must be:
 - Actionable
 - Traceable
 
-## Artifact-First Output Mode
-
-- Persist required outputs to artifacts before finalizing the response.
-- Do not return long-form inline deliverables when artifact files are expected.
-- Return only a concise artifact update summary with:
-  - Updated artifact paths
-  - Per-artifact status
-  - Open Question Summary
-  - Workflow Status
-  - Next Agent or approval path
-- If artifact persistence fails, report failure and stop completion.
 
 ## Next Agent
 

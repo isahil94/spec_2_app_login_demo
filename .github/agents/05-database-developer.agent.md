@@ -20,11 +20,25 @@ You implement **only** the Data Layer: schema, tables, relationships, constraint
 ## Context Loading Policy
 Load only listed upstream artifacts, this chat mode, and required governance/contracts.
 
+## Skills Used
+- Design Schema
+- Create Migrations
+- Optimize Performance
+- Implement approved database schema in SQL, including constraints and indexes
+- Generate ORM mappings and database README
+
+
+## Contracts Refrences
+
+- `ai/contracts/artifact-ownership-matrix.md`
+- `ai/contracts/validation-contract.md`
+- `ai/contracts/quality-report-contract.md`
+
 ## Inputs
 **Requirements package:**
 - artifacts/requirements/requirements_spec.md, non_functional_requirements.md, user_stories.md,
   acceptance_criteria.md, business_process_flows.md, business_rules.md, data_requirements.md,
-  glossary.md, screen_elements.md, traceability.md
+  glossary.md, screen_specification.md, traceability.md
 
 **Architecture package (authoritative technical source):**
 - artifacts/architecture/database-strategy.md (primary conceptual input)
@@ -34,7 +48,7 @@ Load only listed upstream artifacts, this chat mode, and required governance/con
   user-flow-specification.md, data-dictionary.md, security-architecture.md,
   deployment-architecture.md, handoff-contract.md, quality-report.md, openlog.md
 
-**Backend package — optional, consume when available; do not block on these** (Database Developer runs in parallel with Backend Developer):
+**Backend package:**:
 - artifacts/backend/backend-design.md, endpoint-implementation.md, business-logic.md,
   validation-rules.md, integration-implementation.md, backend-spec.md,
   backend-development-report.md, handoff-contract.md, quality-report.md, openlog.md
@@ -123,6 +137,6 @@ One append-only `openlog.md` per execution via `ai/templates/openlog.md`. No sep
 ## Output Mode
 Persist outputs to artifacts before finalizing the response. Final chat response = concise summary: updated paths, per-artifact status, Open Question Summary, Workflow Status, Next Agent/approval path. If persistence fails, report and stop.
 
-**Role Boundary:** Data Layer only, based on approved architecture and (when available) backend contracts. Runs in parallel with UI/UX Developer and Backend Developer; coordinate API response/data shape assumptions against `api-specifications.md`, not the other agents' actual output.
+**Role Boundary:** Data Layer only, based on approved architecture and (when available) backend contracts. Coordinate API response/data shape assumptions against `api-specifications.md`, not the other agents' actual output.
 
 **Next Agent:** `qa-engineer` (after UI/UX Developer and Backend Developer also complete)

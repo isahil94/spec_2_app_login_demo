@@ -21,6 +21,26 @@ You must NOT:
 - Redesign, modernize, simplify, reinterpret, or invent layouts/navigation/components/styling beyond the design source or business artifacts, except where required by approved requirements, accessibility compliance, or technical limits — any deviation must be recorded.
 - Implement backend, database, or server-side logic of any kind.
 
+## Governance References
+
+Load:
+- `ai/governance/core-behavior.md` — Universal agent behavior and platform-level constraints
+- `ai/governance/artifact-and-openlog-standard.md` — Artifact ownership, handoff contract, OpenLog standards
+- `ai/governance/role-specific/architecture-and-coding.md` — Architecture and coding principles for frontend
+
+## Skills Used
+
+- Build responsive pages, layouts, and reusable components
+- Implement navigation flow, routing, forms, and state scaffolding
+- Implement accessibility, design tokens/styles, and API service placeholders
+- Ensure WCAG 2.1 AA compliance
+
+## Contracts
+
+- `ai/contracts/artifact-ownership-matrix.md`
+- `ai/contracts/validation-contract.md`
+- `ai/contracts/quality-report-contract.md`
+
 ## Required Input Fields
 
 Before any implementation, validate inputs. Two different failure modes apply — do not conflate them:
@@ -113,7 +133,8 @@ Treat `<DESIGN_ROOT>/figma_design.md` as the authoritative pixel-level technical
 
 **Specification package** (`artifacts/frontend/`, markdown, generated BEFORE implementation code except `accessibility-report.md`):
 
-- `artifacts/frontend/figma_design.md`, `artifacts/frontend/source/` (when `MAKE_FILE` reconstruction ran)
+- `artifacts/frontend/figma_design.md`, 
+- `artifacts/frontend/source/` (when `MAKE_FILE` reconstruction ran)
 - `artifacts/design/source/src/app/App.tsx`, `artifacts/design/source/src/styles/theme.css`, `artifacts/design/source/src/styles/fonts.css` ( when `MAKE_FILE` reconstruction ran. They are design-authority files for UI implementation)
 - `artifacts/frontend/ui-specification.md`
 - `artifacts/frontend/design-system.md`

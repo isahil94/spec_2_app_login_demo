@@ -1,0 +1,19 @@
+{
+  "currentStage": "human_gate_architecture",
+  "retries": {},
+  "correlationId": "WF-1783359237934",
+  "specPath": "specification.md",
+  "kickoffResetMode": "keep",
+  "figmaSourceType": "none",
+  "kickoffDone": true,
+  "pipelineStarted": true,
+  "invokedAt": {
+    "business_analyst": 1783359254829,
+    "solution_architect": 1783359344956
+  },
+  "pendingAction": {
+    "type": "gate",
+    "stageId": "solution_architect",
+    "nextStageId": "frontend"
+  }
+}

@@ -1,0 +1,46 @@
+{"ts":"2026-07-06T17:33:44.912Z","seq":1,"event":"extension.activate","root":"f:\\Projects\\Specs_to_APP- mini"}
+{"ts":"2026-07-06T17:33:57.932Z","seq":2,"event":"hook.manual_tick_command"}
+{"ts":"2026-07-06T17:33:57.933Z","seq":3,"event":"tick.start"}
+{"ts":"2026-07-06T17:34:01.857Z","seq":4,"event":"kickoff.spec_path","specPath":"specification.md"}
+{"ts":"2026-07-06T17:34:08.686Z","seq":5,"event":"kickoff.reset_mode","resetMode":"keep","raw":"keep"}
+{"ts":"2026-07-06T17:34:14.749Z","seq":6,"event":"kickoff.figma_resolved","sourceType":"none"}
+{"ts":"2026-07-06T17:34:14.754Z","seq":7,"event":"kickoff.complete","specPath":"specification.md","resetMode":"keep","figmaSourceType":"none"}
+{"ts":"2026-07-06T17:34:14.769Z","seq":8,"event":"pipeline.start","stageId":"business_analyst"}
+{"ts":"2026-07-06T17:34:14.858Z","seq":9,"event":"agent.invoke","agent":"01-business-analyst","prompt":"Analyze #file:specification.md and produce missing artifact per your output spec. This stage produces documentation only -- no code.","currentStage":"business_analyst"}
+{"ts":"2026-07-06T17:35:44.917Z","seq":10,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:35:44.918Z","seq":11,"event":"tick.start"}
+{"ts":"2026-07-06T17:35:44.922Z","seq":12,"event":"stage.complete","stageId":"business_analyst"}
+{"ts":"2026-07-06T17:35:45.000Z","seq":13,"event":"agent.invoke","agent":"02-solution-architect","prompt":"Design the architecture using #file:artifacts\\requirements\\handoff-contract.md as your primary input contract. For deeper context, the requirements artifacts (user stories, acceptance criteria, NFRs, screens, personas, flows, business rules, data requirements, glossary, traceability) lives under #file:artifacts/requirements/ -- read whichever files there you need. This stage produces missing documentation only -- no code. Correlation ID: WF-1783359237934.","currentStage":"solution_architect"}
+{"ts":"2026-07-06T17:37:36.452Z","seq":14,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\requirements\\handoff-contract.md"}
+{"ts":"2026-07-06T17:37:36.518Z","seq":15,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\requirements\\handoff-contract.md"}
+{"ts":"2026-07-06T17:37:36.519Z","seq":16,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\requirements\\openlog.md"}
+{"ts":"2026-07-06T17:37:42.048Z","seq":17,"event":"tick.start"}
+{"ts":"2026-07-06T17:37:42.096Z","seq":18,"event":"stage.complete","stageId":"solution_architect"}
+{"ts":"2026-07-06T17:37:42.150Z","seq":19,"event":"stage.gate_reached","gateId":"human_gate_architecture","reviewStageId":"solution_architect","nextStageId":"frontend"}
+{"ts":"2026-07-06T17:37:44.927Z","seq":20,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:37:44.928Z","seq":21,"event":"tick.start"}
+{"ts":"2026-07-06T17:39:21.977Z","seq":22,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\architecture\\handoff-contract.md"}
+{"ts":"2026-07-06T17:39:21.977Z","seq":23,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\architecture\\openlog.md"}
+{"ts":"2026-07-06T17:39:25.982Z","seq":24,"event":"tick.start"}
+{"ts":"2026-07-06T17:39:44.941Z","seq":25,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:39:44.942Z","seq":26,"event":"tick.start"}
+{"ts":"2026-07-06T17:39:48.126Z","seq":27,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\requirements\\handoff-contract.md"}
+{"ts":"2026-07-06T17:39:48.126Z","seq":28,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\architecture\\handoff-contract.md"}
+{"ts":"2026-07-06T17:39:48.127Z","seq":29,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\architecture\\openlog.md"}
+{"ts":"2026-07-06T17:39:48.127Z","seq":30,"event":"hook.watcher_triggered","uri":"f:\\Projects\\Specs_to_APP- mini\\artifacts\\requirements\\openlog.md"}
+{"ts":"2026-07-06T17:39:52.138Z","seq":31,"event":"tick.start"}
+{"ts":"2026-07-06T17:41:44.943Z","seq":32,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:41:44.944Z","seq":33,"event":"tick.start"}
+{"ts":"2026-07-06T17:43:44.945Z","seq":34,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:43:44.946Z","seq":35,"event":"tick.start"}
+{"ts":"2026-07-06T17:45:44.949Z","seq":36,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:45:44.949Z","seq":37,"event":"tick.start"}
+{"ts":"2026-07-06T17:47:44.965Z","seq":38,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:47:44.965Z","seq":39,"event":"tick.start"}
+{"ts":"2026-07-06T17:49:44.977Z","seq":40,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:49:44.978Z","seq":41,"event":"tick.start"}
+{"ts":"2026-07-06T17:51:44.977Z","seq":42,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:51:44.978Z","seq":43,"event":"tick.start"}
+{"ts":"2026-07-06T17:53:44.983Z","seq":44,"event":"hook.poll_triggered"}
+{"ts":"2026-07-06T17:53:44.984Z","seq":45,"event":"tick.start"}
+{"ts":"2026-07-06T17:54:42.526Z","seq":46,"event":"extension.deactivate"}

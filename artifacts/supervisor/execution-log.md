@@ -240,3 +240,8 @@ fix it
 - 2026-07-06T16:21:55.058Z — QA-fix loop-back; returning to qa
 - 2026-07-06T16:23:55.023Z — Stage qa complete.
 - 2026-07-06T16:23:55.044Z — Gate reached: human_gate_final (reviewing qa). Announcing in chat.
+- 2026-07-06T17:34:14.753Z — Kickoff complete. specPath=specification.md, resetMode=keep, (no Figma reference provided)
+- 2026-07-06T17:34:14.768Z — Pipeline starting -- invoking first stage: business_analyst
+- 2026-07-06T17:35:44.922Z — Stage business_analyst complete.
+- 2026-07-06T17:37:42.095Z — Stage solution_architect complete.
+- 2026-07-06T17:37:42.149Z — Gate reached: human_gate_architecture (reviewing solution_architect). Announcing in chat.
